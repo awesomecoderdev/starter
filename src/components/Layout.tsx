@@ -8,6 +8,16 @@ import { Logo } from "@/components/Logo";
 import { Navigation } from "@/components/Navigation";
 import { Prose } from "@/components/Prose";
 import { SectionProvider } from "@/components/SectionProvider";
+import { useMobileNavigationStore } from "./MobileNavigation";
+import { Router } from "next/router";
+
+function onRouteChange() {
+	useMobileNavigationStore.getState().close();
+}
+
+Router.events.on("hashChangeStart", onRouteChange);
+Router.events.on("routeChangeComplete", onRouteChange);
+Router.events.on("routeChangeError", onRouteChange);
 
 export function Layout({ children, sections = [] }: LayoutComponentsProps) {
 	return (
