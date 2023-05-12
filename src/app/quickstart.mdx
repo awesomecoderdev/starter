@@ -1,0 +1,62 @@
+export const description =
+
+# Quickstart
+
+<Note>
+	Before you can make requests to the Protocol API, you will need to grab your
+	API key from your dashboard. You find it under [Settings &raquo; API](#).
+</Note>
+
+## Choose your client
+
+Before making your first API request, you need to pick which API client you will use. In addition to good ol' cURL HTTP requests, Protocol offers clients for JavaScript, Python, and PHP. In the following example, you can see how to install each client.
+
+<CodeGroup>
+
+```bash {{ title: 'cURL' }}
+# cURL is most likely already installed on your machine
+curl --version
+```
+
+```bash {{ language: 'js' }}
+# Install the Protocol JavaScript SDK
+npm install @example/protocol-api --save
+```
+
+```bash {{ language: 'python' }}
+# Install the Protocol Python SDK
+pip install protocol_api
+```
+
+```bash {{ language: 'php' }}
+# Install the Protocol PHP SDK
+composer require protocol/sdk
+```
+
+</CodeGroup>
+
+<div className="not-prose">
+	<Button
+		href="/sdks"
+		variant="text"
+		arrow="right"
+		children="Check out our list of first-party SDKs"
+	/>
+</div>
+
+<div className="not-prose">
+	<Button
+		href="/conversations"
+		variant="text"
+		arrow="right"
+		children="Read the docs for the Conversations endpoint"
+	/>
+</div>
+
+## What's next?
+
+Great, you're now set up with an API client and have made your first request to the API. Here are a few links that might be handy as you venture further into the Protocol API:
+
+-   [Grab your API key from the Protocol dashboard](#)
+-   [Check out the Conversations endpoint](/conversations)
+-   [Learn about the different error messages in Protocol](/errors)

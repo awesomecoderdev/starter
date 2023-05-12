@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion, useIsPresent } from "framer-motion";
 import { Button } from "@/components/Button";
 import { useIsInsideMobileNavigation } from "@/components/MobileNavigation";
@@ -124,7 +124,7 @@ function NavigationGroup({ group, className }: GroupPathProps) {
 	// The state will still update when we re-open (re-render) the navigation.
 	let isInsideMobileNavigation = useIsInsideMobileNavigation();
 	let [router, sections] = useInitialValue(
-		[usePathname(), useSectionStore((s) => s.sections)],
+		[useRouter(), useSectionStore((s) => s.sections)],
 		isInsideMobileNavigation
 	);
 

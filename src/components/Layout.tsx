@@ -11,15 +11,16 @@ import { SectionProvider } from "@/components/SectionProvider";
 import { useMobileNavigationStore } from "./MobileNavigation";
 import { Router } from "next/router";
 
-function onRouteChange() {
-	useMobileNavigationStore.getState().close();
-}
-
-Router.events.on("hashChangeStart", onRouteChange);
-Router.events.on("routeChangeComplete", onRouteChange);
-Router.events.on("routeChangeError", onRouteChange);
-
 export function Layout({ children, sections = [] }: LayoutComponentsProps) {
+	Router.events.on("hashChangeStart", onRouteChange);
+	Router.events.on("routeChangeComplete", onRouteChange);
+	Router.events.on("routeChangeError", onRouteChange);
+
+	function onRouteChange() {
+		useMobileNavigationStore.getState().close();
+		console.log('"changes"', "changes");
+	}
+
 	return (
 		<SectionProvider sections={sections}>
 			<div className="lg:ml-72 xl:ml-80">

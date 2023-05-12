@@ -86,3 +86,12 @@ type HeadingProps = {
 	label?: any;
 	anchor?: boolean;
 };
+
+interface LanguageMappings {
+	[key: string]: string;
+}
+
+interface PreferredLanguageState {
+	preferredLanguages: any[];
+	addPreferredLanguage: (language: any) => void;
+}
