@@ -32,14 +32,6 @@ export default function QuickStart() {
 					# cURL is most likely already installed on your machine curl
 					--version
 				</Code>
-				<Code>
-					# cURL is most likely already installed on your machine curl
-					--version
-				</Code>
-				<Code>
-					# cURL is most likely already installed on your machine curl
-					--version
-				</Code>
 			</CodeGroup>
 			<div className="not-prose">
 				<Button
