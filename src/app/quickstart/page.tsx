@@ -105,25 +105,26 @@ $client->conversations->list();
 			<p>
 				Great, you're now set up with an API client and have made your
 				first request to the API. Here are a few links that might be
-				handy as you venture further into the Protocol API: -{" "}
-				<ul>
-					<li>
-						<Link href="#">
-							Grab your API key from the Protocol dashboard
-						</Link>
-					</li>
-					<li>
-						<Link href="/conversations">
-							Check out the Conversations endpoint
-						</Link>
-					</li>
-					<li>
-						<Link href="/errors">
-							Learn about the different error messages in Protocol
-						</Link>
-					</li>
-				</ul>
+				handy as you venture further into the Protocol API:
 			</p>
+
+			<ul>
+				<li>
+					<Link href="#">
+						Grab your API key from the Protocol dashboard
+					</Link>
+				</li>
+				<li>
+					<Link href="/conversations">
+						Check out the Conversations endpoint
+					</Link>
+				</li>
+				<li>
+					<Link href="/errors">
+						Learn about the different error messages in Protocol
+					</Link>
+				</li>
+			</ul>
 		</>
 	);
 }
