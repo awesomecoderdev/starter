@@ -104,9 +104,7 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 						<ModeToggle />
 					</div>
 					<div className="hidden min-[416px]:contents">
-						<Button>
-							<Link href="#">Sign in</Link>
-						</Button>
+						<Button href="#">Sign in</Button>
 					</div>
 				</div>
 			</motion.div>

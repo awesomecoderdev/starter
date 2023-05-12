@@ -251,8 +251,8 @@ export function Navigation(props: any) {
 					/>
 				))}
 				<li className="sticky bottom-0 z-10 mt-6 min-[416px]:hidden">
-					<Button variant="filled" className="w-full">
-						<Link href={"#"}>Sign in</Link>
+					<Button variant="filled" className="w-full" href="#">
+						Sign in
 					</Button>
 				</li>
 			</ul>
