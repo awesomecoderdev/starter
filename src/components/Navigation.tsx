@@ -10,6 +10,7 @@ import { useSectionStore } from "@/components/SectionProvider";
 import { Tag } from "@/components/Tag";
 import { remToPx } from "@/lib/remToPx";
 import { classNames } from "@/utils/class";
+import { usePathname } from "next/navigation";
 
 function useInitialValue(value: any, condition = true) {
 	let initialValue = useRef(value).current;
@@ -116,21 +117,19 @@ function ActivePageMarker({ group, pathname }: GroupPathProps) {
 }
 
 function NavigationGroup({ group, className }: GroupPathProps) {
+	// console.log("usePathname", usePathname());
+
 	// If this is the mobile navigation then we always render the initial
 	// state, so that the state does not change during the close animation.
 	// The state will still update when we re-open (re-render) the navigation.
 	let isInsideMobileNavigation = useIsInsideMobileNavigation();
-	// let [router, sections] = useInitialValue(
-	// 	[useRouter(), useSectionStore((s) => s.sections)],
-	// 	isInsideMobileNavigation
-	// );
 	let [router, sections] = useInitialValue(
-		["/", useSectionStore((s) => s.sections)],
+		[usePathname(), useSectionStore((s) => s.sections)],
 		isInsideMobileNavigation
 	);
 
 	let isActiveGroup =
-		group.links.findIndex((link: any) => link.href === router.pathname) !==
+		group.links.findIndex((link: any) => link.href === usePathname()) !==
 		-1;
 
 	return (
@@ -146,7 +145,7 @@ function NavigationGroup({ group, className }: GroupPathProps) {
 					{isActiveGroup && (
 						<VisibleSectionHighlight
 							group={group}
-							pathname={router.pathname}
+							pathname={usePathname()}
 						/>
 					)}
 				</AnimatePresence>
@@ -158,7 +157,7 @@ function NavigationGroup({ group, className }: GroupPathProps) {
 					{isActiveGroup && (
 						<ActivePageMarker
 							group={group}
-							pathname={router.pathname}
+							pathname={usePathname()}
 						/>
 					)}
 				</AnimatePresence>
@@ -171,12 +170,12 @@ function NavigationGroup({ group, className }: GroupPathProps) {
 						>
 							<NavLink
 								href={link.href}
-								active={link.href === router.pathname}
+								active={link.href === usePathname()}
 							>
 								{link.title}
 							</NavLink>
 							<AnimatePresence mode="popLayout" initial={false}>
-								{link.href === router.pathname &&
+								{link.href === usePathname() &&
 									sections.length > 0 && (
 										<motion.ul
 											role="list"

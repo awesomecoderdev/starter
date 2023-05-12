@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-// import { Footer } from '@/components/Footer'
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Logo } from "@/components/Logo";
 import { Navigation } from "@/components/Navigation";
@@ -29,7 +29,7 @@ export function Layout({ children, sections = [] }: LayoutComponentsProps) {
 					<main className="py-16">
 						<Prose as="article">{children}</Prose>
 					</main>
-					{/* <Footer /> */}
+					<Footer />
 				</div>
 			</div>
 		</SectionProvider>

@@ -37,7 +37,7 @@ function createSectionStore(sections: Section[]) {
 	}));
 }
 
-function useVisibleSections(sectionStore) {
+function useVisibleSections(sectionStore: any) {
 	let setVisibleSections = useStore(
 		sectionStore,
 		(s) => s.setVisibleSections
@@ -97,8 +97,8 @@ function useVisibleSections(sectionStore) {
 	}, [setVisibleSections, sections]);
 }
 
-// const SectionStoreContext = createContext<never[]>([]);
-const SectionStoreContext = createContext<StoreApi<any> | null>(null);
+const SectionStoreContext = createContext<never[]>([]);
+// const SectionStoreContext = createContext<StoreApi<any> | null>(null);
 
 const useIsomorphicLayoutEffect =
 	typeof window === "undefined" ? useEffect : useLayoutEffect;

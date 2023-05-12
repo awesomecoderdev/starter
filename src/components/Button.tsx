@@ -51,7 +51,7 @@ export function Button({
 	return (
 		<>
 			{props.href ? (
-				<Link href={props.href} {...props}>
+				<Link href={props.href} className={className} {...props}>
 					{arrow === "left" && arrowIcon}
 					{children}
 					{arrow === "right" && arrowIcon}

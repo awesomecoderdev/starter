@@ -68,3 +68,21 @@ type GroupPathProps = {
 	group?: any;
 	className?: any;
 };
+
+type GridPatternProps = {
+	width: number;
+	height: number;
+	x?: number | string;
+	y?: number | string;
+	squares?: any[];
+	className?: string;
+};
+
+type HeadingProps = {
+	level: any;
+	children?: any;
+	id?: any;
+	tag?: any;
+	label?: any;
+	anchor?: boolean;
+};

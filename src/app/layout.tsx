@@ -3,7 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { Layout } from "@/components/Layout";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
 	title: "Create Next App",
@@ -17,9 +17,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body
-				className={`antialiased text-slate-500 dark:text-slate-400 bg-zinc-50 dark:bg-slate-900 h-full min-h-screen ${inter.className}`}
-			>
+			<body className="bg-white antialiased dark:bg-zinc-900">
 				<Header />
 				<Layout>{children}</Layout>
 			</body>

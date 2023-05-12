@@ -281,6 +281,8 @@ module.exports = ({ theme }: { theme: any }) => ({
 
 			// Inline elements
 			a: {
+				marginLeft: theme("spacing.1"),
+				// marginRight: theme("spacing.1"),
 				color: "var(--tw-prose-links)",
 				textDecoration: "underline transparent",
 				fontWeight: "500",
