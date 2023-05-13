@@ -18,6 +18,10 @@ let sectionStorage: any = {
 		{ title: "Resources", id: "resources" },
 		{ title: "Properties", id: "properties" },
 	],
+	"/quickstart": [
+		{ title: "Resources", id: "resources", tag: "PUT" },
+		{ title: "Properties", id: "properties", tag: "POST" },
+	],
 };
 
 export function Layout({ children, sections = [] }: LayoutComponentsProps) {

@@ -5,8 +5,9 @@ import Link from "next/link";
 import { Guides } from "@/components/Guides";
 import { Resources } from "@/components/Resources";
 import { Metadata } from "next";
-import { Note } from "@/components/Note";
+import { Note, Properties, Property } from "@/components/Note";
 import { Code, CodeGroup } from "@/components/Code";
+import { Prose } from "@/components/Prose";
 
 export default function QuickStart() {
 	return (
@@ -24,20 +25,102 @@ export default function QuickStart() {
 				to grab your API key from your dashboard. You find it under
 				<Link href="#">Settings &raquo; API</Link>.
 			</Note>
-			<Heading level="2" anchor={false}>
+
+			<Heading level="2" id="choose-your-client">
 				Choose your client
 			</Heading>
-			<CodeGroup title="cURL">
-				<Code>
-					# cURL is most likely already installed on your machine curl
-					--version
-				</Code>
-			</CodeGroup>
+
 			<div className="not-prose">
 				<Button href="/sdks" variant="text" arrow="right">
 					Check out our list of first-party SDKs
 				</Button>
 			</div>
+
+			<div className="my-16 xl:max-w-none">
+				<Heading level={2} id="properties">
+					Properties
+				</Heading>
+				<hr />
+				<Heading level={2} tag="GET" label="/v1/groups" anchor={false}>
+					List all groups
+				</Heading>
+
+				<Prose className="mt-4 border-t border-zinc-900/5 pt-10 dark:border-white/5">
+					<Properties>
+						<Property name="id" type="string">
+							Unique identifier for the attachment.
+						</Property>
+						<Property name="message_id" type="string">
+							Unique identifier for the message associated with
+							the attachment.
+						</Property>
+						<Property name="filename" type="string">
+							The filename for the attachment.
+						</Property>
+						<Property name="file_url" type="string">
+							The URL for the attached file.
+						</Property>
+						<Property name="file_type" type="string">
+							The MIME type of the attached file.
+						</Property>
+						<Property name="file_size" type="integer">
+							The file size of the attachment in bytes.
+						</Property>
+						<Property name="created_at" type="timestamp">
+							Timestamp of when the attachment was created.
+						</Property>
+					</Properties>
+					<Properties>
+						<Property name="id" type="string">
+							Unique identifier for the attachment.
+						</Property>
+						<Property name="message_id" type="string">
+							Unique identifier for the message associated with
+							the attachment.
+						</Property>
+						<Property name="filename" type="string">
+							The filename for the attachment.
+						</Property>
+						<Property name="file_url" type="string">
+							The URL for the attached file.
+						</Property>
+						<Property name="file_type" type="string">
+							The MIME type of the attached file.
+						</Property>
+						<Property name="file_size" type="integer">
+							The file size of the attachment in bytes.
+						</Property>
+						<Property name="created_at" type="timestamp">
+							Timestamp of when the attachment was created.
+						</Property>
+					</Properties>
+					<Properties>
+						<Property name="id" type="string">
+							Unique identifier for the attachment.
+						</Property>
+						<Property name="message_id" type="string">
+							Unique identifier for the message associated with
+							the attachment.
+						</Property>
+						<Property name="filename" type="string">
+							The filename for the attachment.
+						</Property>
+						<Property name="file_url" type="string">
+							The URL for the attached file.
+						</Property>
+						<Property name="file_type" type="string">
+							The MIME type of the attached file.
+						</Property>
+						<Property name="file_size" type="integer">
+							The file size of the attachment in bytes.
+						</Property>
+						<Property name="created_at" type="timestamp">
+							Timestamp of when the attachment was created.
+						</Property>
+					</Properties>
+				</Prose>
+			</div>
+
 			<Heading level="2" anchor={false}>
 				Making your first API request
 			</Heading>
