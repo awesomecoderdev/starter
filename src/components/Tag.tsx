@@ -1,14 +1,14 @@
 "use client";
-import clsx from "clsx";
+import { classNames } from "@/utils/class";
 
-const variantStyles = {
+const variantStyles: any = {
 	medium: "rounded-lg px-1.5 ring-1 ring-inset",
 };
 
-const colorStyles = {
-	emerald: {
-		small: "text-emerald-500 dark:text-emerald-400",
-		medium: "ring-emerald-300 dark:ring-emerald-400/30 bg-emerald-400/10 text-emerald-500 dark:text-emerald-400",
+const colorStyles: any = {
+	primary: {
+		small: "text-primary-500 dark:text-primary-400",
+		medium: "ring-primary-300 dark:ring-primary-400/30 bg-primary-400/10 text-primary-500 dark:text-primary-400",
 	},
 	sky: {
 		small: "text-sky-500",
@@ -28,8 +28,8 @@ const colorStyles = {
 	},
 };
 
-const valueColorMap = {
-	get: "emerald",
+const valueColorMap: any = {
+	get: "primary",
 	post: "sky",
 	put: "amber",
 	delete: "rose",
@@ -38,11 +38,15 @@ const valueColorMap = {
 export function Tag({
 	children,
 	variant = "medium",
-	color = valueColorMap[children.toLowerCase()] ?? "emerald",
+	color = valueColorMap[children.toLowerCase()] ?? "primary",
+}: {
+	children?: any;
+	variant?: any;
+	color?: any;
 }) {
 	return (
 		<span
-			className={clsx(
+			className={classNames(
 				"font-mono text-[0.625rem] font-semibold leading-6",
 				variantStyles[variant],
 				colorStyles[color][variant]

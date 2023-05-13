@@ -14,10 +14,10 @@ export default function QuickStart() {
 			<h1>Quickstart</h1>
 			<p className="lead">
 				This guide will get you all set up and ready to use the Protocol
-				API. We'll cover how to get started using one of our API clients
-				and how to make your first API request. We'll also look at where
-				to go next to find all the information you need to take full
-				advantage of our powerful REST API.
+				API. We will cover how to get started using one of our API
+				clients and how to make your first API request. We will also
+				look at where to go next to find all the information you need to
+				take full advantage of our powerful REST API.
 			</p>
 			<Note>
 				Before you can make requests to the Protocol API, you will need
@@ -34,12 +34,9 @@ export default function QuickStart() {
 				</Code>
 			</CodeGroup>
 			<div className="not-prose">
-				<Button
-					href="/sdks"
-					variant="text"
-					arrow="right"
-					children="Check out our list of first-party SDKs"
-				/>
+				<Button href="/sdks" variant="text" arrow="right">
+					Check out our list of first-party SDKs
+				</Button>
 			</div>
 			<Heading level="2" anchor={false}>
 				Making your first API request
@@ -51,51 +48,17 @@ export default function QuickStart() {
 				your conversations. In the cURL example, results are limited to
 				ten conversations, the default page length for each client.
 			</p>
-			{/*
-<CodeGroup tag="GET" label="/v1/conversations">
 
-```bash {{ title: 'cURL' }}
-curl -G https://api.protocol.chat/v1/conversations \
-  -H "Authorization: Bearer {token}" \
-  -d limit=10
-```
-
-```js
-import ApiClient from "@example/protocol-api";
-
-const client = new ApiClient(token);
-
-await client.conversations.list();
-```
-
-```python
-from protocol_api import ApiClient
-
-client = ApiClient(token)
-
-client.conversations.list()
-```
-
-```php
-$client = new \Protocol\ApiClient($token);
-
-$client->conversations->list();
-```
-
-</CodeGroup> */}
 			<div className="not-prose">
-				<Button
-					href="/conversations"
-					variant="text"
-					arrow="right"
-					children="Read the docs for the Conversations endpoint"
-				/>
+				<Button href="/conversations" variant="text" arrow="right">
+					Read the docs for the Conversations endpoint
+				</Button>
 			</div>
 			<Heading level="2" anchor={false}>
-				What's next?
+				Whats next?
 			</Heading>
 			<p>
-				Great, you're now set up with an API client and have made your
+				Great, you are now set up with an API client and have made your
 				first request to the API. Here are a few links that might be
 				handy as you venture further into the Protocol API:
 			</p>
@@ -124,10 +87,5 @@ $client->conversations->list();
 export const metadata: Metadata = {
 	title: "Quickstart | Tailwind Protocol",
 	description:
-		"This guide will get you all set up and ready to use the Protocol API. We’ll cover how to get started an API client and how to make your first API request.",
+		"This guide will get you all set up and ready to use the Protocol API. We will cover how to get started an API client and how to make your first API request.",
 };
-
-export const sections = [
-	{ title: "Guides", id: "guides" },
-	{ title: "Resources", id: "resources" },
-];

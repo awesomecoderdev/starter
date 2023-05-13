@@ -66,7 +66,7 @@ import { classNames } from "@/utils/class";
 // 										params: {
 // 											hitsPerPage: 5,
 // 											highlightPreTag:
-// 												'<mark class="underline bg-transparent text-emerald-500">',
+// 												'<mark class="underline bg-transparent text-primary-500">',
 // 											highlightPostTag: "</mark>",
 // 										},
 // 									},
@@ -181,7 +181,7 @@ function LoadingIcon(props: any) {
 // 			<div
 // 				id={`${id}-title`}
 // 				aria-hidden="true"
-// 				className="text-sm font-medium text-zinc-900 group-aria-selected:text-emerald-500 dark:text-white"
+// 				className="text-sm font-medium text-zinc-900 group-aria-selected:text-primary-500 dark:text-white"
 // 				dangerouslySetInnerHTML={{ __html: titleHtml }}
 // 			/>
 // 			{hierarchyHtml.length > 0 && (
@@ -242,8 +242,16 @@ function LoadingIcon(props: any) {
 // }
 
 const SearchInput = forwardRef(function SearchInput(
-	{ autocomplete, autocompleteState, onClose },
-	inputRef
+	{
+		autocomplete,
+		autocompleteState,
+		onClose,
+	}: {
+		autocomplete: any;
+		autocompleteState: any;
+		onClose: any;
+	},
+	inputRef: any
 ) {
 	let inputProps = autocomplete.getInputProps({});
 
@@ -252,7 +260,7 @@ const SearchInput = forwardRef(function SearchInput(
 			<SearchIcon className="pointer-events-none absolute left-3 top-0 h-full w-5 stroke-zinc-500" />
 			<input
 				ref={inputRef}
-				className={clsx(
+				className={classNames(
 					"flex-auto appearance-none bg-transparent pl-10 text-zinc-900 outline-none placeholder:text-zinc-500 focus:w-full focus:flex-none dark:text-white sm:text-sm [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden",
 					autocompleteState.status === "stalled" ? "pr-11" : "pr-4"
 				)}
@@ -271,7 +279,7 @@ const SearchInput = forwardRef(function SearchInput(
 			/>
 			{autocompleteState.status === "stalled" && (
 				<div className="absolute inset-y-0 right-3 flex items-center">
-					<LoadingIcon className="h-5 w-5 animate-spin stroke-zinc-200 text-zinc-900 dark:stroke-zinc-800 dark:text-emerald-400" />
+					<LoadingIcon className="h-5 w-5 animate-spin stroke-zinc-200 text-zinc-900 dark:stroke-zinc-800 dark:text-primary-400" />
 				</div>
 			)}
 		</div>
@@ -298,11 +306,12 @@ function AlgoliaLogo(props: any) {
 }
 
 function SearchButton(props: any) {
-	let [modifierKey, setModifierKey] = useState();
+	let [modifierKey, setModifierKey] = useState<string | undefined>();
 
 	useEffect(() => {
+		let navigator: any = window.navigator;
 		setModifierKey(
-			/(Mac|iPhone|iPod|iPad)/i.test(navigator.userAgentData.platform)
+			/(Mac|iPhone|iPod|iPad)/i.test(navigator?.userAgentData?.platform)
 				? "⌘"
 				: "Ctrl "
 		);
@@ -483,12 +492,15 @@ function SearchButton(props: any) {
 // }
 
 export function Search() {
-	let [modifierKey, setModifierKey] = useState();
+	let [modifierKey, setModifierKey] = useState<string | undefined>();
 	// let { buttonProps, dialogProps } = useSearchProps();
 
 	useEffect(() => {
+		let navigator: any = window.navigator;
 		setModifierKey(
-			/(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? "⌘" : "Ctrl "
+			/(Mac|iPhone|iPod|iPad)/i.test(navigator?.userAgentData?.platform)
+				? "⌘"
+				: "Ctrl "
 		);
 	}, []);
 

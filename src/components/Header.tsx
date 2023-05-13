@@ -55,7 +55,11 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 			[0, 72],
 			[0.5, 0.9]
 		);
-		let bgOpacityDark = useTransform(scrollY, [0, 72], [0.2, 0.8]);
+		let bgOpacityDark: MotionValue<number> = useTransform(
+			scrollY,
+			[0, 72],
+			[0.2, 0.8]
+		);
 
 		return (
 			<motion.div
@@ -69,10 +73,12 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 						? "bg-white dark:bg-zinc-900"
 						: "bg-white/[var(--bg-opacity-light)] dark:bg-zinc-900/[var(--bg-opacity-dark)]"
 				)}
-				style={{
-					"--bg-opacity-light": bgOpacityLight,
-					"--bg-opacity-dark": bgOpacityDark,
-				}}
+				style={
+					{
+						"--bg-opacity-light": bgOpacityLight,
+						"--bg-opacity-dark": bgOpacityDark,
+					} as MotionStyle
+				}
 			>
 				<div
 					className={classNames(

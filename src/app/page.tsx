@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { HeroPattern } from "@/components/HeroPattern";
 import { Button } from "@/components/Button";
 import { Heading } from "@/components/Heading";
@@ -19,16 +18,12 @@ export default function Home() {
 			</p>
 
 			<div className="not-prose mb-16 mt-6 flex gap-3">
-				<Button
-					href="/quickstart"
-					arrow="right"
-					children="Quickstart"
-				/>
-				<Button
-					href="/sdks"
-					variant="outline"
-					children="Explore SDKs"
-				/>
+				<Button href="/quickstart" arrow="right">
+					Quickstart
+				</Button>
+				<Button href="/sdks" variant="outline">
+					Explore SDKs
+				</Button>
 			</div>
 
 			<Heading level="2" anchor={false}>
@@ -46,12 +41,9 @@ export default function Home() {
 			</p>
 
 			<div className="not-prose">
-				<Button
-					href="/sdks"
-					variant="text"
-					arrow="right"
-					children="Get your API key"
-				/>
+				<Button href="/sdks" variant="text" arrow="right">
+					Get your API key
+				</Button>
 			</div>
 
 			<Guides />
@@ -65,8 +57,3 @@ export const metadata: Metadata = {
 	description:
 		"Learn everything there is to know about the Protocol API and integrate Protocol into your product.",
 };
-
-export const sections = [
-	{ title: "Guides", id: "guides" },
-	{ title: "Resources", id: "resources" },
-];
