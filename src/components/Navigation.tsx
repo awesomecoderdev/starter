@@ -123,8 +123,13 @@ function NavigationGroup({ group, className }: GroupPathProps) {
 	// state, so that the state does not change during the close animation.
 	// The state will still update when we re-open (re-render) the navigation.
 	let isInsideMobileNavigation = useIsInsideMobileNavigation();
+	// let [router, sections] = useInitialValue(
+	// 	[useRouter(), useSectionStore((s) => s.sections)],
+	// 	isInsideMobileNavigation
+	// );
+
 	let [router, sections] = useInitialValue(
-		[useRouter(), useSectionStore((s) => s.sections)],
+		[usePathname(), useSectionStore((s) => s.sections)],
 		isInsideMobileNavigation
 	);
 
