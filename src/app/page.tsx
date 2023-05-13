@@ -3,10 +3,14 @@ import { Button } from "@/components/Button";
 import { Heading } from "@/components/Heading";
 import Link from "next/link";
 import { Guides } from "@/components/Guides";
-import { Resources } from "@/components/Resources";
+import { Resource, Resources } from "@/components/Resources";
 import { Metadata } from "next";
-import { Properties, Property } from "@/components/Note";
+import { Properties, Property, Row, Col, Note } from "@/components/Note";
 import { Prose } from "@/components/Prose";
+import { ChatBubbleIcon } from "@/components/icons/ChatBubbleIcon";
+import { EnvelopeIcon } from "@/components/icons/EnvelopeIcon";
+import { UserIcon } from "@/components/icons/UserIcon";
+import { UsersIcon } from "@/components/icons/UsersIcon";
 
 export default function Home() {
 	return (
@@ -60,32 +64,152 @@ export default function Home() {
 				<Heading level={2} tag="GET" label="/v1/groups">
 					List all groups
 				</Heading>
-				<Prose className="mt-4 border-t border-zinc-900/5 pt-10 dark:border-white/5">
-					<Properties>
-						<Property name="id" type="string">
-							Unique identifier for the attachment.
-						</Property>
-						<Property name="message_id" type="string">
-							Unique identifier for the message associated with
-							the attachment.
-						</Property>
-						<Property name="filename" type="string">
-							The filename for the attachment.
-						</Property>
-						<Property name="file_url" type="string">
-							The URL for the attached file.
-						</Property>
-						<Property name="file_type" type="string">
-							The MIME type of the attached file.
-						</Property>
-						<Property name="file_size" type="integer">
-							The file size of the attachment in bytes.
-						</Property>
-						<Property name="created_at" type="timestamp">
-							Timestamp of when the attachment was created.
-						</Property>
-					</Properties>
-				</Prose>
+
+				<Row>
+					<Col>
+						<Prose className="mt-4 border-t border-zinc-900/5 pt-10 dark:border-white/5">
+							<Properties>
+								<Property name="id" type="string">
+									Unique identifier for the attachment.
+								</Property>
+								<Property name="message_id" type="string">
+									Unique identifier for the message associated
+									with the attachment.
+								</Property>
+								<Property name="filename" type="string">
+									The filename for the attachment.
+								</Property>
+								<Property name="file_url" type="string">
+									The URL for the attached file.
+								</Property>
+								<Property name="file_type" type="string">
+									The MIME type of the attached file.
+								</Property>
+								<Property name="file_size" type="integer">
+									The file size of the attachment in bytes.
+								</Property>
+								<Property name="created_at" type="timestamp">
+									Timestamp of when the attachment was
+									created.
+								</Property>
+							</Properties>
+							<Properties>
+								<Property name="id" type="string">
+									Unique identifier for the attachment.
+								</Property>
+								<Property name="message_id" type="string">
+									Unique identifier for the message associated
+									with the attachment.
+								</Property>
+								<Property name="filename" type="string">
+									The filename for the attachment.
+								</Property>
+								<Property name="file_url" type="string">
+									The URL for the attached file.
+								</Property>
+								<Property name="file_type" type="string">
+									The MIME type of the attached file.
+								</Property>
+								<Property name="file_size" type="integer">
+									The file size of the attachment in bytes.
+								</Property>
+								<Property name="created_at" type="timestamp">
+									Timestamp of when the attachment was
+									created.
+								</Property>
+							</Properties>
+							<Properties>
+								<Property name="id" type="string">
+									Unique identifier for the attachment.
+								</Property>
+								<Property name="message_id" type="string">
+									Unique identifier for the message associated
+									with the attachment.
+								</Property>
+								<Property name="filename" type="string">
+									The filename for the attachment.
+								</Property>
+								<Property name="file_url" type="string">
+									The URL for the attached file.
+								</Property>
+								<Property name="file_type" type="string">
+									The MIME type of the attached file.
+								</Property>
+								<Property name="file_size" type="integer">
+									The file size of the attachment in bytes.
+								</Property>
+								<Property name="created_at" type="timestamp">
+									Timestamp of when the attachment was
+									created.
+								</Property>
+							</Properties>
+						</Prose>
+					</Col>
+					<Col sticky>
+						<div className="not-prose mt-4 grid grid-cols-1 gap-8 border-t border-zinc-900/5 pt-10 dark:border-white/5 sm:grid-cols-2 xl:grid-cols-2">
+							{[
+								{
+									href: "/contacts",
+									name: "Contacts",
+									description:
+										"Learn about the contact model and how to create, retrieve, update, delete, and list contacts.",
+									icon: UserIcon,
+									pattern: {
+										y: 16,
+										squares: [
+											[0, 1],
+											[1, 3],
+										],
+									},
+								},
+								{
+									href: "/conversations",
+									name: "Conversations",
+									description:
+										"Learn about the conversation model and how to create, retrieve, update, delete, and list conversations.",
+									icon: ChatBubbleIcon,
+									pattern: {
+										y: -6,
+										squares: [
+											[-1, 2],
+											[1, 3],
+										],
+									},
+								},
+								{
+									href: "/messages",
+									name: "Messages",
+									description:
+										"Learn about the message model and how to create, retrieve, update, delete, and list messages.",
+									icon: EnvelopeIcon,
+									pattern: {
+										y: 32,
+										squares: [
+											[0, 2],
+											[1, 4],
+										],
+									},
+								},
+								{
+									href: "/groups",
+									name: "Groups",
+									description:
+										"Learn about the group model and how to create, retrieve, update, delete, and list groups.",
+									icon: UsersIcon,
+									pattern: {
+										y: 22,
+										squares: [[0, 1]],
+									},
+								},
+							].map((resource) => (
+								<Resource
+									key={resource.href}
+									resource={resource}
+								/>
+							))}
+						</div>
+					</Col>
+				</Row>
 			</div>
 		</>
 	);
