@@ -5,7 +5,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion, useIsPresent } from "framer-motion";
 import { Button } from "@/components/Button";
-import { useIsInsideMobileNavigation } from "@/components/MobileNavigation";
+import {
+	useIsInsideMobileNavigation,
+	useMobileNavigationStore,
+} from "@/components/MobileNavigation";
 import { useSectionStore } from "@/components/SectionProvider";
 import { Tag } from "@/components/Tag";
 import { remToPx } from "@/lib/remToPx";
@@ -41,6 +44,7 @@ function NavLink({
 		<Link
 			href={href}
 			aria-current={active ? "page" : undefined}
+			onClick={(e) => useMobileNavigationStore.getState().close()}
 			className={classNames(
 				"flex justify-between gap-2 py-1 pr-3 text-sm transition",
 				isAnchorLink ? "pl-7" : "pl-4",

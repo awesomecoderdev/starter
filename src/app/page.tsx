@@ -5,11 +5,13 @@ import Link from "next/link";
 import { Guides } from "@/components/Guides";
 import { Resources } from "@/components/Resources";
 import { Metadata } from "next";
+import { Properties, Property } from "@/components/Note";
 
 export default function Home() {
 	return (
 		<>
 			<HeroPattern />
+
 			<h1>API Documentation</h1>
 			<p className="lead">
 				Use the Protocol API to access contacts, conversations, group
@@ -48,6 +50,38 @@ export default function Home() {
 
 			<Guides />
 			<Resources />
+
+			<div className="my-16 xl:max-w-none">
+				<Heading level={2} id="properties">
+					Properties
+				</Heading>
+				<div className="not-prose mt-4 border-t border-zinc-900/5 pt-10 dark:border-white/5">
+					<Properties>
+						<Property name="id" type="string">
+							Unique identifier for the attachment.
+						</Property>
+						<Property name="message_id" type="string">
+							Unique identifier for the message associated with
+							the attachment.
+						</Property>
+						<Property name="filename" type="string">
+							The filename for the attachment.
+						</Property>
+						<Property name="file_url" type="string">
+							The URL for the attached file.
+						</Property>
+						<Property name="file_type" type="string">
+							The MIME type of the attached file.
+						</Property>
+						<Property name="file_size" type="integer">
+							The file size of the attachment in bytes.
+						</Property>
+						<Property name="created_at" type="timestamp">
+							Timestamp of when the attachment was created.
+						</Property>
+					</Properties>
+				</div>
+			</div>
 		</>
 	);
 }

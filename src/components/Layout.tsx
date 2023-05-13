@@ -16,6 +16,7 @@ let sectionStorage: any = {
 	"/": [
 		{ title: "Guides", id: "guides" },
 		{ title: "Resources", id: "resources" },
+		{ title: "Properties", id: "properties" },
 	],
 };
 
