@@ -1,26 +1,44 @@
 "use client";
+
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Logo } from "@/components/Logo";
 import { Navigation } from "@/components/Navigation";
 import { Prose } from "@/components/Prose";
 import { SectionProvider } from "@/components/SectionProvider";
-import { useMobileNavigationStore } from "./MobileNavigation";
-import { Router } from "next/router";
+import { usePathname } from "next/navigation";
+import { useMobileNavigationStore } from "@/components/MobileNavigation";
+
+let sectionStorage: any = {
+	"/": [
+		{ title: "Guides", id: "guides" },
+		{ title: "Resources", id: "resources" },
+	],
+};
 
 export function Layout({ children, sections = [] }: LayoutComponentsProps) {
-	Router.events.on("hashChangeStart", onRouteChange);
-	Router.events.on("routeChangeComplete", onRouteChange);
-	Router.events.on("routeChangeError", onRouteChange);
+	const pathname = usePathname();
+
+	// Save pathname on component mount into a REF
+	const savedPathNameRef = useRef(pathname);
 
 	function onRouteChange() {
 		useMobileNavigationStore.getState().close();
-		console.log('"changes"', "changes");
 	}
 
+	useEffect(() => {
+		// If REF has been changed, do the stuff
+		if (savedPathNameRef.current !== pathname) {
+			onRouteChange();
+			// Update REF
+			savedPathNameRef.current = pathname;
+		}
+	}, [pathname]);
+
+	sections = sections.length == 0 ? sectionStorage[pathname] ?? [] : [];
 	return (
 		<SectionProvider sections={sections}>
 			<div className="lg:ml-72 xl:ml-80">

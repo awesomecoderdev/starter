@@ -8,8 +8,7 @@ import {
 	useState,
 } from "react";
 import { Tab } from "@headlessui/react";
-import create from "zustand";
-
+import { create } from "zustand";
 import { Tag } from "@/components/Tag";
 import { classNames } from "@/utils/class";
 

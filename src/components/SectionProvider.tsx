@@ -7,7 +7,7 @@ import {
 	useLayoutEffect,
 	useState,
 } from "react";
-import { useStore, create, UseBoundStore, StoreApi } from "zustand";
+import { useStore, create } from "zustand";
 
 export const createSectionStore = (sections: Section[]) => {
 	return create<SectionProviderState>((set) => ({
@@ -58,7 +58,7 @@ const useVisibleSections = (sectionStore: any) => {
 				let { id, headingRef, offsetRem } = sections[sectionIndex];
 				let offset = remToPx(offsetRem);
 				let top =
-					headingRef.current.getBoundingClientRect().top + scrollY;
+					headingRef?.current?.getBoundingClientRect().top + scrollY;
 
 				if (sectionIndex === 0 && top - offset > scrollY) {
 					newVisibleSections.push("_top");
