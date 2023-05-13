@@ -6,6 +6,7 @@ import { Guides } from "@/components/Guides";
 import { Resources } from "@/components/Resources";
 import { Metadata } from "next";
 import { Properties, Property } from "@/components/Note";
+import { Prose } from "@/components/Prose";
 
 export default function Home() {
 	return (
@@ -55,7 +56,11 @@ export default function Home() {
 				<Heading level={2} id="properties">
 					Properties
 				</Heading>
-				<div className="not-prose mt-4 border-t border-zinc-900/5 pt-10 dark:border-white/5">
+				<hr />
+				<Heading level={2} tag="GET" label="/v1/groups">
+					List all groups
+				</Heading>
+				<Prose className="mt-4 border-t border-zinc-900/5 pt-10 dark:border-white/5">
 					<Properties>
 						<Property name="id" type="string">
 							Unique identifier for the attachment.
@@ -80,7 +85,7 @@ export default function Home() {
 							Timestamp of when the attachment was created.
 						</Property>
 					</Properties>
-				</div>
+				</Prose>
 			</div>
 		</>
 	);
