@@ -66,7 +66,7 @@ const useVisibleSections = (sectionStore: any) => {
 
 				let nextSection = sections[sectionIndex + 1];
 				let bottom =
-					(nextSection?.headingRef.current.getBoundingClientRect()
+					(nextSection?.headingRef?.current.getBoundingClientRect()
 						.top ?? Infinity) +
 					scrollY -
 					remToPx(nextSection?.offsetRem ?? 0);
