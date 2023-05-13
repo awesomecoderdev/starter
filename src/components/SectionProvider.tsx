@@ -7,10 +7,10 @@ import {
 	useLayoutEffect,
 	useState,
 } from "react";
-import { StoreApi, createStore, useStore } from "zustand";
+import { useStore, create, UseBoundStore, StoreApi } from "zustand";
 
-function createSectionStore(sections: Section[]) {
-	return createStore<SectionProviderCreateStore>((set) => ({
+export const createSectionStore = (sections: Section[]) => {
+	return create<SectionProviderState>((set) => ({
 		sections,
 		visibleSections: [],
 		setVisibleSections: (visibleSections) =>
@@ -35,15 +35,15 @@ function createSectionStore(sections: Section[]) {
 				};
 			}),
 	}));
-}
+};
 
-function useVisibleSections(sectionStore: any) {
+const useVisibleSections = (sectionStore: any) => {
 	let setVisibleSections = useStore(
 		sectionStore,
-		(s) => s.setVisibleSections
+		(state: any) => state.setVisibleSections
 	);
 
-	let sections = useStore(sectionStore, (s) => s.sections);
+	let sections = useStore(sectionStore, (state: any) => state.sections);
 
 	useEffect(() => {
 		function checkVisibleSections() {
@@ -95,16 +95,17 @@ function useVisibleSections(sectionStore: any) {
 			window.removeEventListener("resize", checkVisibleSections);
 		};
 	}, [setVisibleSections, sections]);
-}
+};
 
-const SectionStoreContext = createContext<never[]>([]);
-// const SectionStoreContext = createContext<StoreApi<any> | null>(null);
+const SectionStoreContext = createContext([]);
 
 const useIsomorphicLayoutEffect =
 	typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 export function SectionProvider({ sections, children }: SectionProviderProps) {
-	let [sectionStore] = useState(() => createSectionStore(sections));
+	const [sectionStore, setSectionStore] = useState<any>(() =>
+		createSectionStore(sections)
+	);
 
 	useVisibleSections(sectionStore);
 
@@ -120,6 +121,6 @@ export function SectionProvider({ sections, children }: SectionProviderProps) {
 }
 
 export function useSectionStore(selector: (state: any) => any): any {
-	let store = useContext<StoreApi<any> | null>(SectionStoreContext);
-	return useStore(store as StoreApi<any>, selector);
+	let store = useContext<any>(SectionStoreContext);
+	return useStore(store, selector);
 }

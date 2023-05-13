@@ -8,16 +8,12 @@ type ProseProps = {
 	as?: any;
 };
 
-type MobileNavigationState = {
+interface MobileNavigationState {
 	isOpen: boolean;
 	open: () => void;
 	close: () => void;
 	toggle: () => void;
-};
-
-type SectionProviderState = {
-	sections: any;
-};
+}
 
 type SectionProviderProps = {
 	children: React.ReactNode;
@@ -26,11 +22,12 @@ type SectionProviderProps = {
 
 type Section = {
 	id: string;
+	title?: string;
 	headingRef?: React.RefObject<HTMLElement>;
 	offsetRem?: number;
 };
 
-type SectionProviderCreateStore = {
+interface SectionProviderState {
 	sections: Section[];
 	visibleSections: string[];
 	setVisibleSections: (visibleSections: string[]) => void;
@@ -39,7 +36,7 @@ type SectionProviderCreateStore = {
 		ref: React.RefObject<HTMLElement>;
 		offsetRem: number;
 	}) => void;
-};
+}
 
 type VisibleSectionsProps = {
 	sectionStore: any;
