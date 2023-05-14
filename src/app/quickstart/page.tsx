@@ -26,9 +26,16 @@ function countSpacesFromLeft(str: string) {
 }
 
 export default function QuickStart() {
-	const code = `
-	# cURL is most likely already installed on your machine
-	curl --version
+	const code = `# cURL is most likely already installed on your machine
+import ApiClient from '@example/protocol-api'
+
+const client = new ApiClient(token)
+
+await client.contacts.create({
+  username: 'FrankMcCallister',
+  phone_number: '1-800-759-3000',
+  avatar_url: 'https://assets.protocol.chat/avatars/frank.jpg',
+})
 	`;
 	const python = `
 	from protocol_api import ApiClient
@@ -41,12 +48,12 @@ export default function QuickStart() {
 		<>
 			<h1>Quickstart</h1>
 
-			<CodeGroup tag="POST" label="Hello world">
-				<Code language="python" code={python}>
-					{python}
-				</Code>
+			<CodeGroup tag="POST" label="/v1/update">
 				<Code language="js" code={code}>
 					{code}
+				</Code>
+				<Code language="python" code={python}>
+					{python}
 				</Code>
 			</CodeGroup>
 

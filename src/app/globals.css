@@ -1,13 +1,13 @@
 :root {
-	--shiki-color-text: theme("colors.white");
-	--shiki-token-constant: theme("colors.emerald.300");
-	--shiki-token-string: theme("colors.emerald.300");
-	--shiki-token-comment: theme("colors.zinc.500");
-	--shiki-token-keyword: theme("colors.sky.300");
-	--shiki-token-parameter: theme("colors.pink.300");
-	--shiki-token-function: theme("colors.violet.300");
-	--shiki-token-string-expression: theme("colors.emerald.300");
-	--shiki-token-punctuation: theme("colors.zinc.200");
+	--editor-color-text: theme("colors.white");
+	--editor-color-constant: theme("colors.emerald.300");
+	--editor-color-string: theme("colors.emerald.300");
+	--editor-color-comment: theme("colors.zinc.500");
+	--editor-color-keyword: theme("colors.sky.300");
+	--editor-color-parameter: theme("colors.pink.300");
+	--editor-color-function: theme("colors.violet.300");
+	--editor-color-string-expression: theme("colors.emerald.300");
+	--editor-color-punctuation: theme("colors.zinc.200");
 	/* --foreground-rgb: 0, 0, 0;
 	--background-start-rgb: 214, 219, 220;
 	--background-end-rgb: 255, 255, 255; */
@@ -38,3 +38,61 @@ body {
 /* code span {
 	margin-right: theme("spacing.1");
 } */
+
+code:not(.nohighlight) code:not(.nohighlight) .hljs {
+	color: var(--editor-color-function);
+	/* background: #303030; */
+}
+
+code:not(.nohighlight) .hljs-keyword,
+code:not(.nohighlight) .hljs-selector-tag,
+code:not(.nohighlight) .hljs-literal,
+code:not(.nohighlight) .hljs-section,
+code:not(.nohighlight) .hljs-link {
+	color: var(--editor-color-keyword);
+}
+
+code:not(.nohighlight) .hljs-subst {
+	/* default */
+}
+
+code:not(.nohighlight) .hljs-string,
+code:not(.nohighlight) .hljs-title,
+code:not(.nohighlight) .hljs-name,
+code:not(.nohighlight) .hljs-type,
+code:not(.nohighlight) .hljs-attribute,
+code:not(.nohighlight) .hljs-symbol,
+code:not(.nohighlight) .hljs-bullet,
+code:not(.nohighlight) .hljs-built_in,
+code:not(.nohighlight) .hljs-addition,
+code:not(.nohighlight) .hljs-variable,
+code:not(.nohighlight) .hljs-template-tag,
+code:not(.nohighlight) .hljs-template-variable {
+	color: var(--editor-color-constant);
+}
+
+code:not(.nohighlight) .hljs-comment,
+code:not(.nohighlight) .hljs-quote,
+code:not(.nohighlight) .hljs-deletion,
+code:not(.nohighlight) .hljs-meta {
+	color: var(--editor-color-comment);
+}
+
+code:not(.nohighlight) .hljs-keyword,
+code:not(.nohighlight) .hljs-selector-tag,
+code:not(.nohighlight) .hljs-literal,
+code:not(.nohighlight) .hljs-title,
+code:not(.nohighlight) .hljs-section,
+code:not(.nohighlight) .hljs-doctag,
+code:not(.nohighlight) .hljs-type,
+code:not(.nohighlight) .hljs-name {
+	font-variant: var(--editor-color-string);
+}
+
+code:not(.nohighlight) .hljs-strong {
+	font-weight: theme("fontWeight.semibold");
+}
+
+code:not(.nohighlight) .hljs-emphasis {
+	font-style: italic;
+}

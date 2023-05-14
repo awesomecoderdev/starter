@@ -303,7 +303,7 @@ export function CodeGroup({
 }: {
 	children?: any;
 	title?: string;
-	tag?: "GET" | "POST" | "PUT" | "PATCH";
+	tag?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 	label?: string;
 }) {
 	let languages = Children.map(children, (child) =>
@@ -338,6 +338,7 @@ export function Code({
 	children,
 	code,
 	language = "bash",
+	nohighlight = false,
 	className,
 	...props
 }: {
@@ -345,16 +346,34 @@ export function Code({
 	code: any;
 	className?: any;
 	language?: string;
+	nohighlight?: boolean;
 }) {
 	let isGrouped = useContext(CodeGroupContext);
+	let lang: string;
+
+	if (language) {
+		if (language == "js") {
+			lang = "javascript";
+		} else if (language == "ts") {
+			lang = "typescript";
+		} else {
+			lang = `${language.toLowerCase()}`;
+		}
+	} else {
+		lang = "bash";
+	}
 
 	if (isGrouped) {
 		return (
 			<code
-				className={classNames(`language-${language}`, className)}
+				className={classNames(
+					`language-${lang}`,
+					className,
+					nohighlight && "nohighlight"
+				)}
 				{...props}
 				dangerouslySetInnerHTML={{
-					__html: highlight(children, language),
+					__html: highlight(children, lang),
 				}}
 			/>
 		);
@@ -362,7 +381,11 @@ export function Code({
 
 	return (
 		<code
-			className={classNames(`language-${language}`, className)}
+			className={classNames(
+				`language-${lang}`,
+				className,
+				nohighlight && "nohighlight"
+			)}
 			{...props}
 		>
 			{highlight(children, language)}
