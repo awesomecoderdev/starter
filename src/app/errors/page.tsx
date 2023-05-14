@@ -3,15 +3,15 @@ import { Col, Note, Properties, Property, Row } from "@/components/Note";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Not Found",
+	title: `Errors - ${process.env.APP_NAME}`,
 	description:
 		"In this guide, we will talk about what happens when something goes wrong while you work with the API.",
 };
 
-export default function NotFound() {
+export default function Errors() {
 	return (
 		<>
-			<h1>Errors</h1>
+			<h1>Errors :( </h1>
 			<p className="lead">
 				In this guide, we will talk about what happens when something
 				goes wrong while you work with the API. Mistakes happen, and

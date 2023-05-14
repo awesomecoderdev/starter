@@ -216,7 +216,7 @@ export default function Home() {
 }
 
 export const metadata: Metadata = {
-	title: "Tailwind Protocol",
+	title: `Getting Started - ${process.env.APP_NAME}`,
 	description:
 		"Learn everything there is to know about the Protocol API and integrate Protocol into your product.",
 };

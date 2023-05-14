@@ -1,13 +1,15 @@
-import { HeroPattern } from "@/components/HeroPattern";
 import { Button } from "@/components/Button";
 import { Heading } from "@/components/Heading";
 import Link from "next/link";
-import { Guides } from "@/components/Guides";
-import { Resources } from "@/components/Resources";
 import { Metadata } from "next";
 import { Note, Properties, Property } from "@/components/Note";
-import { Code, CodeGroup } from "@/components/Code";
 import { Prose } from "@/components/Prose";
+
+export const metadata: Metadata = {
+	title: `Quickstart - ${process.env.APP_NAME}`,
+	description:
+		"This guide will get you all set up and ready to use the Protocol API. We will cover how to get started an API client and how to make your first API request.",
+};
 
 export default function QuickStart() {
 	return (
@@ -166,9 +168,3 @@ export default function QuickStart() {
 		</>
 	);
 }
-
-export const metadata: Metadata = {
-	title: "Quickstart | Tailwind Protocol",
-	description:
-		"This guide will get you all set up and ready to use the Protocol API. We will cover how to get started an API client and how to make your first API request.",
-};
