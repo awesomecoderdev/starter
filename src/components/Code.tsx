@@ -11,6 +11,7 @@ import { Tab } from "@headlessui/react";
 import { create } from "zustand";
 import { Tag } from "@/components/Tag";
 import { classNames } from "@/utils/class";
+import { highlight } from "@/lib/highlighter";
 
 const languageNames: LanguageMappings = {
 	js: "JavaScript",
@@ -193,7 +194,16 @@ function CodeGroupHeader({
 	);
 }
 
-function CodeGroupPanels({ children, ...props }: { children?: any }) {
+function CodeGroupPanels({
+	children,
+	tag,
+	label,
+	...props
+}: {
+	children?: any;
+	tag?: string;
+	label?: string;
+}) {
 	let hasTabs = Children.count(children) > 1;
 
 	if (hasTabs) {
@@ -201,14 +211,20 @@ function CodeGroupPanels({ children, ...props }: { children?: any }) {
 			<Tab.Panels>
 				{Children.map(children, (child) => (
 					<Tab.Panel>
-						<CodePanel {...props}>{child}</CodePanel>
+						<CodePanel {...props} tag={tag} label={label}>
+							{child}
+						</CodePanel>
 					</Tab.Panel>
 				))}
 			</Tab.Panels>
 		);
 	}
 
-	return <CodePanel {...props}>{children}</CodePanel>;
+	return (
+		<CodePanel {...props} tag={tag} label={label}>
+			{children}
+		</CodePanel>
+	);
 }
 
 function usePreventLayoutShift() {
@@ -281,10 +297,14 @@ const CodeGroupContext = createContext(false);
 export function CodeGroup({
 	children,
 	title,
+	tag,
+	label,
 	...props
 }: {
 	children?: any;
 	title?: string;
+	tag?: "GET" | "POST" | "PUT" | "PATCH";
+	label?: string;
 }) {
 	let languages = Children.map(children, (child) =>
 		getPanelTitle(child.props)
@@ -306,7 +326,9 @@ export function CodeGroup({
 				<CodeGroupHeader title={title} {...headerProps}>
 					{children}
 				</CodeGroupHeader>
-				<CodeGroupPanels {...props}>{children}</CodeGroupPanels>
+				<CodeGroupPanels {...props} tag={tag} label={label}>
+					{children}
+				</CodeGroupPanels>
 			</Container>
 		</CodeGroupContext.Provider>
 	);
@@ -314,11 +336,13 @@ export function CodeGroup({
 
 export function Code({
 	children,
+	code,
 	language = "bash",
 	className,
 	...props
 }: {
 	children: any;
+	code: any;
 	className?: any;
 	language?: string;
 }) {
@@ -329,74 +353,11 @@ export function Code({
 			<code
 				className={classNames(`language-${language}`, className)}
 				{...props}
-				dangerouslySetInnerHTML={{ __html: children }}
+				dangerouslySetInnerHTML={{
+					__html: highlight(children, language),
+				}}
 			/>
 		);
-
-		// return(
-		// <code>
-		// 	<code className="language-js">
-		// 		<span>
-		// 			<span style={{ color: "var(--shiki-token-keyword)" }}>
-		// 				import
-		// 			</span>
-		// 			<span style={{ color: "var(--shiki-color-text)" }}>
-		// 				ApiClient
-		// 			</span>
-		// 			<span style={{ color: "var(--shiki-token-keyword)" }}>
-		// 				from
-		// 			</span>
-		// 			<span
-		// 				style={{
-		// 					color: "var(--shiki-token-string-expression)",
-		// 				}}
-		// 			>
-		// 				'@example/protocol-api'
-		// 			</span>
-		// 		</span>
-		// 		<span>
-		// 			<span style={{ color: "var(--shiki-token-keyword)" }}>
-		// 				const
-		// 			</span>
-		// 			<span style={{ color: "var(--shiki-token-constant)" }}>
-		// 				client
-		// 			</span>
-		// 			<span style={{ color: "var(--shiki-token-keyword)" }}>
-		// 				=
-		// 			</span>
-		// 			<span style={{ color: "var(--shiki-token-keyword)" }}>
-		// 				new
-		// 			</span>
-		// 			<span style={{ color: "var(--shiki-token-function)" }}>
-		// 				ApiClient
-		// 			</span>
-		// 			<span style={{ color: "var(--shiki-color-text)" }}>
-		// 				(token)
-		// 			</span>
-		// 		</span>
-		// 		<span>
-		// 			<span style={{ color: "var(--shiki-token-keyword)" }}>
-		// 				await
-		// 			</span>
-		// 			<span style={{ color: "var(--shiki-token-constant)" }}>
-		// 				client
-		// 			</span>
-		// 			<span style={{ color: "var(--shiki-token-function)" }}>
-		// 				.
-		// 			</span>
-		// 			<span style={{ color: "var(--shiki-token-constant)" }}>
-		// 				conversations
-		// 			</span>
-		// 			<span style={{ color: "var(--shiki-token-function)" }}>
-		// 				.list
-		// 			</span>
-		// 			<span style={{ color: "var(--shiki-color-text)" }}>
-		// 				()
-		// 			</span>
-		// 		</span>
-		// 	</code>
-		// </code>
-		// )
 	}
 
 	return (
@@ -404,7 +365,7 @@ export function Code({
 			className={classNames(`language-${language}`, className)}
 			{...props}
 		>
-			{children}
+			{highlight(children, language)}
 		</code>
 	);
 }

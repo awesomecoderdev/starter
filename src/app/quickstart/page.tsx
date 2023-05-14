@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { Note, Properties, Property } from "@/components/Note";
 import { Prose } from "@/components/Prose";
 import { Code, CodeGroup, Pre } from "@/components/Code";
+import { Tag } from "@/components/Tag";
 
 export const metadata: Metadata = {
 	// title: `Quickstart - ${process.env.APP_NAME}`,
@@ -12,6 +13,17 @@ export const metadata: Metadata = {
 	description:
 		"This guide will get you all set up and ready to use the Protocol API. We will cover how to get started an API client and how to make your first API request.",
 };
+function countSpacesFromLeft(str: string) {
+	let count = 0;
+	for (let i = 0; i < str.length; i++) {
+		if (str[i] === " ") {
+			count++;
+		} else {
+			break;
+		}
+	}
+	return count;
+}
 
 export default function QuickStart() {
 	const code = `
@@ -21,16 +33,21 @@ export default function QuickStart() {
 	const python = `
 	from protocol_api import ApiClient
 
-    client = ApiClient(token)
+    	client = ApiClient(token)
 
     client.contacts.list()
 	`;
 	return (
 		<>
 			<h1>Quickstart</h1>
-			<CodeGroup>
-				<Code language="python">{python}</Code>
-				<Code language="js">{code}</Code>
+
+			<CodeGroup tag="POST" label="Hello world">
+				<Code language="python" code={python}>
+					{python}
+				</Code>
+				<Code language="js" code={code}>
+					{code}
+				</Code>
 			</CodeGroup>
 
 			<p className="lead">

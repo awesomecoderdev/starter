@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { Layout } from "@/components/Layout";
 import { NextRequest } from "next/server";
+import Script from "next/script";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -61,6 +62,19 @@ export default function RootLayout({
 						__html: `history.scrollRestoration = "manual"`,
 					}}
 				/>
+				{/*
+				<Script
+					src="https://www.googletagmanager.com/gtag/js?id=G-069199CJ1K"
+					strategy="afterInteractive"
+				/>
+				<Script strategy="afterInteractive">
+					{`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-069199CJ1K');
+          `}
+				</Script> */}
 			</head>
 			<body className="bg-white antialiased dark:bg-zinc-900">
 				<Layout>{children}</Layout>

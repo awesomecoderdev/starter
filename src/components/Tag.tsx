@@ -38,7 +38,7 @@ const valueColorMap: any = {
 export function Tag({
 	children,
 	variant = "medium",
-	color = valueColorMap[children.toLowerCase()] ?? "primary",
+	color = valueColorMap[`${children.toLowerCase()}`] ?? "primary",
 }: {
 	children?: any;
 	variant?: any;
@@ -49,7 +49,7 @@ export function Tag({
 			className={classNames(
 				"font-mono text-[0.625rem] font-semibold leading-6",
 				variantStyles[variant],
-				colorStyles[color][variant]
+				colorStyles[color] ? colorStyles[color][variant] : ""
 			)}
 		>
 			{children}

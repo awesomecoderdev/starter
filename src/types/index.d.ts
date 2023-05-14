@@ -6,6 +6,7 @@ type ProseProps = {
 	children: React.ReactNode;
 	className?: string;
 	as?: any;
+	enable?: boolean;
 };
 
 interface MobileNavigationState {
