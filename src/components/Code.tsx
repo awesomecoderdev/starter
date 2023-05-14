@@ -312,7 +312,14 @@ export function CodeGroup({
 	);
 }
 
-export function Code({ children, ...props }: { children: any }) {
+export function Code({
+	children,
+	language = "js",
+	...props
+}: {
+	children: any;
+	language?: string;
+}) {
 	let isGrouped = useContext(CodeGroupContext);
 
 	if (isGrouped) {

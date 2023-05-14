@@ -55,6 +55,12 @@ export default function RootLayout({
 		<html lang="en">
 			<head>
 				<script dangerouslySetInnerHTML={{ __html: modeScript }} />
+				{/* Tell the browser to never restore the scroll position on load */}
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `history.scrollRestoration = "manual"`,
+					}}
+				/>
 			</head>
 			<body className="bg-white antialiased dark:bg-zinc-900">
 				<Layout>{children}</Layout>

@@ -4,17 +4,35 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { Note, Properties, Property } from "@/components/Note";
 import { Prose } from "@/components/Prose";
+import { Code, CodeGroup, Pre } from "@/components/Code";
 
 export const metadata: Metadata = {
-	title: `Quickstart - ${process.env.APP_NAME}`,
+	// title: `Quickstart - ${process.env.APP_NAME}`,
+	title: `Quickstart`,
 	description:
 		"This guide will get you all set up and ready to use the Protocol API. We will cover how to get started an API client and how to make your first API request.",
 };
 
 export default function QuickStart() {
+	const code = `
+	# cURL is most likely already installed on your machine
+	curl --version
+	`;
+	const python = `
+	from protocol_api import ApiClient
+
+    client = ApiClient(token)
+
+    client.contacts.list()
+	`;
 	return (
 		<>
 			<h1>Quickstart</h1>
+			<CodeGroup>
+				<Code language="js">{code}</Code>
+				<Code language="python">{python}</Code>
+			</CodeGroup>
+
 			<p className="lead">
 				This guide will get you all set up and ready to use the Protocol
 				API. We will cover how to get started using one of our API
