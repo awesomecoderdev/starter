@@ -178,7 +178,7 @@ function CodeGroupHeader({
 					{Children.map(children, (child, childIndex) => (
 						<Tab
 							className={classNames(
-								"border-b py-3 transition focus:[&:not(:focus-visible)]:outline-none",
+								"border-b py-3 transition focus:[&:not(:focus-visible)]:outline-none outline-none",
 								childIndex === selectedIndex
 									? "border-primary-500 text-primary-400"
 									: "border-transparent text-zinc-400 hover:text-zinc-300"
@@ -314,21 +314,99 @@ export function CodeGroup({
 
 export function Code({
 	children,
-	language = "js",
+	language = "bash",
+	className,
 	...props
 }: {
 	children: any;
+	className?: any;
 	language?: string;
 }) {
 	let isGrouped = useContext(CodeGroupContext);
 
 	if (isGrouped) {
 		return (
-			<code {...props} dangerouslySetInnerHTML={{ __html: children }} />
+			<code
+				className={classNames(`language-${language}`, className)}
+				{...props}
+				dangerouslySetInnerHTML={{ __html: children }}
+			/>
 		);
+
+		// return(
+		// <code>
+		// 	<code className="language-js">
+		// 		<span>
+		// 			<span style={{ color: "var(--shiki-token-keyword)" }}>
+		// 				import
+		// 			</span>
+		// 			<span style={{ color: "var(--shiki-color-text)" }}>
+		// 				ApiClient
+		// 			</span>
+		// 			<span style={{ color: "var(--shiki-token-keyword)" }}>
+		// 				from
+		// 			</span>
+		// 			<span
+		// 				style={{
+		// 					color: "var(--shiki-token-string-expression)",
+		// 				}}
+		// 			>
+		// 				'@example/protocol-api'
+		// 			</span>
+		// 		</span>
+		// 		<span>
+		// 			<span style={{ color: "var(--shiki-token-keyword)" }}>
+		// 				const
+		// 			</span>
+		// 			<span style={{ color: "var(--shiki-token-constant)" }}>
+		// 				client
+		// 			</span>
+		// 			<span style={{ color: "var(--shiki-token-keyword)" }}>
+		// 				=
+		// 			</span>
+		// 			<span style={{ color: "var(--shiki-token-keyword)" }}>
+		// 				new
+		// 			</span>
+		// 			<span style={{ color: "var(--shiki-token-function)" }}>
+		// 				ApiClient
+		// 			</span>
+		// 			<span style={{ color: "var(--shiki-color-text)" }}>
+		// 				(token)
+		// 			</span>
+		// 		</span>
+		// 		<span>
+		// 			<span style={{ color: "var(--shiki-token-keyword)" }}>
+		// 				await
+		// 			</span>
+		// 			<span style={{ color: "var(--shiki-token-constant)" }}>
+		// 				client
+		// 			</span>
+		// 			<span style={{ color: "var(--shiki-token-function)" }}>
+		// 				.
+		// 			</span>
+		// 			<span style={{ color: "var(--shiki-token-constant)" }}>
+		// 				conversations
+		// 			</span>
+		// 			<span style={{ color: "var(--shiki-token-function)" }}>
+		// 				.list
+		// 			</span>
+		// 			<span style={{ color: "var(--shiki-color-text)" }}>
+		// 				()
+		// 			</span>
+		// 		</span>
+		// 	</code>
+		// </code>
+		// )
 	}
 
-	return <code {...props}>{children}</code>;
+	return (
+		<code
+			className={classNames(`language-${language}`, className)}
+			{...props}
+		>
+			{children}
+		</code>
+	);
 }
 
 export function Pre({ children, ...props }: { children: any }) {

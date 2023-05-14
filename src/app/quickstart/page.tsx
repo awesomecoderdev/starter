@@ -29,8 +29,8 @@ export default function QuickStart() {
 		<>
 			<h1>Quickstart</h1>
 			<CodeGroup>
-				<Code language="js">{code}</Code>
 				<Code language="python">{python}</Code>
+				<Code language="js">{code}</Code>
 			</CodeGroup>
 
 			<p className="lead">
