@@ -6,6 +6,7 @@ import { Note, Properties, Property } from "@/components/Note";
 import { Prose } from "@/components/Prose";
 import { Code, CodeGroup, Pre } from "@/components/Code";
 import { Tag } from "@/components/Tag";
+import { BADHINTS } from "dns";
 
 export const metadata: Metadata = {
 	// title: `Quickstart - ${process.env.APP_NAME}`,
@@ -36,14 +37,101 @@ await client.contacts.create({
   phone_number: '1-800-759-3000',
   avatar_url: 'https://assets.protocol.chat/avatars/frank.jpg',
 })
-	`;
-	const python = `
-	from protocol_api import ApiClient
 
-    	client = ApiClient(token)
+import ApiClient from '@example/protocol-api'
 
-    client.contacts.list()
+const client = new ApiClient(token)
+
+await client.messages.list()
+
 	`;
+	const python = `<section class="introduce" id="skills">
+	<div class="skill__container" data-sr-id="4" style="visibility: visible; opacity: 0; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -30, 0, 1);">
+	<div class="skill__header">
+	   <h1 class="sikll__title">Skills</h1>
+	   <div class="skill__border"></div>
+	</div>
+	<div class="skill__grid">
+	   <div class="skill__names" data-sr-id="5" style="visibility: visible; opacity: 0; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -30, 0, 1);">
+		  <h1 class="sill__name_title">I have experience in </h1>
+		  <div class="my__skills">
+			 <ul class="my__skills_list">
+				<li class="my__skills_item">Html5, Css3, Scss</li>
+				<li class="my__skills_item">Bootstrap, Tailwindcss</li>
+				<li class="my__skills_item">Javascript, jQuery, AJAX</li>
+				<li class="my__skills_item">PHP,PHP[OOP], REST API, LARAVEL</li>
+				<li class="my__skills_item">MYSQL, JSON DB</li>
+				<li class="my__skills_item">PSD to Html5, PSD to WordPress/WooCommerce</li>
+				<li class="my__skills_item">WordPress ( Theme Development, Plugin Development) </li>
+			 </ul>
+		  </div>
+	   </div>
+	   <div class="skill__perc" data-sr-id="6" style="visibility: visible; opacity: 0; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -30, 0, 1);">
+		  <div class="sill__lists">
+			 <div class="skill__item">
+				<h6 class="skillbar__title"><i class="bx bxl-html5"></i></h6>
+				<div class="skillbar" data-percent="95%">
+				   <div class="skillbar-bar html5" style="width: 95%;">
+				   </div>
+				</div>
+				<h6 class="skillbar__percent"><span class="count">95</span>%</h6>
+			 </div>
+			 <div class="skill__item">
+				<h6 class="skillbar__title"><i class="bx bxl-nodejs"></i></h6>
+				<div class="skillbar" data-percent="70%">
+				   <div class="skillbar-bar js" style="width: 70%;">
+				   </div>
+				</div>
+				<h6 class="skillbar__percent"><span class="count">70</span>%</h6>
+			 </div>
+			 <div class="skill__item">
+				<h6 class="skillbar__title"><i class="bx bxl-php"></i></h6>
+				<div class="skillbar" data-percent="85%">
+				   <div class="skillbar-bar php" style="width: 85%;">
+				   </div>
+				</div>
+				<h6 class="skillbar__percent"><span class="count">85</span>%</h6>
+			 </div>
+			 <div class="skill__item">
+				<h6 class="skillbar__title"><i class="bx bxl-wordpress"></i></h6>
+				<div class="skillbar" data-percent="90%">
+				   <div class="skillbar-bar wordpress" style="width: 90%;">
+				   </div>
+				</div>
+				<h6 class="skillbar__percent "><span class="count">90</span>%</h6>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+ </div>
+</section>
+	`;
+	const bash = `
+curl -G https://api.protocol.chat/v1/messages \
+-H "Authorization: Bearer {token}" \
+-d conversation_id=xgQQXg3hrtjh7AvZ \
+-d limit=10
+`;
+
+	const json = `
+{
+	"has_more": false,
+	"data": [
+	  {
+		"id": "WAz8eIbvDR60rouK",
+		// ...
+	  },
+	  {
+		"id": "hSIhXBhNe8X1d8Et"
+		// ...
+	  },
+	  {
+		"id": "fbwYwpi9C2ybt6Yb"
+		// ...
+	  }
+	]
+  }
+`;
 	return (
 		<>
 			<h1>Quickstart</h1>
@@ -54,6 +142,10 @@ await client.contacts.create({
 				</Code>
 				<Code language="python" code={python}>
 					{python}
+				</Code>
+				<Code code={bash}>{bash}</Code>
+				<Code code={json} language="json">
+					{json}
 				</Code>
 			</CodeGroup>
 

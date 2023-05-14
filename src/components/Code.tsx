@@ -22,16 +22,23 @@ const languageNames: LanguageMappings = {
 	python: "Python",
 	ruby: "Ruby",
 	go: "Go",
+	html: "Html",
+	css: "Css",
+	bash: "cUrl",
+	json: "Json",
+	text: "Plaintext",
 };
 
 function getPanelTitle({
 	title,
-	language,
+	language = "bash",
 }: {
 	title: string;
 	language: string;
 }) {
-	return title ?? languageNames[language] ?? "Code";
+	return (
+		title ?? languageNames[language] ?? `${language.toLocaleLowerCase()}`
+	);
 }
 
 function ClipboardIcon(props: any) {
