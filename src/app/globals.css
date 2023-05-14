@@ -39,7 +39,7 @@ body {
 	margin-right: theme("spacing.1");
 } */
 
-code:not(.nohighlight),
+code.code:not(.nohighlight),
 code:not(.nohighlight) .hljs {
 	color: var(--editor-color-text);
 }

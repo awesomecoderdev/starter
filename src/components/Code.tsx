@@ -374,7 +374,7 @@ export function Code({
 		return (
 			<code
 				className={classNames(
-					`language-${lang}`,
+					`code language-${lang}`,
 					className,
 					nohighlight && "nohighlight"
 				)}
@@ -389,7 +389,7 @@ export function Code({
 	return (
 		<code
 			className={classNames(
-				`language-${lang}`,
+				`code language-${lang}`,
 				className,
 				nohighlight && "nohighlight"
 			)}
