@@ -521,11 +521,12 @@ function useSearchProps() {
 		dialogProps: {
 			open,
 			setOpen(open: any) {
-				let { width, height } =
-					buttonRef.current.getBoundingClientRect();
-				if (!open || (width !== 0 && height !== 0)) {
-					setOpen(open);
-				}
+				setOpen(open);
+				// let { width, height } =
+				// 	buttonRef.current.getBoundingClientRect();
+				// if (!open || (width !== 0 && height !== 0)) {
+				// 	setOpen(open);
+				// }
 			},
 		},
 	};

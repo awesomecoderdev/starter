@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["jsonProtocol","fullTextSearch","fullTextIndex","filteredRelationCount"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Post {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  slug        String    @unique
+  title       String?
+  thumbnail   String?
+  content     String?
+  excerpt     String?
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    String    @db.ObjectId
+  status      Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model User {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  email       String   @unique
+  password    String
+  name        String?
+  bio         String?
+  avatar      String?
+  posts       Post[]
+}
