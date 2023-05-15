@@ -61,7 +61,7 @@ export default function Home() {
 					Properties
 				</Heading>
 				<hr />
-				<Heading level={2} tag="GET" label="/v1/groups">
+				<Heading level={2} tag="GET" label="/v1/groups" anchor={false}>
 					List all groups
 				</Heading>
 
