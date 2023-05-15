@@ -3,6 +3,7 @@
 import hljs from "highlight.js";
 
 export function highlight(code: any, lang?: any): string {
-	// return code;
-	return hljs.highlightAuto(code).value;
+	const output = hljs.highlightAuto(code).value;
+
+	return output.replaceAll("hljs-", "code-");
 }

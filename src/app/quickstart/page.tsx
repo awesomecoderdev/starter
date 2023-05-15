@@ -113,24 +113,34 @@ curl -G https://api.protocol.chat/v1/messages \
 -d limit=10
 `;
 
-	const json = `
-{
-	"has_more": false,
-	"data": [
-	  {
-		"id": "WAz8eIbvDR60rouK",
-		// ...
-	  },
-	  {
-		"id": "hSIhXBhNe8X1d8Et"
-		// ...
-	  },
-	  {
-		"id": "fbwYwpi9C2ybt6Yb"
-		// ...
+	const json = `{
+		"has_more": false,
+		"data": [
+		  {
+			"id": "SIuAFUNKdSYHZF2w",
+			"conversation_id": "xgQQXg3hrtjh7AvZ",
+			"contact": {
+			  "id": "WAz8eIbvDR60rouK",
+			  "username": "KevinMcCallister",
+			  "phone_number": "1-800-759-3000",
+			  "avatar_url": "https://assets.protocol.chat/avatars/buzzboy.jpg",
+			  "last_active_at": 705103200,
+			  "created_at": 692233200
+			},
+			"message": "It’s a nice night for a neck injury.",
+			"reactions": [],
+			"attachments": [],
+			"read_at": 705103200,
+			"created_at": 692233200,
+			"updated_at": 692233200
+		  },
+		  {
+			"id": "hSIhXBhNe8X1d8Et",
+			// ..
+		  }
+		]
 	  }
-	]
-  }
+
 `;
 	return (
 		<>
@@ -140,7 +150,7 @@ curl -G https://api.protocol.chat/v1/messages \
 				<Code language="js" code={code}>
 					{code}
 				</Code>
-				<Code language="python" code={python}>
+				<Code language="html" code={python}>
 					{python}
 				</Code>
 				<Code code={bash}>{bash}</Code>
