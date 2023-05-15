@@ -93,3 +93,19 @@ interface PreferredLanguageState {
 	preferredLanguages: any[];
 	addPreferredLanguage: (language: any) => void;
 }
+
+interface AlgoliaResult {
+	// Define the structure of your Algolia result here
+	// You can customize this based on your specific use case
+	// For example:
+	objectID: string;
+	title: string;
+	content: string;
+	// ...
+}
+
+interface AlgoliaQuery {
+	query: string;
+	indexName: string;
+	params?: Record<string, any>;
+}
