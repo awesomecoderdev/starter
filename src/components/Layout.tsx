@@ -36,7 +36,6 @@ export function Layout({ children, sections = [] }: LayoutComponentsProps) {
 	}
 
 	useEffect(() => {
-		console.log("pathname", pathname);
 		// If REF has been changed, do the stuff
 		if (savedPathNameRef.current !== pathname) {
 			onRouteChange();
