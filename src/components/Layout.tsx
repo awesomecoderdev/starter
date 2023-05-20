@@ -11,6 +11,7 @@ import { Prose } from "@/components/Prose";
 import { SectionProvider } from "@/components/SectionProvider";
 import { usePathname } from "next/navigation";
 import { useMobileNavigationStore } from "@/components/MobileNavigation";
+import TagManager from "react-gtm-module";
 
 let sectionStorage: any = {
 	"/": [
@@ -35,13 +36,22 @@ export function Layout({ children, sections = [] }: LayoutComponentsProps) {
 	}
 
 	useEffect(() => {
+		console.log("pathname", pathname);
 		// If REF has been changed, do the stuff
 		if (savedPathNameRef.current !== pathname) {
 			onRouteChange();
 			// Update REF
 			savedPathNameRef.current = pathname;
 		}
+		onRouteChange();
 	}, [pathname]);
+
+	useEffect(() => {
+		// google tag manager
+		TagManager.initialize({
+			gtmId: "GTM-K69DMNQ",
+		});
+	}, []);
 
 	sections = sections.length == 0 ? sectionStorage[pathname] ?? [] : [];
 	return (

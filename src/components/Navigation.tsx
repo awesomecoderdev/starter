@@ -44,7 +44,9 @@ function NavLink({
 		<Link
 			href={href}
 			aria-current={active ? "page" : undefined}
-			onClick={(e) => useMobileNavigationStore.getState().close()}
+			onClick={(e) => {
+				// useMobileNavigationStore.getState().close();
+			}}
 			className={classNames(
 				"flex justify-between gap-2 py-1 pr-3 text-sm transition",
 				isAnchorLink ? "pl-7" : "pl-4",
