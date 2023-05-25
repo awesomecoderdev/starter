@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import Cookies from "js-cookie";
 
 interface Item {
 	id: number;
@@ -17,14 +18,28 @@ interface CartState {
 	getTotal: () => string;
 }
 
+const btoa = (str: string) => {
+	return Buffer.from(str).toString("base64");
+};
+
+const atob = (str: string) => {
+	return Buffer.from(str, "base64").toString("ascii");
+};
+
 const setItems = (items: Item[]) => {
-	localStorage.setItem("session_id", btoa(`${JSON.stringify(items)}`));
+	window.localStorage.setItem("session_id", btoa(`${JSON.stringify(items)}`));
+	// Cookies.set("session_id", btoa(`${JSON.stringify(items)}`));
 };
 
 const useCart = create<CartState>((set, get) => ({
-	items: localStorage.getItem("session_id")
-		? JSON.parse(atob(localStorage.getItem("session_id")!)) ?? [] ?? []
+	items: window.localStorage.getItem("session_id")
+		? JSON.parse(atob(window.localStorage.getItem("session_id")!)) ??
+		  [] ??
+		  []
 		: [],
+	// items: Cookies.get("session_id")
+	// 	? JSON.parse(atob(Cookies.get("session_id")!)) ?? [] ?? []
+	// 	: [],
 	addItem: (item) =>
 		set((state) => {
 			let products = state.items.find((product) => product.id == item.id);
@@ -71,7 +86,7 @@ const useCart = create<CartState>((set, get) => ({
 		}),
 	clearCart: () =>
 		set(() => {
-			localStorage.removeItem("session_id");
+			window.localStorage.removeItem("session_id");
 			return { items: [] };
 		}),
 	getTotal: () => {

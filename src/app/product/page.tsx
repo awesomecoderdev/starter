@@ -7,7 +7,6 @@ export default function Product() {
 	const removeItem = useCart((state) => state.removeItem);
 	const clearCart = useCart((state) => state.clearCart);
 	const totalPrice = useCart((state) => state.getTotal());
-
 	return (
 		<div>
 			<h2>Cart</h2>
