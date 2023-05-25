@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { Note, Properties, Property } from "@/components/Note";
 import { Prose } from "@/components/Prose";
 import { Code, CodeGroup, Pre } from "@/components/Code";
+import Confetti from "react-dom-confetti";
 export const metadata: Metadata = {
 	// title: `Quickstart - ${process.env.APP_NAME}`,
 	title: `Quickstart`,
@@ -142,6 +143,10 @@ curl -G https://api.protocol.chat/v1/messages \
 	return (
 		<>
 			<h1>Quickstart</h1>
+			{/* <Confetti
+				active={true}
+				config={{ elementCount: 200, spread: 90 }}
+			/> */}
 
 			<CodeGroup tag="POST" label="/v1/update">
 				<Code language="js" code={code}>
