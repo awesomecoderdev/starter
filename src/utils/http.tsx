@@ -140,7 +140,7 @@ class Status {
 export { Status };
 export default Status;
 
-export async function MethodNotALlowed(request: Request) {
+export async function MethodNotALlowed(headers: any = {}) {
 	return new Response(
 		JSON.stringify({
 			success: false,
@@ -149,12 +149,10 @@ export async function MethodNotALlowed(request: Request) {
 		}),
 		{
 			status: Status.HTTP_METHOD_NOT_ALLOWED,
-			headers: {
-				// "Set-Cookie": `token=${btoa(JSON.stringify(posts))},count=${
-				// 	posts.length
-				// }`,
-				Allow: "POST",
-			},
+			headers,
+			// headers: {
+			// 	"Set-Cookie": `dev=ibrahim`,
+			// },
 		}
 	);
 }

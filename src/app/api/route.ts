@@ -1,13 +1,14 @@
 import prisma from "@/prisma/client";
 import Status, { MethodNotALlowed } from "@/utils/http";
 import { cookies } from "next/headers";
-
+import { headers } from "next/headers";
 interface Data {
 	name: String;
 }
 
 export async function GET(request: Request) {
 	const cookie = cookies();
+	const header = headers();
 
 	// const req = await fetch("https://jsonplaceholder.typicode.com/posts");
 	// const res = await req.json();
@@ -35,26 +36,26 @@ export async function GET(request: Request) {
 	// );
 
 	try {
-		const posts = await prisma.post.findMany({
-			select: {
-				id: true,
-				title: true,
-				author: {
-					select: {
-						name: true,
-					},
-				},
-			},
-			take: 10,
-		});
+		// const posts = await prisma.post.findMany({
+		// 	select: {
+		// 		id: true,
+		// 		title: true,
+		// 		author: {
+		// 			select: {
+		// 				name: true,
+		// 			},
+		// 		},
+		// 	},
+		// 	take: 10,
+		// });
 
 		return new Response(
 			JSON.stringify({
 				success: true,
 				status: Status.HTTP_CREATED,
 				data: {
-					count: posts.length,
-					posts,
+					request,
+					headers: header.get("accept"),
 				},
 			}),
 			{
