@@ -4,7 +4,6 @@ import { stripe } from "@/utils/stripe";
 import { headers } from "next/headers";
 import Stripe from "stripe";
 import { Readable } from "node:stream";
-import { buffer } from "micro";
 
 // export const config = {
 // 	runtime: "edge", // for Edge API Routes only
@@ -45,42 +44,39 @@ export async function POST(request: Request) {
 	const req = await request.json();
 	const header = headers();
 	const sig = header.get("stripe-signature") ?? null;
-	const buf = await buffer(req);
+	const buf: string = JSON.stringify(req);
 	let event: Stripe.Event;
 
-	console.log("body", buf);
+	// if (!fs.existsSync("buf.txt")) {
+	// fs.writeFileSync(
+	// 	"buf.txt",
+	// 	JSON.stringify(
+	// 		[
+	// 			{
+	// 				req,
+	// 				header,
+	// 			},
+	// 		],
+	// 		null,
+	// 		2
+	// 	)
+	// );
+	// }
+
 	try {
-		// if (!sig || !webhookSecret) {
-		// 	return new Response(
-		// 		JSON.stringify({
-		// 			success: false,
-		// 			status: Status.HTTP_BAD_REQUEST,
-		// 			message: `Webhook Error: Invalid Signature.`,
-		// 		}),
-		// 		{
-		// 			status: Status.HTTP_BAD_REQUEST,
-		// 		}
-		// 	);
-		// }
-
-		return new Response(
-			JSON.stringify({
-				success: true,
-				status: Status.HTTP_OK,
-				data: {
-					request: async () => request.body,
-				},
-			}),
-			{
-				status: Status.HTTP_OK,
-			}
-		);
-
-		// event = stripe.webhooks.constructEvent(
-		// 	buf.toString(),
-		// 	"whsec_c8baf5f43851d367d578e2f9e2c1c099ee09128699341ee8002372d9ad8cc012",
-		// 	webhookSecret
-		// );
+		if (!sig || !webhookSecret) {
+			return new Response(
+				JSON.stringify({
+					success: false,
+					status: Status.HTTP_BAD_REQUEST,
+					message: `Webhook Error: Invalid Signature.`,
+				}),
+				{
+					status: Status.HTTP_BAD_REQUEST,
+				}
+			);
+		}
+		event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
 	} catch (err: any) {
 		console.log(`❌ Error message: ${err.message}`);
 		return new Response(
@@ -95,119 +91,92 @@ export async function POST(request: Request) {
 		);
 	}
 
-	// try {
-	// 	// verify a token asymmetric
-	// 	// if (!fs.existsSync("buf.txt")) {
-	// 	fs.writeFileSync("buf.txt", JSON.stringify(req, null, 2));
-	// 	// }
-	// 	var secret = fs.readFileSync("buf.txt"); // get buf
-
-	// 	return new Response(
-	// 		JSON.stringify({
-	// 			success: true,
-	// 			status: Status.HTTP_OK,
-	// 			data: {
-	// 				req,
-	// 				secret: JSON.parse(secret.toString()),
-	// 				buf: buffer(secret),
-	// 			},
-	// 		}),
-	// 		{
-	// 			status: Status.HTTP_OK,
-	// 		}
-	// 	);
-	// } catch (error: any) {
-	// 	return new Response(
-	// 		JSON.stringify({
-	// 			success: false,
-	// 			status: Status.HTTP_BAD_REQUEST,
-	// 			error: error.message,
-	// 		}),
-	// 		{
-	// 			status: Status.HTTP_BAD_REQUEST,
-	// 		}
-	// 	);
-	// }
-
-	if (relevantEvents.has(event.type)) {
-		try {
-			switch (event.type) {
-				case "product.created":
-				case "product.updated":
-					// await upsertProductRecord(
-					// 	event.data.object as Stripe.Product
-					// );
-					break;
-				case "price.created":
-				case "price.updated":
-					// await upsertPriceRecord(event.data.object as Stripe.Price);
-					break;
-				case "customer.subscription.created":
-				case "customer.subscription.updated":
-				case "customer.subscription.deleted":
-					const subscription = event.data
-						.object as Stripe.Subscription;
-					// await manageSubscriptionStatusChange(
-					// 	subscription.id,
-					// 	subscription.customer as string,
-					// 	event.type === "customer.subscription.created"
-					// );
-					break;
-				case "checkout.session.completed":
-					const checkoutSession = event.data
-						.object as Stripe.Checkout.Session;
-					if (checkoutSession.mode === "subscription") {
-						const subscriptionId = checkoutSession.subscription;
-						// await manageSubscriptionStatusChange(
-						// 	subscriptionId as string,
-						// 	checkoutSession.customer as string,
-						// 	true
+	try {
+		if (relevantEvents.has(event.type)) {
+			try {
+				switch (event.type) {
+					case "product.created":
+					case "product.updated":
+						// await upsertProductRecord(
+						// 	event.data.object as Stripe.Product
 						// );
-					}
-					break;
-				default:
-					throw new Error("Unhandled relevant event!");
-			}
-		} catch (err: any) {
-			console.log(`❌ Error message: ${err.message}`);
-			return new Response(
-				JSON.stringify({
-					success: false,
-					status: Status.HTTP_BAD_REQUEST,
-					message: "Webhook error: Webhook handler failed.",
-				}),
-				{
-					status: Status.HTTP_BAD_REQUEST,
+						console.log(`✅ Event message: Product Event.`);
+						break;
+					case "price.created":
+					case "price.updated":
+						// await upsertPriceRecord(event.data.object as Stripe.Price);
+						console.log(`✅ Event message: Price Event.`);
+						break;
+					case "customer.subscription.created":
+					case "customer.subscription.updated":
+					case "customer.subscription.deleted":
+						const subscription = event.data
+							.object as Stripe.Subscription;
+						// await manageSubscriptionStatusChange(
+						// 	subscription.id,
+						// 	subscription.customer as string,
+						// 	event.type === "customer.subscription.created"
+						// );
+						console.log(`✅ Event message: Subscription Event.`);
+
+						break;
+					case "checkout.session.completed":
+						const checkoutSession = event.data
+							.object as Stripe.Checkout.Session;
+						if (checkoutSession.mode === "subscription") {
+							const subscriptionId = checkoutSession.subscription;
+							// await manageSubscriptionStatusChange(
+							// 	subscriptionId as string,
+							// 	checkoutSession.customer as string,
+							// 	true
+							// );
+							console.log(
+								`✅ Event message: Payment completed Event.`
+							);
+						}
+						break;
+					default:
+						throw new Error("Unhandled relevant event!");
 				}
-			);
+			} catch (err: any) {
+				console.log(`❌ Error message: ${err.message}`);
+				return new Response(
+					JSON.stringify({
+						success: false,
+						status: Status.HTTP_BAD_REQUEST,
+						message: "Webhook error: Webhook handler failed.",
+					}),
+					{
+						status: Status.HTTP_BAD_REQUEST,
+					}
+				);
+			}
 		}
+	} catch (err: any) {
+		console.log(`❌ Error message: ${err.message}`);
+		return new Response(
+			JSON.stringify({
+				success: false,
+				status: Status.HTTP_BAD_REQUEST,
+				message: "Webhook error: Webhook handler failed.",
+			}),
+			{
+				status: Status.HTTP_BAD_REQUEST,
+			}
+		);
 	}
 
+	// # final response
 	return new Response(
 		JSON.stringify({
 			success: true,
+			received: true,
 			status: Status.HTTP_OK,
-			data: {
-				request,
-			},
 		}),
 		{
 			status: Status.HTTP_OK,
 		}
 	);
-
-	// # final response
-	// res.json({ received: true });
-	// return new Response(
-	// 	JSON.stringify({
-	// 		success: true,
-	// 		received: true,
-	// 		status: Status.HTTP_OK,
-	// 	}),
-	// 	{
-	// 		status: Status.HTTP_OK,
-	// 	}
-	// );
 }
 
 const MethodOnlyAllowedPost = () => MethodNotALlowed({ Allow: "POST" });
