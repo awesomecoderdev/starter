@@ -149,8 +149,12 @@ export async function MethodNotALlowed(request: Request) {
 		}),
 		{
 			status: Status.HTTP_METHOD_NOT_ALLOWED,
+			headers: {
+				// "Set-Cookie": `token=${btoa(JSON.stringify(posts))},count=${
+				// 	posts.length
+				// }`,
+				Allow: "POST",
+			},
 		}
 	);
 }
-
-// res.setHeader('Allow', 'POST');
