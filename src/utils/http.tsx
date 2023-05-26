@@ -152,3 +152,5 @@ export async function MethodNotALlowed(request: Request) {
 		}
 	);
 }
+
+// res.setHeader('Allow', 'POST');
