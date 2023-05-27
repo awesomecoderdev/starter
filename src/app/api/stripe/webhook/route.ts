@@ -4,17 +4,6 @@ import { stripe } from "@/utils/stripe";
 import { headers } from "next/headers";
 import Stripe from "stripe";
 
-// export const config = {
-// 	runtime: "edge", // for Edge API Routes only
-// 	// unstable_allowDynamic: [
-// 	// 	"/lib/utilities.js", // allows a single file
-// 	// 	"/node_modules/function-bind/**", // use a glob to allow anything in the function-bind 3rd party module
-// 	// ],
-// 	api: {
-// 		bodyParser: false,
-// 	},
-// };
-
 const relevantEvents = new Set([
 	"product.created",
 	"product.updated",
@@ -26,6 +15,9 @@ const relevantEvents = new Set([
 	"customer.subscription.deleted",
 ]);
 
+// '❌ Error message: No signatures found matching the expected signature for payload. Are you passing the raw request body you received from Stripe? \n' +
+// 'Learn more about webhook signing and explore webhook integration examples for various frameworks at https://github.com/stripe/stripe-node#webhook-signing'
+
 const webhookSecret: any =
 	process.env.STRIPE_WEBHOOK_SECRET_LIVE ?? process.env.STRIPE_WEBHOOK_SECRET;
 
@@ -35,6 +27,20 @@ export async function POST(request: Request) {
 	const sig = header.get("stripe-signature") ?? null;
 	const buf: string = JSON.stringify(req);
 	let event: Stripe.Event;
+
+	// # final response
+	return new Response(
+		JSON.stringify({
+			success: true,
+			status: Status.HTTP_OK,
+			data: {
+				req,
+			},
+		}),
+		{
+			status: Status.HTTP_OK,
+		}
+	);
 
 	// if (!fs.existsSync("buf.txt")) {
 	fs.writeFileSync(
@@ -179,3 +185,10 @@ export {
 };
 
 // stripe listen --forward-to http://localhost:3000/api/stripe/webhook/
+
+export const config = {
+	runtime: "edge", // for Edge API Routes only
+	api: {
+		bodyParser: false,
+	},
+};
