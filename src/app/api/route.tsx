@@ -1,10 +1,9 @@
+import sendMail from "@/emails";
+import RecentLoginEmail from "@/emails/RecentLogIn";
 import prisma from "@/prisma/client";
 import Status, { MethodNotALlowed } from "@/utils/http";
 import { cookies } from "next/headers";
 import { headers } from "next/headers";
-interface Data {
-	name: String;
-}
 
 export async function GET(request: Request) {
 	const cookie = cookies();
@@ -48,6 +47,12 @@ export async function GET(request: Request) {
 		// 	},
 		// 	take: 10,
 		// });
+
+		sendMail({
+			subject: "Welcome to stripe.",
+			to: "ibrahim@gmail.com",
+			component: <RecentLoginEmail />,
+		});
 
 		return new Response(
 			JSON.stringify({

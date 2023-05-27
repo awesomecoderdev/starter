@@ -109,6 +109,18 @@ interface AlgoliaQuery {
 	indexName: string;
 	params?: Record<string, any>;
 }
+// mailer
+import type { SendMailOptions, Transporter } from "nodemailer";
+
+type BuildSendMailOptions<T> = {
+	transport: Transporter<T>;
+	defaultFrom: string;
+	processHtml?: (html: string) => string;
+};
+
+type ComponentMail = SendMailOptions & {
+	component?: JSX.Element;
+};
 
 // subscriptions
 import Stripe from "stripe";

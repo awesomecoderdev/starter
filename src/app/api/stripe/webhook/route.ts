@@ -3,15 +3,12 @@ import Status, { MethodNotALlowed } from "@/utils/http";
 import { stripe } from "@/utils/stripe";
 import { headers } from "next/headers";
 import Stripe from "stripe";
-import { Readable } from "node:stream";
 
 // export const config = {
 // 	runtime: "edge", // for Edge API Routes only
 // 	// unstable_allowDynamic: [
-// 	// 	// allows a single file
-// 	// 	"/lib/utilities.js",
-// 	// 	// use a glob to allow anything in the function-bind 3rd party module
-// 	// 	"/node_modules/function-bind/**",
+// 	// 	"/lib/utilities.js", // allows a single file
+// 	// 	"/node_modules/function-bind/**", // use a glob to allow anything in the function-bind 3rd party module
 // 	// ],
 // 	api: {
 // 		bodyParser: false,
@@ -31,14 +28,6 @@ const relevantEvents = new Set([
 
 const webhookSecret: any =
 	process.env.STRIPE_WEBHOOK_SECRET_LIVE ?? process.env.STRIPE_WEBHOOK_SECRET;
-
-// async function buffer(readable: Readable): Promise<Buffer> {
-// 	const chunks = [];
-// 	for await (const chunk of readable) {
-// 		chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk);
-// 	}
-// 	return Buffer.concat(chunks);
-// }
 
 export async function POST(request: Request) {
 	const req = await request.json();
