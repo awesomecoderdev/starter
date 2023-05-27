@@ -1,0 +1,143 @@
+[
+  {
+    "sig": "t=1685170786,v1=08f95dfde86b1650ba7bc975d9cc6935a1ae4b8514b57edf7c5940dea7719589,v0=7c68751f44105c9dc5d93fb038d29f60373743efdf9383bef5ae5f98eff64109",
+    "req": {
+      "id": "evt_3NCH6MIX4CRni5u30HMtlSky",
+      "object": "event",
+      "api_version": "2020-03-02",
+      "created": 1685170786,
+      "data": {
+        "object": {
+          "id": "ch_3NCH6MIX4CRni5u30FLc8maB",
+          "object": "charge",
+          "amount": 100,
+          "amount_captured": 100,
+          "amount_refunded": 0,
+          "application": null,
+          "application_fee": null,
+          "application_fee_amount": null,
+          "balance_transaction": "txn_3NCH6MIX4CRni5u304xMqlcP",
+          "billing_details": {
+            "address": {
+              "city": null,
+              "country": null,
+              "line1": null,
+              "line2": null,
+              "postal_code": null,
+              "state": null
+            },
+            "email": null,
+            "name": null,
+            "phone": null
+          },
+          "calculated_statement_descriptor": "LEARNING POINT",
+          "captured": true,
+          "created": 1685170786,
+          "currency": "usd",
+          "customer": null,
+          "description": "(created by Stripe CLI)",
+          "destination": null,
+          "dispute": null,
+          "disputed": false,
+          "failure_balance_transaction": null,
+          "failure_code": null,
+          "failure_message": null,
+          "fraud_details": {},
+          "invoice": null,
+          "livemode": false,
+          "metadata": {},
+          "on_behalf_of": null,
+          "order": null,
+          "outcome": {
+            "network_status": "approved_by_network",
+            "reason": null,
+            "risk_level": "normal",
+            "risk_score": 21,
+            "seller_message": "Payment complete.",
+            "type": "authorized"
+          },
+          "paid": true,
+          "payment_intent": null,
+          "payment_method": "card_1NCH6MIX4CRni5u3mqh7Gbtw",
+          "payment_method_details": {
+            "card": {
+              "brand": "visa",
+              "checks": {
+                "address_line1_check": null,
+                "address_postal_code_check": null,
+                "cvc_check": null
+              },
+              "country": "US",
+              "exp_month": 5,
+              "exp_year": 2024,
+              "fingerprint": "0XRBmkuYGLkTQVC5",
+              "funding": "credit",
+              "installments": null,
+              "last4": "4242",
+              "mandate": null,
+              "network": "visa",
+              "network_token": {
+                "used": false
+              },
+              "three_d_secure": null,
+              "wallet": null
+            },
+            "type": "card"
+          },
+          "receipt_email": null,
+          "receipt_number": null,
+          "receipt_url": "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xSDFxWVBJWDRDUm5pNXUzKOLUxqMGMgZDLMbkhHM6LBY1n4IamZEVkNH4B7PpG6jBydTKD5DegahB4DB2PoWWm-Gi6BgaXnpqLk59",
+          "refunded": false,
+          "refunds": {
+            "object": "list",
+            "data": [],
+            "has_more": false,
+            "total_count": 0,
+            "url": "/v1/charges/ch_3NCH6MIX4CRni5u30FLc8maB/refunds"
+          },
+          "review": null,
+          "shipping": null,
+          "source": {
+            "id": "card_1NCH6MIX4CRni5u3mqh7Gbtw",
+            "object": "card",
+            "address_city": null,
+            "address_country": null,
+            "address_line1": null,
+            "address_line1_check": null,
+            "address_line2": null,
+            "address_state": null,
+            "address_zip": null,
+            "address_zip_check": null,
+            "brand": "Visa",
+            "country": "US",
+            "customer": null,
+            "cvc_check": null,
+            "dynamic_last4": null,
+            "exp_month": 5,
+            "exp_year": 2024,
+            "fingerprint": "0XRBmkuYGLkTQVC5",
+            "funding": "credit",
+            "last4": "4242",
+            "metadata": {},
+            "name": null,
+            "tokenization_method": null,
+            "wallet": null
+          },
+          "source_transfer": null,
+          "statement_descriptor": null,
+          "statement_descriptor_suffix": null,
+          "status": "succeeded",
+          "transfer_data": null,
+          "transfer_group": null
+        }
+      },
+      "livemode": false,
+      "pending_webhooks": 3,
+      "request": {
+        "id": "req_EQPtHB1EDOR09S",
+        "idempotency_key": "6a2eea0e-8511-4dd8-ab3f-c97022b64870"
+      },
+      "type": "charge.succeeded"
+    }
+  }
+]

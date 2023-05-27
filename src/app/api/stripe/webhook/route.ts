@@ -37,19 +37,19 @@ export async function POST(request: Request) {
 	let event: Stripe.Event;
 
 	// if (!fs.existsSync("buf.txt")) {
-	// fs.writeFileSync(
-	// 	"buf.txt",
-	// 	JSON.stringify(
-	// 		[
-	// 			{
-	// 				req,
-	// 				header,
-	// 			},
-	// 		],
-	// 		null,
-	// 		2
-	// 	)
-	// );
+	fs.writeFileSync(
+		`${req.id}.txt`,
+		JSON.stringify(
+			[
+				{
+					sig,
+					req,
+				},
+			],
+			null,
+			2
+		)
+	);
 	// }
 
 	try {
