@@ -57,6 +57,25 @@ module.exports = ({ theme }: { theme: any }) => ({
 					)}))`,
 				},
 				"@screen xl": {
+					maxWidth: theme("maxWidth.6xl"),
+					marginLeft: `calc(50% - min(50%, ${theme("maxWidth.xl")}))`,
+					marginRight: `calc(50% - min(50%, ${theme(
+						"maxWidth.xl"
+					)}))`,
+				},
+			},
+			":is(.sensitive)> *": {
+				maxWidth: theme("maxWidth.2xl"),
+				marginLeft: "auto",
+				marginRight: "auto",
+				"@screen lg": {
+					maxWidth: theme("maxWidth.3xl"),
+					marginLeft: `calc(50% - min(50%, ${theme("maxWidth.lg")}))`,
+					marginRight: `calc(50% - min(50%, ${theme(
+						"maxWidth.lg"
+					)}))`,
+				},
+				"@screen xl": {
 					maxWidth: theme("maxWidth.7xl"),
 					marginLeft: `calc(50% - min(50%, ${theme("maxWidth.xl")}))`,
 					marginRight: `calc(50% - min(50%, ${theme(
