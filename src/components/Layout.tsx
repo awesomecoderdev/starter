@@ -78,8 +78,8 @@ export function Layout({ children, sections = [] }: LayoutComponentsProps) {
 						<main className="py-10">
 							<Prose as="article">{children}</Prose>
 						</main>
-						<Footer />
 					</div>
+					<Footer />
 				</Fragment>
 			)}
 		</SectionProvider>
