@@ -59,7 +59,6 @@ export async function POST(request: Request, context: any) {
 				data: {
 					name,
 					email,
-					password,
 				},
 			});
 

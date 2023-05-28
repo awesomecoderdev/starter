@@ -12,6 +12,7 @@ import { create } from "zustand";
 import { Tag } from "@/components/Tag";
 import { classNames } from "@/utils/class";
 import { highlight } from "@/lib/highlighter";
+import { LanguageMappings, PreferredLanguageState } from "@/types";
 
 const languageNames: LanguageMappings = {
 	js: "JavaScript",

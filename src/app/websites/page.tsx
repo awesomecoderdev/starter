@@ -24,11 +24,13 @@ export default async function page() {
 						className="group relative shadow p-4 border rounded-md border-zinc-900/5 dark:border-white/5 bg-white"
 					>
 						<div className="aspect-w-4 aspect-h-5 overflow-hidden rounded-lg bg-gray-100">
+						<picture>
 							<img
 								src={product.image}
 								alt={product.title}
 								className="object-cover object-center p-0 m-0"
 							/>
+							   </picture>
 							<div
 								className="flex items-end p-4 opacity-0 group-hover:opacity-100"
 								aria-hidden="true"

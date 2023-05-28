@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 	description: "Billing",
 };
 
-export default function SDKs() {
+export default function Billing() {
 	return (
 		<>
 			<h1>Errors :( </h1>

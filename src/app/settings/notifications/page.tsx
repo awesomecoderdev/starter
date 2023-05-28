@@ -6,6 +6,6 @@ export const metadata: Metadata = {
 	description: "Notifications",
 };
 
-export default function page() {
+export default function Notifications() {
 	return <div>notifications</div>;
 }

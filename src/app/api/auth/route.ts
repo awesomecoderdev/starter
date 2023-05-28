@@ -1,6 +1,6 @@
 import prisma from "@/prisma/client";
 import { cookies } from "next/headers";
-import Status, { MethodNotALlowed } from "@/lib/http";
+import Status, { MethodNotALlowed } from "@/utils/http";
 
 export async function GET(request: Request) {
 	const cookieStore = cookies();

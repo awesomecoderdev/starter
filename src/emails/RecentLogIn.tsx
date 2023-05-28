@@ -21,7 +21,7 @@ export const RecentLoginEmail = () => (
 	<Html>
 		<Head />
 		<Preview>
-			You're now ready to make live transactions with Stripe!
+			Youre now ready to make live transactions with Stripe!
 		</Preview>
 		<Body style={main}>
 			<Container style={container}>
@@ -34,7 +34,7 @@ export const RecentLoginEmail = () => (
 					/>
 					<Hr style={hr} />
 					<Text style={paragraph}>
-						Thanks for submitting your account information. You're
+						Thanks for submitting your account information. Youre
 						now ready to make live transactions with Stripe!
 					</Text>
 					<Text style={paragraph}>
@@ -52,7 +52,7 @@ export const RecentLoginEmail = () => (
 					</Button>
 					<Hr style={hr} />
 					<Text style={paragraph}>
-						If you haven't finished your integration, you might find
+						If you havent finished your integration, you might find
 						our{" "}
 						<Link style={anchor} href="https://stripe.com/docs">
 							docs
@@ -60,8 +60,8 @@ export const RecentLoginEmail = () => (
 						handy.
 					</Text>
 					<Text style={paragraph}>
-						Once you're ready to start accepting payments, you'll
-						just need to use your live{" "}
+						Once youre ready to start accepting payments, youll just
+						need to use your live{" "}
 						<Link
 							style={anchor}
 							href="https://dashboard.stripe.com/login?redirect=%2Fapikeys"
@@ -81,7 +81,7 @@ export const RecentLoginEmail = () => (
 						.
 					</Text>
 					<Text style={paragraph}>
-						Finally, we've put together a{" "}
+						Finally, weve put together a{" "}
 						<Link
 							style={anchor}
 							href="https://stripe.com/docs/checklist/website"
@@ -92,7 +92,7 @@ export const RecentLoginEmail = () => (
 						standards.
 					</Text>
 					<Text style={paragraph}>
-						We'll be here to help you with any step along the way.
+						Well be here to help you with any step along the way.
 						You can find answers to most questions and get in touch
 						with us on our{" "}
 						<Link style={anchor} href="https://support.stripe.com/">
@@ -117,7 +117,7 @@ export default RecentLoginEmail;
 const main = {
 	backgroundColor: "#f6f9fc",
 	fontFamily:
-		'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif',
+		'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif,',
 };
 
 const container = {

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 	description: "Profile",
 };
 
-export default function SDKs() {
+export default function Profile() {
 	return (
 		<>
 			<h1>Errors :( </h1>

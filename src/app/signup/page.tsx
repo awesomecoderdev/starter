@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 		"In this guide, we will talk about what happens when something goes wrong while you work with the API.",
 };
 
-export default function SDKs() {
+export default function SignUp() {
 	return (
 		<>
 			<h1>Errors :( </h1>
