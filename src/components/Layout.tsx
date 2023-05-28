@@ -15,6 +15,7 @@ import TagManager from "react-gtm-module";
 import { LayoutComponentsProps } from "@/types";
 import { sensitiveRoutes } from "@/utils/route";
 import { Toaster } from "sonner";
+import { classNames } from "@/utils/class";
 
 export function Layout({
 	children,
@@ -73,9 +74,16 @@ export function Layout({
 							/>
 							<Navigation className="hidden lg:mt-10 lg:block" />
 						</motion.header>
-						<div className="relative px-4 pt-14 sm:px-6 lg:px-8">
+						<div className="relative px-6 pt-14 sm:px-7 lg:px-8">
 							<main className="py-10">
-								<Prose as="article">{children}</Prose>
+								<Prose
+									className={classNames(
+										isSensitiveRoute && "sensitive"
+									)}
+									as="article"
+								>
+									{children}
+								</Prose>
 							</main>
 						</div>
 					</div>
@@ -92,9 +100,16 @@ export function Layout({
 							auth={session}
 						/>
 					</motion.header>
-					<div className="relative px-4 pt-14 sm:px-6 lg:px-8">
+					<div className="relative px-6 pt-14 sm:px-7 lg:px-8">
 						<main className="py-10">
-							<Prose as="article">{children}</Prose>
+							<Prose
+								className={classNames(
+									isSensitiveRoute && "sensitive"
+								)}
+								as="article"
+							>
+								{children}
+							</Prose>
 						</main>
 					</div>
 					<Footer />

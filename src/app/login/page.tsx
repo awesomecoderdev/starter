@@ -2,10 +2,11 @@
 import { signInWithGoogle } from "@/utils/auth";
 
 type Props = {};
+import { Metadata } from "next";
 
-// export const metadata = {
-// 	title: "Login",
-// 	description: "Login to registered account.",
+// export const metadata: Metadata = {
+// 	title: `Settings - ${process.env.APP_NAME}`,
+// 	description: "Settings",
 // };
 
 export default function Page(props: Props) {

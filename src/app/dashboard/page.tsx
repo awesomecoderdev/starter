@@ -1,7 +1,14 @@
-import React from "react";
 import { cookies as getCookies } from "next/headers";
 import { getUserFromCookie } from "@/utils/buffer";
 import { redirect } from "next/navigation";
+
+import { Metadata } from "next";
+import { HeroPattern } from "@/components/HeroPattern";
+
+export const metadata: Metadata = {
+	title: `Dashboard - ${process.env.APP_NAME}`,
+	description: "Dashboard",
+};
 
 export default function page() {
 	const cookies = getCookies();
@@ -13,9 +20,10 @@ export default function page() {
 	}
 
 	return (
-		<div>
+		<>
+			<HeroPattern />
 			Dashboard
 			{session && <h1>{JSON.stringify(session, null, 2)}</h1>}
-		</div>
+		</>
 	);
 }

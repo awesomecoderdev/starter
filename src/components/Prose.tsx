@@ -1,4 +1,5 @@
 "use client";
+import { ProseProps } from "@/types";
 import { classNames } from "@/utils/class";
 
 export function Prose({

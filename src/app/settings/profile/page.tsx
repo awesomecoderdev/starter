@@ -1,12 +1,11 @@
 import { Heading } from "@/components/Heading";
 import { Col, Note, Properties, Property, Row } from "@/components/Note";
+
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-	// title: `SDKs - ${process.env.APP_NAME}`,
-	title: `SDKs`,
-	description:
-		"In this guide, we will talk about what happens when something goes wrong while you work with the API.",
+	title: `Profile - ${process.env.APP_NAME}`,
+	description: "Profile",
 };
 
 export default function SDKs() {

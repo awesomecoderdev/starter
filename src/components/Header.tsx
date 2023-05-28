@@ -71,8 +71,8 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 				ref={ref}
 				className={classNames(
 					className,
-					"fixed inset-x-0 top-0 z-50 flex justify-between items-center h-14 gap-12 px-4 transition sm:px-6 lg:z-30 lg:px-8",
-					sensitive ? "lg:justify-end" : "lg:justify-between",
+					"fixed inset-x-0 top-0 z-50 px-4 transition sm:px-6 lg:z-30 lg:px-8",
+					// sensitive ? "lg:justify-end" : "lg:justify-between",
 					!isInsideMobileNavigation &&
 						sensitive &&
 						"backdrop-blur-sm dark:backdrop-blur lg:left-60 xl:left-64",
@@ -94,54 +94,68 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 							"bg-zinc-900/7.5 dark:bg-white/7.5"
 					)}
 				/>
-				<div className="flex items-center gap-5 lg:hidden">
-					<MobileNavigation
-						cart={cart}
-						sensitive={sensitive}
-						auth={auth}
-					/>
-					<Link href="/" aria-label="Home">
-						<Logo className="h-6" />
-					</Link>
-				</div>
-				{!sensitive && (
-					<div className="hidden lg:flex">
+				<div
+					className={classNames(
+						"relative h-14 gap-12 flex justify-between items-center",
+						sensitive ? "lg:justify-end" : "lg:justify-between",
+						!sensitive && "max-w-7xl mx-auto"
+					)}
+				>
+					<div className="flex items-center gap-5 lg:hidden">
+						<MobileNavigation
+							cart={cart}
+							sensitive={sensitive}
+							auth={auth}
+						/>
 						<Link href="/" aria-label="Home">
 							<Logo className="h-6" />
 						</Link>
 					</div>
-				)}
+					{!sensitive && (
+						<div className="hidden lg:flex">
+							<Link href="/" aria-label="Home">
+								<Logo className="h-6" />
+							</Link>
+						</div>
+					)}
 
-				<div className="flex items-center gap-5">
-					<nav className="hidden md:block">
-						<ul role="list" className="flex items-center gap-8">
-							<TopLevelNavItem href="#">
-								Getting Started
-							</TopLevelNavItem>
-							<TopLevelNavItem href="#">Pricing</TopLevelNavItem>
-							<TopLevelNavItem href="#">Support</TopLevelNavItem>
-						</ul>
-					</nav>
-					<div className="hidden md:block md:h-5 md:w-px md:bg-zinc-900/10 md:dark:bg-white/15" />
-					<div className="flex gap-4">
-						<ModeToggle />
-					</div>
-					<div className="hidden min-[416px]:contents">
-						{auth ? (
-							!sensitive ? (
-								<Fragment>
-									<Button href="/dashboard">Dashboard</Button>
-								</Fragment>
+					<div className="flex items-center gap-5">
+						<nav className="hidden md:block">
+							<ul role="list" className="flex items-center gap-8">
+								<TopLevelNavItem href="#">
+									Getting Started
+								</TopLevelNavItem>
+								<TopLevelNavItem href="#">
+									Pricing
+								</TopLevelNavItem>
+								<TopLevelNavItem href="#">
+									Support
+								</TopLevelNavItem>
+							</ul>
+						</nav>
+						<div className="hidden md:block md:h-5 md:w-px md:bg-zinc-900/10 md:dark:bg-white/15" />
+						<div className="flex gap-4">
+							<ModeToggle />
+						</div>
+						<div className="hidden min-[416px]:contents">
+							{auth ? (
+								!sensitive ? (
+									<Fragment>
+										<Button href="/dashboard">
+											Dashboard
+										</Button>
+									</Fragment>
+								) : (
+									<Fragment>
+										<Button href="/login">Profile</Button>
+									</Fragment>
+								)
 							) : (
 								<Fragment>
-									<Button href="/login">Profile</Button>
+									<Button href="/login">Sign in</Button>
 								</Fragment>
-							)
-						) : (
-							<Fragment>
-								<Button href="/login">Sign in</Button>
-							</Fragment>
-						)}
+							)}
+						</div>
 					</div>
 				</div>
 			</motion.div>

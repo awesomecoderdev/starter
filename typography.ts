@@ -56,6 +56,13 @@ module.exports = ({ theme }: { theme: any }) => ({
 						"maxWidth.lg"
 					)}))`,
 				},
+				"@screen xl": {
+					maxWidth: theme("maxWidth.7xl"),
+					marginLeft: `calc(50% - min(50%, ${theme("maxWidth.xl")}))`,
+					marginRight: `calc(50% - min(50%, ${theme(
+						"maxWidth.xl"
+					)}))`,
+				},
 			},
 
 			// Text
