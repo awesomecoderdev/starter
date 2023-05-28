@@ -232,6 +232,25 @@ module.exports = ({ theme }: { theme: any }) => ({
 				marginBottom: theme("spacing.2"),
 			},
 
+			":is(.sensitive) h1": {
+				color: "var(--tw-prose-headings)",
+				fontWeight: "700",
+				fontSize: theme("fontSize.2xl")[0],
+				...theme("fontSize.2xl")[1],
+			},
+			":is(.sensitive) h2": {
+				color: "var(--tw-prose-headings)",
+				fontWeight: "600",
+				fontSize: theme("fontSize.lg")[0],
+				...theme("fontSize.lg")[1],
+			},
+			":is(.sensitive) h3": {
+				color: "var(--tw-prose-headings)",
+				fontSize: theme("fontSize.base")[0],
+				...theme("fontSize.base")[1],
+				fontWeight: "600",
+			},
+
 			// Media
 			"img, video, figure": {
 				marginTop: theme("spacing.8"),

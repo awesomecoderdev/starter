@@ -7,7 +7,9 @@ const WebsitesLayout = ({ children }: { children: any }) => {
 			<h1>Websites</h1>
 			<Prose
 				enable={false}
-				className={classNames("grid grid-cols-1 lg:grid-cols-3 gap-5")}
+				className={classNames(
+					"grid grid-cols-fluid xl:grid-cols-3 gap-5"
+				)}
 			>
 				{children}
 			</Prose>

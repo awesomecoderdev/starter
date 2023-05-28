@@ -6,11 +6,13 @@ import Tooltip, { TooltipContent } from "@/components/Tooltips";
 import {
 	ChartBarIcon,
 	CheckBadgeIcon,
+	DocumentTextIcon,
 	GlobeAltIcon,
 	LinkIcon,
+	ShieldCheckIcon,
 	XCircleIcon,
 } from "@heroicons/react/24/outline";
-import Badge, { PlanBadge } from "@/components/Badge";
+import Badge from "@/components/Badge";
 import { nFormatter } from "@/utils/utils";
 
 type WebsiteCardProps = {
@@ -19,7 +21,6 @@ type WebsiteCardProps = {
 	href?: any;
 	endpoint?: string;
 	logo?: any;
-	plan?: any;
 	status?: boolean;
 	payload?: any;
 };
@@ -30,15 +31,14 @@ const Card = ({
 	href,
 	endpoint,
 	logo = "https://awesomecoder.dev/img/profile.jpg",
-	plan = "free",
 	status = false,
 	payload = {},
 }: WebsiteCardProps) => {
 	return (
 		<Link
 			key={href}
-			href={`/${href}`}
-			className="flex flex-col cursor-pointer space-y-10 rounded-lg border border-gray-100 bg-white p-6 shadow transition-all hover:shadow-lg"
+			href={`/websites/${href}`}
+			className="flex flex-col cursor-pointer space-y-10 rounded-lg border border-gray-100 dark:border-white/2.5 bg-white dark:bg-white/1 p-6 shadow transition-all hover:shadow-lg hover:dark:bg-white/2.5 text-zinc-700 dark:text-zinc-100"
 		>
 			<div className="flex items-start justify-between">
 				<div className="flex items-center space-x-3">
@@ -50,7 +50,7 @@ const Card = ({
 						height={48}
 					/>
 					<div>
-						<h2 className="text-lg font-medium text-gray-700 truncate w-10">
+						<h2 className="text-lg font-medium truncate w-36">
 							{name}
 						</h2>
 						<div className="flex items-center">
@@ -100,29 +100,32 @@ const Card = ({
 				)}
 			</div>
 			<div className="flex items-center space-x-4">
-				<div className="flex items-center space-x-2 text-gray-500">
-					<GlobeAltIcon className="h-4 w-4" />
+				<div className="flex items-center space-x-1.5 text-gray-500 dark:text-zinc-300">
+					<DocumentTextIcon className="h-4 w-4" />
 					<h2 className="whitespace-nowrap text-sm">
-						{nFormatter(payload?.posts?.length)} domain
-						{payload?.posts?.length > 1 && "s"}
+						{nFormatter(payload?.posts)} post
+						{payload?.posts > 1 && "s"}
 					</h2>
 				</div>
-				<div className="flex items-center space-x-2 text-gray-500">
+				<div className="flex items-center space-x-1.5 text-gray-500 dark:text-zinc-300">
 					<LinkIcon className="h-4 w-4" />
-					{payload?.posts?.length || payload?.posts?.length === 0 ? (
+					{/* {payload?.posts ? (
 						<h2 className="whitespace-nowrap text-sm">
-							{nFormatter(payload?.posts?.length)} link
-							{payload?.posts?.length != 1 && "s"}
+							{nFormatter(payload?.posts)} link
+							{payload?.posts != 1 && "s"}
 						</h2>
 					) : (
 						<div className="h-4 w-8 animate-pulse rounded-md bg-gray-200" />
-					)}
-				</div>
-				<div className="flex items-center space-x-2 text-gray-500">
-					<ChartBarIcon className="h-4 w-4" />
+					)} */}
 					<h2 className="whitespace-nowrap text-sm">
-						{nFormatter(payload?.posts)} click
+						{nFormatter(payload?.posts)} link
 						{payload?.posts != 1 && "s"}
+					</h2>
+				</div>
+				<div className="flex items-center space-x-1.5 text-gray-500 dark:text-zinc-300">
+					<ShieldCheckIcon className="h-4 w-4" />
+					<h2 className="whitespace-nowrap text-sm">
+						{nFormatter(payload?.posts)} scan
 					</h2>
 				</div>
 			</div>

@@ -75,14 +75,14 @@ export default function Tooltip({
 							dragConstraints={{ top: 0, bottom: 0 }}
 						>
 							<div
-								className={`rounded-t-4xl -mb-1 flex h-7 w-full items-center justify-center border-t border-gray-200 bg-white`}
+								className={`rounded-t-4xl flex h-7 w-full items-center justify-center border-t border-gray-200 dark:border-white/7.5 bg-white dark:bg-zinc-500/75`}
 							>
-								<div className="-mr-1 h-1 w-6 rounded-full bg-gray-300 transition-all group-active:rotate-12" />
-								<div className="h-1 w-6 rounded-full bg-gray-300 transition-all group-active:-rotate-12" />
+								<div className="-mr-1 h-1 w-6 rounded-full bg-gray-300  dark:bg-zinc-50  transition-all group-active:rotate-12" />
+								<div className="h-1 w-6 rounded-full bg-gray-300  dark:bg-zinc-50 transition-all group-active:-rotate-12" />
 							</div>
-							<div className="flex min-h-[150px] w-full items-center justify-center overflow-hidden bg-white align-middle shadow-xl">
+							<div className="flex min-h-[150px] w-full items-center justify-center overflow-hidden bg-white dark:bg-zinc-500/75 align-middle shadow-xl">
 								{typeof content === "string" ? (
-									<span className="block max-w-xs text-center text-sm text-gray-700">
+									<span className="block max-w-xs text-center text-sm text-gray-700 dark:text-zinc-300">
 										{content}
 									</span>
 								) : (
@@ -112,12 +112,12 @@ export default function Tooltip({
 					<TooltipPrimitive.Content
 						sideOffset={4}
 						side="top"
-						className="z-30 hidden animate-slide-up-fade items-center overflow-hidden rounded-md border border-gray-200 bg-white drop-shadow-lg sm:block"
+						className="z-50 hidden animate-slide-up-fade items-center overflow-hidden rounded-md border drop-shadow-lg sm:block border-zinc-900/7.5 dark:border-white/7.5 bg-white/[var(--bg-opacity-light)] dark:bg-zinc-900/[var(--bg-opacity-dark)] backdrop-blur-sm dark:backdrop-blur "
 					>
 						<TooltipPrimitive.Arrow className="fill-current text-white" />
 						{typeof content === "string" ? (
 							<div className="p-4">
-								<span className="block max-w-xs text-center text-sm text-gray-700">
+								<span className="block max-w-xs text-center text-sm text-gray-700 dark:text-zinc-300">
 									{content}
 								</span>
 							</div>
@@ -144,23 +144,25 @@ export function TooltipContent({
 	onClick?: () => void;
 }) {
 	return (
-		<div className="flex max-w-xs flex-col items-center space-y-3 p-4 text-center">
-			<p className="text-sm text-gray-700">{title}</p>
+		<div className="flex max-w-xs flex-col items-center space-y-3 p-4 text-center ">
+			<p className="text-sm text-gray-700 dark:text-zinc-300">{title}</p>
 			{cta &&
 				(href ? (
-					<Link
+					<Button
+						variant="filled"
 						href={href}
-						className="mt-4 w-full rounded-md border border-black bg-black px-3 py-1.5 text-center text-sm text-white transition-all hover:bg-white hover:text-black"
+						// className="mt-4 w-full rounded-md border border-black bg-black px-3 py-1.5 text-center text-sm text-white transition-all hover:bg-white hover:text-black"
 					>
 						{cta}
-					</Link>
+					</Button>
 				) : onClick ? (
-					<button
-						className="mt-4 w-full rounded-md border border-black bg-black px-3 py-1.5 text-center text-sm text-white transition-all hover:bg-white hover:text-black"
+					<Button
+						variant="filled"
+						// className="mt-4 w-full rounded-md border border-black bg-black px-3 py-1.5 text-center text-sm text-white transition-all hover:bg-white hover:text-black"
 						onClick={onClick}
 					>
 						{cta}
-					</button>
+					</Button>
 				) : null)}
 		</div>
 	);
