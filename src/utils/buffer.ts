@@ -1,5 +1,5 @@
-export const encode = (str: string) => Buffer.from(str).toString("base64");
-export const decode = (str: string) =>
+export const encode = (str: any) => Buffer.from(str).toString("base64");
+export const decode = (str: any) =>
 	Buffer.from(`${str}`, "base64").toString("ascii");
 
 export const getUserFromCookie = (token?: any) => {

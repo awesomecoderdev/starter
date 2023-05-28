@@ -1,6 +1,6 @@
 "use client";
 
-import { Ref, forwardRef } from "react";
+import { Fragment, Ref, forwardRef } from "react";
 import {
 	MotionStyle,
 	MotionValue,
@@ -42,10 +42,14 @@ function TopLevelNavItem({
 type HeaderProps = {
 	className?: string;
 	auth?: any;
+	cart?: any;
 };
 
 export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
-	function Header({ className, auth = false }, ref: Ref<HTMLHeadingElement>) {
+	function Header(
+		{ className, auth = false, cart },
+		ref: Ref<HTMLHeadingElement>
+	) {
 		let { isOpen: mobileNavIsOpen } = useMobileNavigationStore();
 		let isInsideMobileNavigation = useIsInsideMobileNavigation();
 
@@ -117,7 +121,15 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 						<ModeToggle />
 					</div>
 					<div className="hidden min-[416px]:contents">
-						<Button href="/login">Sign in</Button>
+						{auth ? (
+							<Fragment>
+								<Button href="/dashboard">Dashboard</Button>
+							</Fragment>
+						) : (
+							<Fragment>
+								<Button href="/login">Sign in</Button>
+							</Fragment>
+						)}
 					</div>
 				</div>
 			</motion.div>

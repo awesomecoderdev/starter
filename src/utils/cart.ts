@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import Cookies from "js-cookie";
+import { getCartFromCookie } from "./buffer";
 
 interface Item {
 	id: number;
@@ -28,18 +29,11 @@ const atob = (str: string) => {
 
 const setItems = (items: Item[]) => {
 	window.localStorage.setItem("session_id", btoa(`${JSON.stringify(items)}`));
-	// Cookies.set("session_id", btoa(`${JSON.stringify(items)}`));
+	Cookies.set("session_id", btoa(`${JSON.stringify(items)}`));
 };
 
 const useCart = create<CartState>((set, get) => ({
-	items: window.localStorage.getItem("session_id")
-		? JSON.parse(atob(window.localStorage.getItem("session_id")!)) ??
-		  [] ??
-		  []
-		: [],
-	// items: Cookies.get("session_id")
-	// 	? JSON.parse(atob(Cookies.get("session_id")!)) ?? [] ?? []
-	// 	: [],
+	items: [],
 	addItem: (item) =>
 		set((state) => {
 			let products = state.items.find((product) => product.id == item.id);

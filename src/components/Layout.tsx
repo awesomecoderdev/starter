@@ -48,7 +48,7 @@ export function Layout({
 
 	return (
 		<SectionProvider sections={sections}>
-			{session ? (
+			{session?.email ? (
 				<Fragment>
 					<div className="lg:ml-60 xl:ml-64">
 						<motion.header
@@ -60,7 +60,7 @@ export function Layout({
 									<Logo className="h-6" />
 								</Link>
 							</div>
-							<Header auth={session} />
+							<Header cart={cart} auth={session} />
 							<Navigation className="hidden lg:mt-10 lg:block" />
 						</motion.header>
 						<div className="relative px-4 pt-14 sm:px-6 lg:px-8">
@@ -76,7 +76,7 @@ export function Layout({
 						layoutScroll
 						className="relative z-40 contents px-6 pt-4 pb-8"
 					>
-						<Header auth={session} />
+						<Header cart={cart} auth={session} />
 					</motion.header>
 					<div className="relative px-4 pt-14 sm:px-6 lg:px-8">
 						<main className="py-10">

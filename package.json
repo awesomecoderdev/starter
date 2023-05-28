@@ -28,6 +28,7 @@
 		"clsx": "^1.2.1",
 		"eslint": "8.40.0",
 		"eslint-config-next": "13.4.2",
+		"firebase": "^9.22.1",
 		"focus-visible": "^5.2.0",
 		"framer-motion": "^10.12.10",
 		"fs": "^0.0.1-security",

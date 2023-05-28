@@ -238,7 +238,7 @@ export const navigation = [
 	{
 		title: "General",
 		links: [
-			{ title: "Home", href: "/", icon: HomeIcon },
+			{ title: "Home", href: "/dashboard", icon: HomeIcon },
 			{ title: "Websites", href: "/websites", icon: LinkIcon },
 		],
 	},
