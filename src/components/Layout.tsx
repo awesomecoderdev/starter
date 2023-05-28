@@ -14,7 +14,11 @@ import { useMobileNavigationStore } from "@/components/MobileNavigation";
 import TagManager from "react-gtm-module";
 import { LayoutComponentsProps } from "@/types";
 
-export function Layout({ children, sections = [] }: LayoutComponentsProps) {
+export function Layout({
+	children,
+	sections = [],
+	session = null,
+}: LayoutComponentsProps) {
 	const pathname = usePathname();
 
 	// Save pathname on component mount into a REF
@@ -40,11 +44,10 @@ export function Layout({ children, sections = [] }: LayoutComponentsProps) {
 			gtmId: "GTM-K69DMNQ",
 		});
 	}, []);
-	const auth = false;
 
 	return (
 		<SectionProvider sections={sections}>
-			{auth ? (
+			{session ? (
 				<Fragment>
 					<div className="lg:ml-60 xl:ml-64">
 						<motion.header
@@ -56,7 +59,7 @@ export function Layout({ children, sections = [] }: LayoutComponentsProps) {
 									<Logo className="h-6" />
 								</Link>
 							</div>
-							<Header auth={auth} />
+							<Header auth={session} />
 							<Navigation className="hidden lg:mt-10 lg:block" />
 						</motion.header>
 						<div className="relative px-4 pt-14 sm:px-6 lg:px-8">
@@ -72,7 +75,7 @@ export function Layout({ children, sections = [] }: LayoutComponentsProps) {
 						layoutScroll
 						className="relative z-40 contents px-6 pt-4 pb-8"
 					>
-						<Header auth={auth} />
+						<Header auth={session} />
 					</motion.header>
 					<div className="relative px-4 pt-14 sm:px-6 lg:px-8">
 						<main className="py-10">

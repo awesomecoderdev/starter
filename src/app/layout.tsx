@@ -2,8 +2,10 @@ import { Header } from "@/components/Header";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Layout } from "@/components/Layout";
+import { cookies as getCookies } from "next/headers";
 import { NextRequest } from "next/server";
 import Script from "next/script";
+import { getCartFromCookie, getUserFromCookie } from "@/utils/buffer";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -52,6 +54,13 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
+	const cookies = getCookies();
+	const token = cookies.get("token")?.value;
+	const session = getUserFromCookie(token);
+
+	let session_id = cookies.get("session_id")?.value;
+	const cart = getCartFromCookie(session_id);
+
 	return (
 		<html lang="en">
 			<head>
@@ -64,7 +73,9 @@ export default function RootLayout({
 				/>
 			</head>
 			<body className="bg-white antialiased dark:bg-zinc-900">
-				<Layout>{children}</Layout>
+				<Layout {...cart} session={session}>
+					{children}
+				</Layout>
 			</body>
 		</html>
 	);

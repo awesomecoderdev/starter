@@ -1,6 +1,7 @@
 type LayoutComponentsProps = {
 	children: React.ReactNode | any;
 	sections?: Section[];
+	session?: any;
 };
 type ProseProps = {
 	children: React.ReactNode;
