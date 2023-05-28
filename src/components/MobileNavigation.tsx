@@ -7,6 +7,7 @@ import { create } from "zustand";
 
 import { Header } from "@/components/Header";
 import { Navigation } from "@/components/Navigation";
+import { MobileNavigationState } from "@/types";
 
 const IsInsideMobileNavigationContext = createContext(false);
 

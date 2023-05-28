@@ -14,6 +14,17 @@ import { Tag } from "@/components/Tag";
 import { remToPx } from "@/lib/remToPx";
 import { classNames } from "@/utils/class";
 import { usePathname } from "next/navigation";
+import {
+	LinkIcon,
+	HomeIcon,
+	Cog6ToothIcon,
+	BellAlertIcon,
+	CreditCardIcon,
+	CurrencyDollarIcon,
+	BanknotesIcon,
+	UserCircleIcon,
+} from "@heroicons/react/24/outline";
+import { GroupPathProps, NavLinkProps, TopLevelNavItemProps } from "@/types";
 
 function useInitialValue(value: any, condition = true) {
 	let initialValue = useRef(value).current;
@@ -49,7 +60,7 @@ function NavLink({
 			}}
 			className={classNames(
 				"flex justify-between gap-2 py-1 pr-3 text-sm transition",
-				isAnchorLink ? "pl-7" : "pl-4",
+				isAnchorLink ? "pl-7" : "pl-2",
 				active
 					? "text-zinc-900 dark:text-white"
 					: "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
@@ -179,7 +190,12 @@ function NavigationGroup({ group, className }: GroupPathProps) {
 								href={link.href}
 								active={link.href === pathname}
 							>
-								{link.title}
+								<span className="flex items-center">
+									{link.icon && (
+										<link.icon className="h-4 w-4 mr-1.5" />
+									)}
+									{link.title}
+								</span>
 							</NavLink>
 							<AnimatePresence mode="popLayout" initial={false}>
 								{link.href === pathname &&
@@ -220,25 +236,46 @@ function NavigationGroup({ group, className }: GroupPathProps) {
 
 export const navigation = [
 	{
-		title: "Guides",
+		title: "General",
 		links: [
-			{ title: "Introduction", href: "/" },
-			{ title: "Quickstart", href: "/quickstart" },
-			{ title: "SDKs", href: "/sdks" },
-			{ title: "Authentication", href: "/authentication" },
-			{ title: "Pagination", href: "/pagination" },
-			{ title: "Errors", href: "/errors" },
-			{ title: "Webhooks", href: "/webhooks" },
+			{ title: "Home", href: "/", icon: HomeIcon },
+			{ title: "Websites", href: "/websites", icon: LinkIcon },
 		],
 	},
 	{
-		title: "Resources",
+		title: "Subscriptions",
 		links: [
-			{ title: "Contacts", href: "/contacts" },
-			{ title: "Conversations", href: "/conversations" },
-			{ title: "Messages", href: "/messages" },
-			{ title: "Groups", href: "/groups" },
-			{ title: "Attachments", href: "/attachments" },
+			{
+				title: "Subscriptions",
+				href: "/subscriptions",
+				icon: CurrencyDollarIcon,
+			},
+			{
+				title: "Payments",
+				href: "/payments",
+				icon: BanknotesIcon,
+			},
+		],
+	},
+	{
+		title: "Settings",
+		links: [
+			{ title: "General", href: "/settings", icon: Cog6ToothIcon },
+			{
+				title: "Profile",
+				href: "/settings/profile",
+				icon: UserCircleIcon,
+			},
+			{
+				title: "Notification",
+				href: "/settings/notifications",
+				icon: BellAlertIcon,
+			},
+			{
+				title: "Billing",
+				href: "/settings/billing",
+				icon: CreditCardIcon,
+			},
 		],
 	},
 ];
@@ -247,8 +284,8 @@ export function Navigation(props: any) {
 	return (
 		<nav {...props}>
 			<ul role="list">
-				<TopLevelNavItem href="#">API</TopLevelNavItem>
-				<TopLevelNavItem href="#">Documentation</TopLevelNavItem>
+				<TopLevelNavItem href="#">Getting Started</TopLevelNavItem>
+				<TopLevelNavItem href="#">Pricing</TopLevelNavItem>
 				<TopLevelNavItem href="#">Support</TopLevelNavItem>
 				{navigation.map((group, groupIndex) => (
 					<NavigationGroup

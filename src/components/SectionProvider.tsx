@@ -1,5 +1,6 @@
 "use client";
 import { remToPx } from "@/lib/remToPx";
+import { SectionProviderProps, SectionProviderState, Section } from "@/types";
 import {
 	createContext,
 	useContext,

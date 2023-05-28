@@ -12,16 +12,17 @@ import { SectionProvider } from "@/components/SectionProvider";
 import { usePathname } from "next/navigation";
 import { useMobileNavigationStore } from "@/components/MobileNavigation";
 import TagManager from "react-gtm-module";
+import { LayoutComponentsProps } from "@/types";
 
 let sectionStorage: any = {
-	"/": [
-		{ title: "Guides", id: "guides" },
-		{ title: "Resources", id: "resources" },
-		{ title: "Properties", id: "properties" },
-	],
+	// "/": [
+	// 	{ title: "Guides", id: "guides" },
+	// 	{ title: "Resources", id: "resources" },
+	// 	{ title: "Properties", id: "properties" },
+	// ],
 	"/quickstart": [
-		{ title: "Resources", id: "resources", tag: "PUT" },
-		{ title: "Properties", id: "properties", tag: "POST" },
+		{ title: "Resources", id: "resources", tag: "New" },
+		{ title: "Properties", id: "properties" },
 	],
 };
 
@@ -53,12 +54,13 @@ export function Layout({ children, sections = [] }: LayoutComponentsProps) {
 	}, []);
 
 	sections = sections.length == 0 ? sectionStorage[pathname] ?? [] : [];
+
 	return (
 		<SectionProvider sections={sections}>
-			<div className="lg:ml-72 xl:ml-80">
+			<div className="lg:ml-60 xl:ml-64">
 				<motion.header
 					layoutScroll
-					className="fixed inset-y-0 left-0 z-40 contents w-72 overflow-y-auto border-r border-zinc-900/10 px-6 pt-4 pb-8 dark:border-white/10 lg:block xl:w-80"
+					className="fixed inset-y-0 left-0 z-40 contents w-60 overflow-y-auto border-r border-zinc-900/10 px-6 pt-4 pb-8 dark:border-white/10 lg:block xl:w-64"
 				>
 					<div className="hidden lg:flex">
 						<Link href="/" aria-label="Home">
@@ -69,7 +71,7 @@ export function Layout({ children, sections = [] }: LayoutComponentsProps) {
 					<Navigation className="hidden lg:mt-10 lg:block" />
 				</motion.header>
 				<div className="relative px-4 pt-14 sm:px-6 lg:px-8">
-					<main className="py-16">
+					<main className="py-10">
 						<Prose as="article">{children}</Prose>
 					</main>
 					<Footer />

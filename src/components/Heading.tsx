@@ -6,6 +6,7 @@ import { useInView } from "framer-motion";
 import { useSectionStore } from "@/components/SectionProvider";
 import { Tag } from "@/components/Tag";
 import { remToPx } from "@/lib/remToPx";
+import { HeadingProps } from "@/types";
 
 function AnchorIcon(props: any) {
 	return (

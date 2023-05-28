@@ -12,6 +12,7 @@
 		"@algolia/autocomplete-core": "^1.9.2",
 		"@algolia/autocomplete-preset-algolia": "^1.9.2",
 		"@headlessui/react": "^1.7.14",
+		"@heroicons/react": "^2.0.18",
 		"@next-auth/prisma-adapter": "^1.0.6",
 		"@prisma/client": "^4.14.0",
 		"@react-email/components": "^0.0.6",
