@@ -73,7 +73,7 @@ export default function RootLayout({
 				/>
 			</head>
 			<body className="bg-white antialiased dark:bg-zinc-900">
-				<Layout {...cart} session={session}>
+				<Layout cart={cart} session={session}>
 					{children}
 				</Layout>
 			</body>
