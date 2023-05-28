@@ -3,8 +3,6 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { Layout } from "@/components/Layout";
 import { cookies as getCookies } from "next/headers";
-import { NextRequest } from "next/server";
-import Script from "next/script";
 import { getCartFromCookie, getUserFromCookie } from "@/utils/buffer";
 
 // const inter = Inter({ subsets: ["latin"] });
@@ -65,12 +63,6 @@ export default function RootLayout({
 		<html lang="en">
 			<head>
 				<script dangerouslySetInnerHTML={{ __html: modeScript }} />
-				{/* Tell the browser to never restore the scroll position on load */}
-				<script
-					dangerouslySetInnerHTML={{
-						__html: `history.scrollRestoration = "manual"`,
-					}}
-				/>
 			</head>
 			<body className="bg-white antialiased dark:bg-zinc-900">
 				<Layout cart={cart} session={session}>

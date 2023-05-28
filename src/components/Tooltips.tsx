@@ -92,7 +92,7 @@ export default function Tooltip({
 						</motion.div>
 						<motion.div
 							key="mobile-tooltip-backdrop"
-							className="fixed inset-0 z-30 bg-gray-100 bg-opacity-10 backdrop-blur sm:hidden"
+							className="fixed inset-0 z-30 bg-gray-100 bg-opacity-10 backdrop-blur sm:hidden "
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							exit={{ opacity: 0 }}
@@ -209,10 +209,10 @@ export function SSOWaitlist() {
 					onClick={() => {
 						setOpening(true);
 						// @ts-ignore
-						window.Tally?.openPopup("waexqB", {
-							width: 540,
-							onOpen: () => setOpening(false),
-						});
+						// window.Tally?.openPopup("waexqB", {
+						// 	width: 540,
+						// 	onOpen: () => setOpening(false),
+						// });
 					}}
 				>
 					Join waitlist

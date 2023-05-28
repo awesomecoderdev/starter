@@ -27,8 +27,8 @@ export default async function page() {
 					id={product.id}
 					name={product.title}
 					logo={product.image}
-					href="fakestoreapi.com"
-					endpoint="https://fakestoreapi.com/"
+					href={`fakestoreapi.com/${product.id}`}
+					endpoint={`https://fakestoreapi.com/`}
 					status={product.id % 2 == 0 ? true : false}
 				/>
 			))}

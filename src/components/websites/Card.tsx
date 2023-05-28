@@ -54,26 +54,19 @@ const Card = ({
 							{name}
 						</h2>
 						<div className="flex items-center">
-							<p className="text-gray-500">{endpoint}</p>
-
-							{payload?.length > 1 && (
-								<Tooltip
-									content={
-										<TooltipContent
-											title={`${endpoint}`}
-											cta="View all domains"
-											href={`/${endpoint}/`}
-										/>
-									}
-								>
-									<div>
-										<Badge
-											text={`+${payload?.length - 1}`}
-											variant="gray"
-										/>
-									</div>
-								</Tooltip>
-							)}
+							{/* {payload?.length > 1 && ( */}
+							<Tooltip
+								content={
+									<TooltipContent
+										title={`${endpoint}`}
+										cta="View all posts"
+										href={`/${endpoint}/`}
+									/>
+								}
+							>
+								<p className="text-gray-500">{endpoint}</p>
+							</Tooltip>
+							{/*  )} */}
 						</div>
 					</div>
 				</div>

@@ -1,5 +1,12 @@
 import { Prose } from "@/components/Prose";
+import { OGImageProxy } from "@/components/Tooltips";
 import { classNames } from "@/utils/class";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: `Websites - ${process.env.APP_NAME}`,
+	description: "Websites",
+};
 
 const WebsitesLayout = ({ children }: { children: any }) => {
 	return (
