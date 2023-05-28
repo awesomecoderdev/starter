@@ -13,6 +13,8 @@ import { usePathname } from "next/navigation";
 import { useMobileNavigationStore } from "@/components/MobileNavigation";
 import TagManager from "react-gtm-module";
 import { LayoutComponentsProps } from "@/types";
+import { sensitiveRoutes } from "@/utils/route";
+import { Toaster } from "sonner";
 
 export function Layout({
 	children,
@@ -22,9 +24,12 @@ export function Layout({
 }: LayoutComponentsProps) {
 	const pathname = usePathname();
 
+	const isSensitiveRoute = sensitiveRoutes.some((route) =>
+		pathname.startsWith(route)
+	);
+
 	// Save pathname on component mount into a REF
 	const savedPathNameRef = useRef(pathname);
-
 	function onRouteChange() {
 		useMobileNavigationStore.getState().close();
 	}
@@ -48,7 +53,8 @@ export function Layout({
 
 	return (
 		<SectionProvider sections={sections}>
-			{session?.email ? (
+			<Toaster duration={2000} expand={true} />
+			{session?.email && isSensitiveRoute ? (
 				<Fragment>
 					<div className="lg:ml-60 xl:ml-64">
 						<motion.header
@@ -60,7 +66,11 @@ export function Layout({
 									<Logo className="h-6" />
 								</Link>
 							</div>
-							<Header cart={cart} auth={session} />
+							<Header
+								cart={cart}
+								sensitive={isSensitiveRoute}
+								auth={session}
+							/>
 							<Navigation className="hidden lg:mt-10 lg:block" />
 						</motion.header>
 						<div className="relative px-4 pt-14 sm:px-6 lg:px-8">
@@ -76,7 +86,11 @@ export function Layout({
 						layoutScroll
 						className="relative z-40 contents px-6 pt-4 pb-8"
 					>
-						<Header cart={cart} auth={session} />
+						<Header
+							cart={cart}
+							sensitive={isSensitiveRoute}
+							auth={session}
+						/>
 					</motion.header>
 					<div className="relative px-4 pt-14 sm:px-6 lg:px-8">
 						<main className="py-10">

@@ -280,9 +280,22 @@ export const navigation = [
 	},
 ];
 
-export function Navigation(props: any) {
+type HeaderProps = {
+	auth?: any;
+	className?: any;
+	cart?: any;
+	sensitive?: boolean;
+};
+
+export function Navigation({
+	auth = false,
+	cart = null,
+	sensitive = false,
+	className,
+	...props
+}: HeaderProps) {
 	return (
-		<nav {...props}>
+		<nav className={classNames(className)}>
 			<ul role="list">
 				<TopLevelNavItem href="#">Getting Started</TopLevelNavItem>
 				<TopLevelNavItem href="#">Pricing</TopLevelNavItem>
@@ -295,9 +308,33 @@ export function Navigation(props: any) {
 					/>
 				))}
 				<li className="sticky bottom-0 z-10 mt-6 min-[416px]:hidden">
-					<Button variant="filled" className="w-full" href="#">
-						Sign in
-					</Button>
+					{auth ? (
+						!sensitive ? (
+							<Button
+								variant="filled"
+								className="w-full"
+								href="/dashboard"
+							>
+								Dashboard
+							</Button>
+						) : (
+							<Button
+								variant="filled"
+								className="w-full"
+								href="/login"
+							>
+								Profile
+							</Button>
+						)
+					) : (
+						<Button
+							variant="filled"
+							className="w-full"
+							href="/login"
+						>
+							Sign in
+						</Button>
+					)}
 				</li>
 			</ul>
 		</nav>

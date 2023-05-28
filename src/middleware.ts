@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { decode } from "./utils/buffer";
+import { sensitiveRoutes } from "@/utils/route";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
@@ -10,13 +10,6 @@ export function middleware(request: NextRequest) {
 	const token = JwtToken?.value;
 	var secret = process.env.JWT_SECRET; // get public key
 	const isAuth = JwtToken?.value;
-
-	const sensitiveRoutes = [
-		"/dashboard",
-		"/settings",
-		"/websites",
-		"/subscriptions",
-	];
 
 	const isAccessingSensitiveRoute = sensitiveRoutes.some((route) =>
 		pathname.startsWith(route)

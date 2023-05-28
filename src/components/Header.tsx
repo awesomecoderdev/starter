@@ -43,11 +43,12 @@ type HeaderProps = {
 	className?: string;
 	auth?: any;
 	cart?: any;
+	sensitive?: boolean;
 };
 
 export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 	function Header(
-		{ className, auth = false, cart },
+		{ className, auth = false, cart = null, sensitive = false },
 		ref: Ref<HTMLHeadingElement>
 	) {
 		let { isOpen: mobileNavIsOpen } = useMobileNavigationStore();
@@ -71,9 +72,9 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 				className={classNames(
 					className,
 					"fixed inset-x-0 top-0 z-50 flex justify-between items-center h-14 gap-12 px-4 transition sm:px-6 lg:z-30 lg:px-8",
-					auth ? "lg:justify-end" : "lg:justify-between",
+					sensitive ? "lg:justify-end" : "lg:justify-between",
 					!isInsideMobileNavigation &&
-						auth &&
+						sensitive &&
 						"backdrop-blur-sm dark:backdrop-blur lg:left-60 xl:left-64",
 					isInsideMobileNavigation
 						? "bg-white dark:bg-zinc-900"
@@ -94,18 +95,23 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 					)}
 				/>
 				<div className="flex items-center gap-5 lg:hidden">
-					<MobileNavigation />
+					<MobileNavigation
+						cart={cart}
+						sensitive={sensitive}
+						auth={auth}
+					/>
 					<Link href="/" aria-label="Home">
 						<Logo className="h-6" />
 					</Link>
 				</div>
-				{!auth && (
+				{!sensitive && (
 					<div className="hidden lg:flex">
 						<Link href="/" aria-label="Home">
 							<Logo className="h-6" />
 						</Link>
 					</div>
 				)}
+
 				<div className="flex items-center gap-5">
 					<nav className="hidden md:block">
 						<ul role="list" className="flex items-center gap-8">
@@ -122,9 +128,15 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 					</div>
 					<div className="hidden min-[416px]:contents">
 						{auth ? (
-							<Fragment>
-								<Button href="/dashboard">Dashboard</Button>
-							</Fragment>
+							!sensitive ? (
+								<Fragment>
+									<Button href="/dashboard">Dashboard</Button>
+								</Fragment>
+							) : (
+								<Fragment>
+									<Button href="/login">Profile</Button>
+								</Fragment>
+							)
 						) : (
 							<Fragment>
 								<Button href="/login">Sign in</Button>
