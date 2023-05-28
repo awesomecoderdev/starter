@@ -41,10 +41,11 @@ function TopLevelNavItem({
 
 type HeaderProps = {
 	className?: string;
+	auth?: any;
 };
 
 export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
-	function Header({ className }, ref: Ref<HTMLHeadingElement>) {
+	function Header({ className, auth = false }, ref: Ref<HTMLHeadingElement>) {
 		let { isOpen: mobileNavIsOpen } = useMobileNavigationStore();
 		let isInsideMobileNavigation = useIsInsideMobileNavigation();
 
@@ -65,8 +66,10 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 				ref={ref}
 				className={classNames(
 					className,
-					"fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between lg:justify-end gap-12 px-4 transition sm:px-6 lg:z-30 lg:px-8",
+					"fixed inset-x-0 top-0 z-50 flex justify-between items-center h-14 gap-12 px-4 transition sm:px-6 lg:z-30 lg:px-8",
+					auth ? "lg:justify-end" : "lg:justify-between",
 					!isInsideMobileNavigation &&
+						auth &&
 						"backdrop-blur-sm dark:backdrop-blur lg:left-60 xl:left-64",
 					isInsideMobileNavigation
 						? "bg-white dark:bg-zinc-900"
@@ -92,6 +95,13 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 						<Logo className="h-6" />
 					</Link>
 				</div>
+				{!auth && (
+					<div className="hidden lg:flex">
+						<Link href="/" aria-label="Home">
+							<Logo className="h-6" />
+						</Link>
+					</div>
+				)}
 				<div className="flex items-center gap-5">
 					<nav className="hidden md:block">
 						<ul role="list" className="flex items-center gap-8">

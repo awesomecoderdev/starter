@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Footer } from "@/components/Footer";
@@ -13,18 +13,6 @@ import { usePathname } from "next/navigation";
 import { useMobileNavigationStore } from "@/components/MobileNavigation";
 import TagManager from "react-gtm-module";
 import { LayoutComponentsProps } from "@/types";
-
-let sectionStorage: any = {
-	// "/": [
-	// 	{ title: "Guides", id: "guides" },
-	// 	{ title: "Resources", id: "resources" },
-	// 	{ title: "Properties", id: "properties" },
-	// ],
-	"/quickstart": [
-		{ title: "Resources", id: "resources", tag: "New" },
-		{ title: "Properties", id: "properties" },
-	],
-};
 
 export function Layout({ children, sections = [] }: LayoutComponentsProps) {
 	const pathname = usePathname();
@@ -52,31 +40,48 @@ export function Layout({ children, sections = [] }: LayoutComponentsProps) {
 			gtmId: "GTM-K69DMNQ",
 		});
 	}, []);
-
-	sections = sections.length == 0 ? sectionStorage[pathname] ?? [] : [];
+	const auth = false;
 
 	return (
 		<SectionProvider sections={sections}>
-			<div className="lg:ml-60 xl:ml-64">
-				<motion.header
-					layoutScroll
-					className="fixed inset-y-0 left-0 z-40 contents w-60 overflow-y-auto border-r border-zinc-900/10 px-6 pt-4 pb-8 dark:border-white/10 lg:block xl:w-64"
-				>
-					<div className="hidden lg:flex">
-						<Link href="/" aria-label="Home">
-							<Logo className="h-6" />
-						</Link>
+			{auth ? (
+				<Fragment>
+					<div className="lg:ml-60 xl:ml-64">
+						<motion.header
+							layoutScroll
+							className="fixed inset-y-0 left-0 z-40 contents w-60 overflow-y-auto border-r border-zinc-900/10 px-6 pt-4 pb-8 dark:border-white/10 lg:block xl:w-64"
+						>
+							<div className="hidden lg:flex">
+								<Link href="/" aria-label="Home">
+									<Logo className="h-6" />
+								</Link>
+							</div>
+							<Header auth={auth} />
+							<Navigation className="hidden lg:mt-10 lg:block" />
+						</motion.header>
+						<div className="relative px-4 pt-14 sm:px-6 lg:px-8">
+							<main className="py-10">
+								<Prose as="article">{children}</Prose>
+							</main>
+						</div>
 					</div>
-					<Header />
-					<Navigation className="hidden lg:mt-10 lg:block" />
-				</motion.header>
-				<div className="relative px-4 pt-14 sm:px-6 lg:px-8">
-					<main className="py-10">
-						<Prose as="article">{children}</Prose>
-					</main>
-					<Footer />
-				</div>
-			</div>
+				</Fragment>
+			) : (
+				<Fragment>
+					<motion.header
+						layoutScroll
+						className="relative z-40 contents px-6 pt-4 pb-8"
+					>
+						<Header auth={auth} />
+					</motion.header>
+					<div className="relative px-4 pt-14 sm:px-6 lg:px-8">
+						<main className="py-10">
+							<Prose as="article">{children}</Prose>
+						</main>
+						<Footer />
+					</div>
+				</Fragment>
+			)}
 		</SectionProvider>
 	);
 }

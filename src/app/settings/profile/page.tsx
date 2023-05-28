@@ -3,12 +3,13 @@ import { Col, Note, Properties, Property, Row } from "@/components/Note";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: `Login - ${process.env.APP_NAME}`,
+	// title: `SDKs - ${process.env.APP_NAME}`,
+	title: `SDKs`,
 	description:
 		"In this guide, we will talk about what happens when something goes wrong while you work with the API.",
 };
 
-export default function Login() {
+export default function SDKs() {
 	return (
 		<>
 			<h1>Errors :( </h1>

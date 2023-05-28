@@ -18,7 +18,7 @@ interface MobileNavigationState {
 
 type SectionProviderProps = {
 	children: React.ReactNode;
-	sections: React.ReactNode | any;
+	sections?: React.ReactNode | any;
 };
 
 type Section = {
