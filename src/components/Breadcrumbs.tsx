@@ -39,7 +39,7 @@ const Breadcrumbs = () => {
 
 	return (
 		<>
-			<div className="flex items-center overflow-x-auto whitespace-nowrap">
+			<div className="flex items-center overflow-x-auto whitespace-nowrap pb-6">
 				<Link
 					href="/dashboard"
 					className="text-gray-600 dark:text-gray-200"

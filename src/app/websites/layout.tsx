@@ -1,5 +1,4 @@
 "use client";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { Prose } from "@/components/Prose";
 import { classNames } from "@/utils/class";
 import { usePathname } from "next/navigation";
@@ -10,7 +9,6 @@ const WebsitesLayout = ({ children }: { children: any }) => {
 	if (pathname == "/websites") {
 		return (
 			<Fragment>
-				<Breadcrumbs />
 				<Prose
 					enable={false}
 					className={classNames(
