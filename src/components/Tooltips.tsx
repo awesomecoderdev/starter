@@ -77,10 +77,10 @@ export default function Tooltip({
 							<div
 								className={`rounded-t-4xl flex h-7 w-full items-center justify-center border-t border-gray-200 dark:border-white/7.5 bg-white dark:bg-zinc-500/75`}
 							>
-								<div className="-mr-1 h-1 w-6 rounded-full bg-gray-300  dark:bg-zinc-50  transition-all group-active:rotate-12" />
-								<div className="h-1 w-6 rounded-full bg-gray-300  dark:bg-zinc-50 transition-all group-active:-rotate-12" />
+								<div className="-mr-1 h-1 w-6 rounded-full bg-gray-300  dark:bg-zinc-50  transition-all group-hover:rotate-12 group-active:rotate-12" />
+								<div className="-mr-1 h-1 w-6 rounded-full bg-gray-300  dark:bg-zinc-50 transition-all group-hover:-rotate-12 group-active:-rotate-12" />
 							</div>
-							<div className="flex min-h-[150px] w-full items-center justify-center overflow-hidden bg-white dark:bg-zinc-500/75 align-middle shadow-xl">
+							<div className="flex min-h-[180px] w-full items-center justify-center overflow-hidden bg-white dark:bg-zinc-500/75 align-middle shadow-xl">
 								{typeof content === "string" ? (
 									<span className="block max-w-xs text-center text-sm text-gray-700 dark:text-zinc-300">
 										{content}
@@ -148,19 +148,11 @@ export function TooltipContent({
 			<p className="text-sm text-gray-700 dark:text-zinc-300">{title}</p>
 			{cta &&
 				(href ? (
-					<Button
-						variant="filled"
-						href={href}
-						// className="mt-4 w-full rounded-md border border-black bg-black px-3 py-1.5 text-center text-sm text-white transition-all hover:bg-white hover:text-black"
-					>
+					<Button variant="filled" href={href}>
 						{cta}
 					</Button>
 				) : onClick ? (
-					<Button
-						variant="filled"
-						// className="mt-4 w-full rounded-md border border-black bg-black px-3 py-1.5 text-center text-sm text-white transition-all hover:bg-white hover:text-black"
-						onClick={onClick}
-					>
+					<Button variant="filled" onClick={onClick}>
 						{cta}
 					</Button>
 				) : null)}

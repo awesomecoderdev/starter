@@ -141,18 +141,25 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 							{auth ? (
 								!sensitive ? (
 									<Fragment>
-										<Button href="/dashboard">
+										<Button
+											variant="filled"
+											href="/dashboard"
+										>
 											Dashboard
 										</Button>
 									</Fragment>
 								) : (
 									<Fragment>
-										<Button href="/login">Profile</Button>
+										<Button variant="filled" href="/login">
+											Profile
+										</Button>
 									</Fragment>
 								)
 							) : (
 								<Fragment>
-									<Button href="/login">Sign in</Button>
+									<Button variant="filled" href="/login">
+										Sign in
+									</Button>
 								</Fragment>
 							)}
 						</div>

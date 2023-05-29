@@ -36,6 +36,7 @@ function TopLevelNavItem({ href, children }: TopLevelNavItemProps) {
 		<li className="md:hidden">
 			<Link
 				href={href}
+				onClick={(e) => useMobileNavigationStore.getState().close()}
 				className="block py-1 text-sm text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
 			>
 				{children}
@@ -55,9 +56,7 @@ function NavLink({
 		<Link
 			href={href}
 			aria-current={active ? "page" : undefined}
-			onClick={(e) => {
-				// useMobileNavigationStore.getState().close();
-			}}
+			onClick={(e) => useMobileNavigationStore.getState().close()}
 			className={classNames(
 				"flex justify-between gap-2 py-1 pr-3 text-sm transition",
 				isAnchorLink ? "pl-7" : "pl-2",

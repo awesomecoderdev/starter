@@ -29,22 +29,6 @@ export function Layout({
 		pathname.startsWith(route)
 	);
 
-	// Save pathname on component mount into a REF
-	const savedPathNameRef = useRef(pathname);
-	function onRouteChange() {
-		useMobileNavigationStore.getState().close();
-	}
-
-	useEffect(() => {
-		// If REF has been changed, do the stuff
-		if (savedPathNameRef.current !== pathname) {
-			onRouteChange();
-			// Update REF
-			savedPathNameRef.current = pathname;
-		}
-		onRouteChange();
-	}, [pathname]);
-
 	useEffect(() => {
 		// google tag manager
 		TagManager.initialize({
@@ -75,7 +59,13 @@ export function Layout({
 							<Navigation className="hidden lg:mt-10 lg:block" />
 						</motion.header>
 						<div className="relative px-6 pt-14 sm:px-7 lg:px-8">
-							<main className="py-10">
+							<main
+								className={classNames(
+									isSensitiveRoute
+										? "sensitive py-6"
+										: "py-10"
+								)}
+							>
 								<Prose
 									className={classNames(
 										isSensitiveRoute && "sensitive"

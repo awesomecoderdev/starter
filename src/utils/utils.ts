@@ -86,7 +86,17 @@ export function nFormatter(num?: number, digits?: number) {
 
 export function capitalize(str: string) {
 	if (!str || typeof str !== "string") return str;
+	if (isValidDomain(str)) return str;
 	return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export function isValidDomain(domain: string) {
+	try {
+		var domainPattern = /^(?:[-A-Za-z0-9]+\.)+[A-Za-z]{2,}$/;
+		return domainPattern.test(domain);
+	} catch (error) {
+		return false;
+	}
 }
 
 export const chunk = <T>(array: T[], chunk_size: number): T[][] => {
@@ -176,6 +186,50 @@ export const getDomain = (headers: Headers) => {
 	let domain = headers.get("host") as string;
 	return domain;
 };
+
+type LocationProps = {
+	href?: any;
+	protocol?: any;
+	host?: any;
+	hostname?: any;
+	port?: any;
+	pathname?: any;
+	search?: any;
+	hash?: any;
+};
+export function getLocation(href: string): LocationProps {
+	try {
+		let match: any = href.match(
+			/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/
+		);
+
+		if (match) {
+			return {
+				href: href,
+				protocol: match[1],
+				host: match[2],
+				hostname: match[3],
+				port: match[4],
+				pathname: match[5],
+				search: match[6],
+				hash: match[7],
+			};
+		}
+	} catch (error) {
+		// nothing
+	}
+
+	return {
+		href: null,
+		protocol: null,
+		host: null,
+		hostname: null,
+		port: null,
+		pathname: null,
+		search: null,
+		hash: null,
+	};
+}
 
 export const getUrlFromString = (str: string) => {
 	if (isValidUrl(str)) return str;

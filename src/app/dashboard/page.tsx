@@ -7,6 +7,7 @@ import { HeroPattern } from "@/components/HeroPattern";
 import { Button } from "@/components/Button";
 import { Heading } from "@/components/Heading";
 import Link from "next/link";
+import { Code, CodeGroup } from "@/components/Code";
 
 export const metadata: Metadata = {
 	title: `Dashboard - ${process.env.APP_NAME}`,
@@ -31,11 +32,16 @@ export default function page() {
 				messages, and more and seamlessly integrate your product into
 				the workflows of dozens of devoted Protocol users.{" "}
 			</p>
-			{session && (
-				<p className="lead">
-					Session:{JSON.stringify(session, null, 2)}
-				</p>
-			)}
+			<CodeGroup>
+				{session && (
+					<Code
+						code={JSON.stringify(session, null, 4)}
+						language="json"
+					>
+						{JSON.stringify(session, null, 4)}
+					</Code>
+				)}
+			</CodeGroup>
 
 			<div className="not-prose mb-16 mt-6 flex gap-3">
 				<Button href="/quickstart" arrow="right">

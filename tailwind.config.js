@@ -32,6 +32,7 @@ module.exports = {
 			},
 			gridTemplateColumns: {
 				fluid: "repeat(auto-fit, minmax(15rem, 1fr))",
+				"[auto,auto,1fr]": "auto auto 1fr",
 			},
 			boxShadow: {
 				glow: "0 0 4px rgb(0 0 0 / 0.1)",
