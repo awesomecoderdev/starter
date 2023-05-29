@@ -14,10 +14,13 @@ export const metadata: Metadata = {
 	description: "Dashboard",
 };
 
-export default function page() {
+export default async function Dashboard() {
 	const cookies = getCookies();
 	const token = cookies.get("token")?.value;
 	const session = getUserFromCookie(token);
+	await new Promise(function (resolve) {
+		setTimeout(resolve, 105000);
+	});
 
 	if (!session?.email) {
 		// redirect("/login");

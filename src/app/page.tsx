@@ -12,7 +12,10 @@ import { EnvelopeIcon } from "@/components/icons/EnvelopeIcon";
 import { UserIcon } from "@/components/icons/UserIcon";
 import { UsersIcon } from "@/components/icons/UsersIcon";
 
-export default function Home() {
+export default async function Home() {
+	await new Promise(function (resolve) {
+		setTimeout(resolve, 105000);
+	});
 	return (
 		<>
 			<HeroPattern />
