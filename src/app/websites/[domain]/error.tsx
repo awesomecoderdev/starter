@@ -1,6 +1,7 @@
 "use client"; // Error components must be Client Components
 import BlurImage from "@/components/BlurImage";
 import { Prose } from "@/components/Prose";
+import ServerAnimation from "@/components/animation/Lottie";
 import { CallWaiting } from "@/components/icons/Static";
 import { useEffect } from "react";
 
@@ -20,7 +21,12 @@ export default function DomainError({
 		<Prose>
 			<div className="flex flex-col items-center justify-center rounded-md  py-12">
 				<h2 className="z-10 text-xl font-semibold ">Invalid Domain.</h2>
-				<CallWaiting className="pointer-events-none -my-8 w-96" />
+				{/* <CallWaiting className="pointer-events-none -my-8 w-96" /> */}
+
+				<div className="w-screen max-w-xs">
+					<ServerAnimation />
+				</div>
+
 				{/* <AddEditLinkButton
 				/> */}
 				<p className="mt-2 text-sm ">or edit your search filters</p>
