@@ -14,7 +14,7 @@ import { UsersIcon } from "@/components/icons/UsersIcon";
 
 export default async function Home() {
 	await new Promise(function (resolve) {
-		setTimeout(resolve, 105000);
+		setTimeout(resolve, 5000);
 	});
 	return (
 		<>

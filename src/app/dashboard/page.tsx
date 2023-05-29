@@ -19,7 +19,7 @@ export default async function Dashboard() {
 	const token = cookies.get("token")?.value;
 	const session = getUserFromCookie(token);
 	await new Promise(function (resolve) {
-		setTimeout(resolve, 105000);
+		setTimeout(resolve, 5000);
 	});
 
 	if (!session?.email) {

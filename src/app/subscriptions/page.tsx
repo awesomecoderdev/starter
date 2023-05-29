@@ -5,9 +5,6 @@ export const metadata: Metadata = {
 	description: "Subscriptions",
 };
 
-export default async function Subscriptions() {
-	await new Promise(function (resolve) {
-		setTimeout(resolve, 105000);
-	});
+export default function Subscriptions() {
 	return <div>subscriptions</div>;
 }
