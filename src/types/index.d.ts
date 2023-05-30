@@ -195,3 +195,7 @@ interface Subscription {
 	trial_end?: string;
 	prices?: Price;
 }
+
+interface DomainCardProps {
+	domain: string;
+}
