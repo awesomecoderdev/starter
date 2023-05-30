@@ -5,6 +5,7 @@ import NotFoundAnimationJson from "./notfound.json";
 import OppsAnimationJson from "./opps.json";
 import PaperPlaneAnimationJson from "./paperplane.json";
 import TextLoadingAnimationJson from "./textloading.json";
+import PageNotFoundAnimationJson from "./pagenotfound.json";
 
 export const ServerAnimation = (props: any) => {
 	return <Lottie {...props} animationData={ServerAnimationJson} />;
@@ -24,6 +25,10 @@ export const PaperPlaneAnimation = (props: any) => {
 
 export const TextLoadingAnimation = (props: any) => {
 	return <Lottie {...props} animationData={TextLoadingAnimationJson} />;
+};
+
+export const PageNotFoundAnimation = (props: any) => {
+	return <Lottie {...props} animationData={PageNotFoundAnimationJson} />;
 };
 
 export default ServerAnimation;

@@ -1,7 +1,7 @@
 import { TextLoadingAnimation } from "@/components/animation/Lottie";
 import React, { Fragment } from "react";
 
-const DefaultLoading = () => {
+const DomainLoading = () => {
 	return (
 		<Fragment>
 			<div className="relative flex justify-center items-center min-h-[70vh] w-full">
@@ -13,4 +13,4 @@ const DefaultLoading = () => {
 	);
 };
 
-export default DefaultLoading;
+export default DomainLoading;

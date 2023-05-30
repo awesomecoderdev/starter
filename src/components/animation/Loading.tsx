@@ -1,3 +1,5 @@
+"use client";
+
 import { TextLoadingAnimation } from "@/components/animation/Lottie";
 import React, { Fragment } from "react";
 

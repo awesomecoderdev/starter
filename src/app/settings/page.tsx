@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 	description: "Settings",
 };
 
-export default function SDKs() {
+export default function Settings() {
 	return (
 		<>
 			<h1>Errors :( </h1>
