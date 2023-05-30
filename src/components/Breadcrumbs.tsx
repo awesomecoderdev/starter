@@ -11,20 +11,6 @@ import { Fragment } from "react";
 import { classNames } from "@/utils/class";
 import { capitalize } from "@/utils/utils";
 
-// const links = [
-// 	{
-// 		link: "/websites",
-// 		text: "Websites",
-// 	},
-// 	{
-// 		link: "/websites/awesomecoder.dev",
-// 		text: "awesomecoder.dev",
-// 	},
-// 	{
-// 		link: "/websites/awesomecoder.dev/settings",
-// 		text: "Settings",
-// 	},
-// ];
 type LinkItem = {
 	link: string;
 	text: string;
@@ -87,3 +73,21 @@ const Breadcrumbs = () => {
 };
 
 export default Breadcrumbs;
+
+export const BreadcrumbsSkeleton = () => {
+	return (
+		<Fragment>
+			<div className="flex h-10 items-center space-x-2 pb-6 mt-2">
+				<div className="flex items-center space-x-2">
+					<div className="h-5 w-5 animate-pulse rounded-full bg-gray-200 dark:bg-zinc-50/25" />
+					<div className="h-2 w-3 animate-pulse rounded-full bg-gray-200 dark:bg-zinc-50/25" />
+					<div className="h-5 w-[58px] animate-pulse rounded-md bg-gray-200 dark:bg-zinc-50/25" />
+				</div>
+				<div className="flex items-center space-x-2">
+					<div className="h-2 w-3 animate-pulse rounded-full bg-gray-200 dark:bg-zinc-50/25" />
+					<div className="h-5 w-36 animate-pulse rounded-md bg-gray-200 dark:bg-zinc-50/25" />
+				</div>
+			</div>
+		</Fragment>
+	);
+};
