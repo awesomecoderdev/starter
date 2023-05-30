@@ -7,12 +7,11 @@ import React from "react";
 export default function NotFound() {
 	return (
 		<Prose>
-			<div className="flex items-center">
-				<div className="w-72">
-					<React.Fragment>
-						{/* <PageNotFoundAnimation /> */}
-						Not Found
-					</React.Fragment>
+			<div className="flex flex-col items-center justify-center rounded-md  py-12">
+				<h1>Invalid Domain.</h1>
+				{/* <CallWaiting className="pointer-events-none -my-8 w-96" /> */}
+				<div className="w-screen max-w-xs">
+					<PageNotFoundAnimation />
 				</div>
 			</div>
 		</Prose>

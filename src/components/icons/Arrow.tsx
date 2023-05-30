@@ -1,8 +1,10 @@
 import { classNames } from "@/utils/class";
 import React from "react";
 
-export const ArrowRightIcon = (props: any) => {
-	const { className } = props;
+export const ArrowRightIcon = (
+	{ className }: { className: any },
+	props: any
+) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

@@ -67,7 +67,6 @@ const Card = ({
 								content={
 									<TooltipContent
 										title={`${name} - ${protocol}//${hostname}`}
-										cta="Settings"
 										href={`/websites/${hostname}/settings`}
 									/>
 								}
@@ -95,7 +94,7 @@ const Card = ({
 							<TooltipContent
 								title="This domain is not correctly configured. Please configure your domain to start scan."
 								cta="Configure Domain"
-								href={`/${hostname}/`}
+								href={`/websites/${hostname}/settings`}
 							/>
 						}
 					>

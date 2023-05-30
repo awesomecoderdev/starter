@@ -10,8 +10,7 @@ export default function NotFound() {
 			<div className="flex items-center">
 				<div className="w-72">
 					<React.Fragment>
-						{/* <PageNotFoundAnimation /> */}
-						Not Found
+						<PageNotFoundAnimation />
 					</React.Fragment>
 				</div>
 			</div>

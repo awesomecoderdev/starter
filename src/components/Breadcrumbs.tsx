@@ -1,5 +1,9 @@
 "use client";
-import { HomeIcon, LinkIcon } from "@heroicons/react/24/outline";
+import {
+	ChevronRightIcon,
+	HomeIcon,
+	LinkIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import ArrowRightIcon from "@/components/icons/Arrow";
 import { usePathname } from "next/navigation";
@@ -39,37 +43,45 @@ const Breadcrumbs = () => {
 
 	return (
 		<>
-			<div className="flex items-center overflow-x-auto whitespace-nowrap pb-6">
-				<Link
-					href="/dashboard"
-					className="text-gray-600 dark:text-gray-200"
+			<nav aria-label="Breadcrumb" className="flex items-center pb-6">
+				<ol
+					role="list"
+					className="flex items-center overflow-x-auto whitespace-nowrap"
 				>
-					<HomeIcon className="w-5 h-5 stroke-[1.5]" />
-				</Link>
+					<Link
+						href="/dashboard"
+						className="text-gray-600 dark:text-gray-200"
+					>
+						<HomeIcon className="w-[17px] h-[17px] " />
+					</Link>
 
-				{links?.map((item, index) => (
-					<Fragment key={item.link}>
-						{item.text && item.text && (
-							<Fragment>
-								<span className="mx-2 text-gray-500 dark:text-gray-300 rtl:-scale-x-100">
-									<ArrowRightIcon />
-								</span>
+					{links?.map((item, index) => (
+						<Fragment key={item.link}>
+							{item.text && item.text && (
+								<Fragment>
+									<span className="mx-1.5 text-gray-500 dark:text-gray-300">
+										<ArrowRightIcon
+											className="flex-shrink-0 w-[17px] h-[17px] mt-0.5 stroke-[1]"
+											aria-hidden="true"
+										/>
+									</span>
 
-								<Link
-									href={`${item.link}`}
-									className={classNames(
-										"flex items-center text-gray-600 -px-2 dark:text-gray-200 hover:underline",
-										index == endpoints.length - 1 &&
-											"text-primary-500"
-									)}
-								>
-									{item.text}
-								</Link>
-							</Fragment>
-						)}
-					</Fragment>
-				))}
-			</div>
+									<Link
+										href={`${item.link}`}
+										className={classNames(
+											"flex items-center text-gray-600 -px-2 dark:text-gray-200 hover:underline",
+											index == endpoints.length - 1 &&
+												"text-primary-500 dark:text-primary-500"
+										)}
+									>
+										{item.text}
+									</Link>
+								</Fragment>
+							)}
+						</Fragment>
+					))}
+				</ol>
+			</nav>
 		</>
 	);
 };

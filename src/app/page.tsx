@@ -12,6 +12,11 @@ import { EnvelopeIcon } from "@/components/icons/EnvelopeIcon";
 import { UserIcon } from "@/components/icons/UserIcon";
 import { UsersIcon } from "@/components/icons/UsersIcon";
 
+export const metadata: Metadata = {
+	title: `Getting Started - ${process.env.APP_NAME}`,
+	description: "Getting Started",
+};
+
 export default async function Home() {
 	await new Promise(function (resolve) {
 		setTimeout(resolve, 5000);
@@ -217,10 +222,3 @@ export default async function Home() {
 		</>
 	);
 }
-
-export const metadata: Metadata = {
-	// title: `Getting Started - ${process.env.APP_NAME}`,
-	title: `Getting Started`,
-	description:
-		"Learn everything there is to know about the Protocol API and integrate Protocol into your product.",
-};

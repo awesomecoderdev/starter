@@ -1,8 +1,13 @@
+import { classNames } from "@/utils/class";
+
 const Loading = () => {
 	return (
 		<>
 			{Array.from({ length: 6 }).map((_, i) => (
 				<Skeleton key={i} />
+			))}
+			{Array.from({ length: 3 }).map((_, i) => (
+				<Skeleton className="xl:block hidden" key={i} />
 			))}
 		</>
 	);
@@ -10,9 +15,14 @@ const Loading = () => {
 
 export default Loading;
 
-function Skeleton() {
+function Skeleton({ className }: { className?: string }) {
 	return (
-		<div className="cursor-pointer flex flex-col space-y-[46px] rounded-lg border border-gray-100 dark:border-white/2.5 bg-white dark:bg-white/1 p-6 shadow transition-all hover:shadow-md hover:dark:bg-white/2.5">
+		<div
+			className={classNames(
+				"cursor-pointer flex flex-col space-y-[46px] rounded-lg border border-gray-100 dark:border-white/2.5 bg-white dark:bg-white/1 p-6 shadow transition-all hover:shadow-md hover:dark:bg-white/2.5",
+				className
+			)}
+		>
 			<div className="flex items-center space-x-3">
 				<div className="h-12 w-12 animate-pulse rounded-full bg-gray-200 dark:bg-zinc-50/25" />
 				<div className="flex flex-col space-y-2.5">
