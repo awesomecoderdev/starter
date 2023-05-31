@@ -33,8 +33,7 @@ function Skeleton({ className }: { className?: string }) {
 					</div>
 				</div>
 			</div>
-			<div className="flex items-center justify-between space-x-4 py-[4px]">
-				<div className="h-4 w-24 animate-pulse rounded-md bg-gray-200 dark:bg-zinc-50/25" />
+			<div className="flex items-center justify-start space-x-4 py-[4px]">
 				<div className="h-4 w-24 animate-pulse rounded-md bg-gray-200 dark:bg-zinc-50/25" />
 				<div className="h-4 w-24 animate-pulse rounded-md bg-gray-200 dark:bg-zinc-50/25" />
 			</div>

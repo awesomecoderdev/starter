@@ -106,13 +106,6 @@ const Card = ({
 			</div>
 			<div className="flex items-center space-x-4">
 				<div className="flex items-center space-x-1.5 text-gray-500 dark:text-zinc-300">
-					<DocumentTextIcon className="h-4 w-4" />
-					<h2 className="whitespace-nowrap text-sm">
-						{nFormatter(payload?.posts)} post
-						{payload?.posts > 1 && "s"}
-					</h2>
-				</div>
-				<div className="flex items-center space-x-1.5 text-gray-500 dark:text-zinc-300">
 					<LinkIcon className="h-4 w-4" />
 					{/* {payload?.posts ? (
 						<h2 className="whitespace-nowrap text-sm">
@@ -123,7 +116,7 @@ const Card = ({
 						<div className="h-4 w-8 animate-pulse rounded-md bg-gray-200" />
 					)} */}
 					<h2 className="whitespace-nowrap text-sm">
-						{nFormatter(payload?.posts)} url
+						{nFormatter(payload?.posts)} post
 						{payload?.posts > 1 && "s"}
 					</h2>
 				</div>

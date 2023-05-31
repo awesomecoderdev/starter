@@ -18,7 +18,7 @@ import { useRouter } from "next/navigation";
 import { classNames } from "@/utils/class";
 
 function DomainCard({ domain }: DomainCardProps) {
-	const [clicks, setClicks] = useState<number | null>(null);
+	const [posts, setPosts] = useState<number | null>(null);
 	const [isValidating, setIsValidating] = useState<boolean>(true);
 	const router = useRouter();
 
@@ -26,7 +26,7 @@ function DomainCard({ domain }: DomainCardProps) {
 		setTimeout(() => {
 			setIsValidating(false);
 			setInterval(() => {
-				setClicks(Math.floor(Math.random() * 1000));
+				setPosts(Math.floor(Math.random() * 1000));
 			}, 4000);
 		}, 3000);
 	}, []);
@@ -58,13 +58,13 @@ function DomainCard({ domain }: DomainCardProps) {
 							href={`/${domain}/`}
 							className="min-h-[28px] min-w-[3rem] flex items-center justify-center space-x-1 rounded-md bg-gray-100 dark:bg-zinc-50/25 px-2 py-0.5 transition-all duration-75 hover:scale-105 active:scale-100"
 						>
-							{!clicks ? (
+							{!posts ? (
 								<LoadingDots color="#6366f1" />
 							) : (
 								<p className="text-sm">
-									{nFormatter(clicks)}
+									{nFormatter(posts)}
 									<span className="ml-1 hidden sm:inline-block">
-										clicks
+										posts
 									</span>
 								</p>
 							)}
