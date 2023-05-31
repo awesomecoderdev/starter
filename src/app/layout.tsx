@@ -57,9 +57,9 @@ export default function RootLayout({
 
 	return (
 		<html lang="en">
-			{/* <head>
+			<head>
 				<script dangerouslySetInnerHTML={{ __html: modeScript }} />
-			</head> */}
+			</head>
 			<body className="bg-white antialiased dark:bg-zinc-900">
 				<Layout cart={cart} session={session}>
 					{children}

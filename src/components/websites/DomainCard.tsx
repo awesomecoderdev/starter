@@ -5,8 +5,10 @@ import Link from "next/link";
 import { capitalize, isValidDomain, nFormatter, truncate } from "@/utils/utils";
 import { LoadingCircle, LoadingDots } from "@/components/animation/Loading";
 import {
+	ArrowPathIcon,
 	ArrowTopRightOnSquareIcon,
 	CheckBadgeIcon,
+	CheckCircleIcon,
 	Cog6ToothIcon,
 	XCircleIcon,
 } from "@heroicons/react/24/outline";
@@ -76,7 +78,7 @@ function DomainCard({ domain }: DomainCardProps) {
 							variant="outline"
 							className={classNames(
 								"items-center",
-								isValidating && "cursor-progress min-w-[5rem]"
+								isValidating && "cursor-progress min-w-[97.3px]"
 							)}
 							disabled={isValidating}
 						>
@@ -84,7 +86,7 @@ function DomainCard({ domain }: DomainCardProps) {
 								<LoadingDots color="#6366f1" />
 							) : (
 								<>
-									<Cog6ToothIcon className="h-4 w-4 mr-1" />
+									<ArrowPathIcon className="h-4 w-4 mr-1" />
 									Refresh
 								</>
 							)}
@@ -102,7 +104,7 @@ function DomainCard({ domain }: DomainCardProps) {
 					</div>
 				</div>
 				<div className="flex h-10 items-center space-x-5">
-					<div className="flex items-center space-x-2">
+					<div className="flex items-center justify-between">
 						{data ? (
 							// data.status === "Valid Configuration" ? (
 							// 	<CheckCircleFill className="h-6 w-6 text-blue-500" />
@@ -114,13 +116,13 @@ function DomainCard({ domain }: DomainCardProps) {
 							// <XCircleIcon className="h-6 w-6 text-red-500" />
 							<>
 								{isValidating ? (
-									<LoadingCircle className="w-5 h-5 mr-1" />
+									<LoadingCircle />
 								) : (
-									<CheckBadgeIcon className="h-6 w-6 text-blue-500" />
+									<CheckBadgeIcon className="mx-0.5 h-5 w-5 text-blue-500" />
 								)}
 							</>
 						) : (
-							<LoadingCircle className="w-5 h-5 mr-1" />
+							<LoadingCircle />
 						)}
 						<p className="text-sm text-gray-500">
 							{data ? data.status : "Checking Domain Status"}

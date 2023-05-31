@@ -29,12 +29,12 @@ export function Layout({
 		pathname.startsWith(route)
 	);
 
-	useEffect(() => {
-		// google tag manager
-		TagManager.initialize({
-			gtmId: "GTM-K69DMNQ",
-		});
-	}, []);
+	// useEffect(() => {
+	// 	// google tag manager
+	// 	TagManager.initialize({
+	// 		gtmId: "GTM-K69DMNQ",
+	// 	});
+	// }, []);
 
 	return (
 		<SectionProvider sections={sections}>
