@@ -10,6 +10,7 @@ import {
 	CheckBadgeIcon,
 	CheckCircleIcon,
 	Cog6ToothIcon,
+	LinkIcon,
 	XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Button } from "@/components/Button";
@@ -49,24 +50,25 @@ function DomainCard({ domain }: DomainCardProps) {
 							rel="noreferrer"
 							className="flex items-center space-x-2"
 						>
-							<p className="flex items-center text-xl font-semibold">
-								{domain}
+							<p className="text-xl font-semibold">
+								{truncate(domain, 20)}
 							</p>
 							<ArrowTopRightOnSquareIcon className="h-5 w-5" />
 						</a>
 						<Link
 							href={`/${domain}/`}
-							className="min-h-[28px] min-w-[3rem] flex items-center justify-center space-x-1 rounded-md bg-gray-100 dark:bg-zinc-50/25 px-2 py-0.5 transition-all duration-75 hover:scale-105 active:scale-100"
+							className="min-h-[28px] min-w-[3rem] md:flex hidden items-center justify-center space-x-1 rounded-md bg-gray-100 dark:bg-zinc-50/25 px-2 py-0.5 transition-all duration-75 hover:scale-105 active:scale-100 "
 						>
 							{!posts ? (
 								<LoadingDots color="#6366f1" />
 							) : (
-								<p className="text-sm">
-									{nFormatter(posts)}
-									<span className="ml-1 hidden sm:inline-block">
-										posts
-									</span>
-								</p>
+								<div className="flex items-center space-x-1.5 text-gray-500 dark:text-zinc-300">
+									<LinkIcon className="h-4 w-4" />
+									<h2 className="whitespace-nowrap text-sm">
+										{nFormatter(posts)} post
+										{posts > 1 && "s"}
+									</h2>
+								</div>
 							)}
 						</Link>
 					</div>
@@ -121,7 +123,7 @@ function DomainCard({ domain }: DomainCardProps) {
 						) : (
 							<LoadingCircle />
 						)}
-						<p className="text-sm text-gray-500">
+						<p className="text-sm text-gray-500 ml-2">
 							{data ? data.status : "Checking Domain Status"}
 						</p>
 					</div>
