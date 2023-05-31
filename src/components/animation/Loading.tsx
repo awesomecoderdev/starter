@@ -66,7 +66,7 @@ export function LoadingCircle({ className }: { className?: string }) {
 	);
 }
 
-export const LoadingDots = ({ color = "#000" }: { color?: string }) => {
+export const LoadingDots = ({ color = "#6366f1" }: { color?: string }) => {
 	return (
 		<span className={styles.loading}>
 			<span style={{ backgroundColor: color }} />

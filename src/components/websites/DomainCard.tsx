@@ -69,16 +69,13 @@ function DomainCard({ domain }: DomainCardProps) {
 								</p>
 							)}
 						</Link>
-						<span className="rounded-full bg-blue-500 px-3 py-0.5 text-xs text-white">
-							Primary Domain
-						</span>
 					</div>
 					<div className="flex space-x-3">
 						<Button
 							variant="outline"
 							className={classNames(
-								"items-center",
-								isValidating && "cursor-progress min-w-[97.3px]"
+								"items-center min-w-[97.3px] rounded-md py-2",
+								isValidating && "cursor-progress "
 							)}
 							disabled={isValidating}
 						>
@@ -95,7 +92,7 @@ function DomainCard({ domain }: DomainCardProps) {
 							onClick={(e) =>
 								router.push(`websites/${domain}/settings`)
 							}
-							className="items-center"
+							className="items-center min-w-[97.3px] rounded-md py-2"
 							variant="outline"
 						>
 							<Cog6ToothIcon className="h-4 w-4 mr-1" />
