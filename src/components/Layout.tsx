@@ -56,7 +56,12 @@ export function Layout({
 								sensitive={isSensitiveRoute}
 								auth={session}
 							/>
-							<Navigation className="hidden lg:mt-10 lg:block" />
+							<Navigation
+								cart={cart}
+								sensitive={isSensitiveRoute}
+								auth={session}
+								className="hidden lg:mt-10 lg:block"
+							/>
 						</motion.header>
 						<div className="relative px-6 pt-14 sm:px-7 lg:px-8">
 							<main

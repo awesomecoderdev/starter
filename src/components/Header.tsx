@@ -211,7 +211,7 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 										)}
 									>
 										<div>
-											<Menu.Button className="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2">
+											<Menu.Button className="flex rounded-full focus:outline-none">
 												<span className="sr-only">
 													Open user menu
 												</span>
@@ -232,7 +232,7 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 											leaveTo="transform opacity-0 scale-95"
 										>
 											{/* <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"> */}
-											<Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right flex flex-col space-y-px rounded-md bg-white p-3 sm:w-56 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+											<Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right flex flex-col space-y-px rounded-md bg-white dark:bg-zinc-900/90 p-3 sm:w-56 shadow-lg ring-1 ring-black dark:ring-zinc-700/[0.35] ring-opacity-5 focus:outline-none">
 												<Menu.Item>
 													{({ active }) => (
 														<Link
@@ -243,11 +243,11 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 																	.close()
 															}
 															className={classNames(
-																"flex items-center w-full rounded-md p-2 text-sm transition-all duration-75 hover:bg-gray-100 active:bg-gray-200",
+																"flex items-center text-zinc-900 dark:text-zinc-100 w-full rounded-md p-2 text-sm transition-all duration-75 hover:bg-gray-100 hover:dark:bg-zinc-700/[0.30] active:bg-gray-200",
 																active &&
 																	pathname ==
 																		"/settings/profile" &&
-																	"bg-gray-100"
+																	"bg-gray-100 dark:bg-zinc-700/[0.30]"
 															)}
 														>
 															<UserCircleIcon className="h-4 w-4 mr-2" />
@@ -265,11 +265,11 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 																	.close()
 															}
 															className={classNames(
-																"flex items-center w-full rounded-md p-2 text-sm transition-all duration-75 hover:bg-gray-100 active:bg-gray-200",
+																"flex items-center text-zinc-900 dark:text-zinc-100 w-full rounded-md p-2 text-sm transition-all duration-75 hover:bg-gray-100 hover:dark:bg-zinc-700/[0.30] active:bg-gray-200",
 																active &&
 																	pathname ==
 																		"/settings" &&
-																	"bg-gray-100"
+																	"bg-gray-100 dark:bg-zinc-700/[0.30]"
 															)}
 														>
 															<Cog6ToothIcon className="h-4 w-4 mr-2" />
@@ -279,9 +279,9 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 												</Menu.Item>
 												<button
 													className={classNames(
-														"flex items-center w-full rounded-md p-2 text-sm transition-all duration-75 hover:bg-gray-100 active:bg-gray-200",
+														"flex items-center text-zinc-900 dark:text-zinc-100 w-full rounded-md p-2 text-sm transition-all duration-75 hover:bg-gray-100 hover:dark:bg-zinc-700/[0.30] active:bg-gray-200",
 														logoutLoading &&
-															"justify-center bg-gray-100 min-h-[40px]"
+															"justify-center bg-gray-100 dark:bg-zinc-700/[0.30] min-h-[40px]"
 													)}
 													onClick={(e) => logout(e)}
 												>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { Fragment, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion, useIsPresent } from "framer-motion";
@@ -27,6 +27,9 @@ import {
 	RectangleGroupIcon,
 } from "@heroicons/react/24/outline";
 import { GroupPathProps, NavLinkProps, TopLevelNavItemProps } from "@/types";
+import axios from "@/utils/axios";
+import { toast } from "sonner";
+import { LoadingDots } from "./animation/Loading";
 
 function useInitialValue(value: any, condition = true) {
 	let initialValue = useRef(value).current;
@@ -155,7 +158,7 @@ function NavigationGroup({ group, className }: GroupPathProps) {
 		group.links.findIndex((link: any) => link.href === pathname) !== -1;
 
 	return (
-		<li className={classNames("relative mt-6", className)}>
+		<li className={classNames("relative", className)}>
 			<motion.h2
 				layout="position"
 				className="text-xs font-semibold text-zinc-900 dark:text-white"
@@ -299,33 +302,82 @@ export function Navigation({
 	className,
 	...props
 }: HeaderProps) {
+	const [logoutLoading, setLogoutLoading] = useState(false);
+
+	const logout = async (e: any) => {
+		setLogoutLoading(true);
+		axios
+			.post("/api/auth/logout")
+			.then((res) => {
+				toast.success("You have successfully logged out!");
+				location.reload();
+			})
+			.catch((error) => {
+				toast.error("Something went wrong!");
+			});
+	};
+
 	return (
 		<nav className={classNames(className)}>
 			<ul role="list">
-				<TopLevelNavItem href="#">Getting Started</TopLevelNavItem>
-				<TopLevelNavItem href="/pricing">Pricing</TopLevelNavItem>
-				<TopLevelNavItem href="#">Support</TopLevelNavItem>
+				{!sensitive && (
+					<Fragment>
+						<TopLevelNavItem href="#">
+							Getting Started
+						</TopLevelNavItem>
+						<TopLevelNavItem href="/pricing">
+							Pricing
+						</TopLevelNavItem>
+						<TopLevelNavItem href="#">Support</TopLevelNavItem>
+					</Fragment>
+				)}
 
 				{navigation.map((group, groupIndex) => (
 					<NavigationGroup
 						key={group.title}
 						group={group}
 						className={classNames(
-							groupIndex === 0 && "md:mt-0"
-							// !auth && "hidden"
+							groupIndex === 0 && "md:mt-0",
+							!auth && "hidden",
+							!sensitive && "md:block hidden"
 						)}
 					/>
 				))}
 
-				<li className="sticky bottom-0 z-10 mt-6 min-[416px]:hidden">
+				<li
+					className={classNames(
+						// "sticky bottom-0 z-10 mt-6 min-[416px]:hidden",
+						"sticky bottom-0 z-10 mt-6 md:hidden"
+					)}
+				>
 					{auth ? (
-						!sensitive && (
+						!sensitive ? (
 							<Button
 								variant="filled"
-								className="w-full "
+								className="w-full flex items-center"
 								href="/dashboard"
 							>
-								Dashboards
+								<RectangleGroupIcon className="h-4 w-4 mr-2" />
+								Dashboard
+							</Button>
+						) : (
+							<Button
+								variant="filled"
+								className={classNames(
+									"w-full flex items-center hover:bg-zinc-900 dark:hover:bg-primary-500",
+									logoutLoading &&
+										"justify-center min-h-[32px]"
+								)}
+								onClick={(e) => logout(e)}
+							>
+								{logoutLoading ? (
+									<LoadingDots className="bg-white" />
+								) : (
+									<>
+										<ArrowUpOnSquareStackIcon className="h-4 w-4 mr-2 transform rotate-90" />
+										Logout
+									</>
+								)}
 							</Button>
 						)
 					) : (

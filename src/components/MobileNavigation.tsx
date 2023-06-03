@@ -39,7 +39,6 @@ export function MobileNavigation({
 	let isInsideMobileNavigation = useIsInsideMobileNavigation();
 	let { isOpen, toggle, close } = useMobileNavigationStore();
 	let ToggleIcon = isOpen ? XIcon : MenuIcon;
-
 	return (
 		<IsInsideMobileNavigationContext.Provider value={true}>
 			<button

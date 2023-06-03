@@ -60,7 +60,7 @@ function DomainCard({ domain }: DomainCardProps) {
 							className="min-h-[28px] min-w-[3rem] md:flex hidden items-center justify-center space-x-1 rounded-md bg-gray-100 dark:bg-zinc-50/25 px-2 py-0.5 transition-all duration-75 hover:scale-105 active:scale-100 "
 						>
 							{!posts ? (
-								<LoadingDots color="#6366f1" />
+								<LoadingDots />
 							) : (
 								<div className="flex items-center space-x-1.5 text-gray-500 dark:text-zinc-300">
 									<LinkIcon className="h-4 w-4" />
@@ -82,7 +82,7 @@ function DomainCard({ domain }: DomainCardProps) {
 							disabled={isValidating}
 						>
 							{isValidating ? (
-								<LoadingDots color="#6366f1" />
+								<LoadingDots />
 							) : (
 								<>
 									{/* <ArrowPathIcon className="h-4 w-4 mr-1" /> */}

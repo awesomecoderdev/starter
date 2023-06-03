@@ -36,23 +36,23 @@ export async function POST(request: Request) {
 	// 	}
 	// );
 
-	if (!token) {
-		const expired = new Date(2000);
-		return new Response(
-			JSON.stringify({
-				success: false,
-				status: Status.HTTP_UNAUTHORIZED,
-				message: "Unauthorized.",
-				// token,
-			}),
-			{
-				status: Status.HTTP_UNAUTHORIZED,
-				headers: {
-					"Set-Cookie": `token=deleted; Path=/; Expires=${expired};`,
-				},
-			}
-		);
-	}
+	// if (!token) {
+	// 	const expired = new Date(2000);
+	// 	return new Response(
+	// 		JSON.stringify({
+	// 			success: false,
+	// 			status: Status.HTTP_UNAUTHORIZED,
+	// 			message: "Unauthorized.",
+	// 			// token,
+	// 		}),
+	// 		{
+	// 			status: Status.HTTP_UNAUTHORIZED,
+	// 			headers: {
+	// 				"Set-Cookie": `token=deleted; Path=/; Expires=${expired};`,
+	// 			},
+	// 		}
+	// 	);
+	// }
 
 	try {
 		const { user, exp } = <jwt.JwtPayload>(

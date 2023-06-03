@@ -9,12 +9,16 @@ export const metadata: Metadata = {
 };
 
 const getProducts = async () => {
-	const req = await fetch("https://fakestoreapi.com/products");
-	// await new Promise(function (resolve) {
-	// 	setTimeout(resolve, 15000);
-	// });
-	const res = await req.json();
-	return res;
+	try {
+		const req = await fetch("https://fakestoreapi.com/products");
+		// await new Promise(function (resolve) {
+		// 	setTimeout(resolve, 15000);
+		// });
+		const res = await req.json();
+		return res;
+	} catch (error) {
+		return [];
+	}
 };
 
 export default async function page() {
