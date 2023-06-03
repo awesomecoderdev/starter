@@ -15,7 +15,7 @@ export function middleware(request: NextRequest) {
 		pathname.startsWith(route)
 	);
 
-	const authRoutes = ["/login", "/register"];
+	const authRoutes = ["/login", "/signup"];
 	const isAuthSensitiveRoute = authRoutes.some((route) =>
 		pathname.startsWith(route)
 	);

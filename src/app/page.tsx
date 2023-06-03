@@ -18,9 +18,9 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-	await new Promise(function (resolve) {
-		setTimeout(resolve, 5000);
-	});
+	// await new Promise(function (resolve) {
+	// 	setTimeout(resolve, 5000);
+	// });
 	return (
 		<>
 			<HeroPattern />
