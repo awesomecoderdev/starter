@@ -85,7 +85,7 @@ function DomainCard({ domain }: DomainCardProps) {
 								<LoadingDots color="#6366f1" />
 							) : (
 								<>
-									<ArrowPathIcon className="h-4 w-4 mr-1" />
+									{/* <ArrowPathIcon className="h-4 w-4 mr-1" /> */}
 									Refresh
 								</>
 							)}
