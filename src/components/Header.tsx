@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, Ref, forwardRef } from "react";
+import { Fragment, Ref, forwardRef, useState } from "react";
 import {
 	MotionStyle,
 	MotionValue,
@@ -9,6 +9,14 @@ import {
 	useTransform,
 } from "framer-motion";
 
+import {
+	Disclosure,
+	Menu,
+	RadioGroup,
+	Switch,
+	Transition,
+} from "@headlessui/react";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/Button";
 import { Logo } from "@/components/Logo";
 import {
@@ -19,6 +27,16 @@ import { useMobileNavigationStore } from "@/components/MobileNavigation";
 import { ModeToggle } from "@/components/ModeToggle";
 import Link from "next/link";
 import { classNames } from "@/utils/class";
+import BlurImage from "./BlurImage";
+import {
+	ArrowUpOnSquareStackIcon,
+	Cog6ToothIcon,
+	UserCircleIcon,
+} from "@heroicons/react/24/outline";
+import { LoadingDots } from "./animation/Loading";
+import axios from "@/utils/axios";
+import { error } from "console";
+import { toast } from "sonner";
 
 function TopLevelNavItem({
 	href,
@@ -51,8 +69,10 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 		{ className, auth = false, cart = null, sensitive = false },
 		ref: Ref<HTMLHeadingElement>
 	) {
+		const pathname = usePathname();
 		let { isOpen: mobileNavIsOpen } = useMobileNavigationStore();
 		let isInsideMobileNavigation = useIsInsideMobileNavigation();
+		const [logoutLoading, setLogoutLoading] = useState(false);
 
 		let { scrollY }: { scrollY: MotionValue<number> } = useScroll();
 		let bgOpacityLight: MotionValue<number> = useTransform(
@@ -65,6 +85,19 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 			[0, 72],
 			[0.2, 0.8]
 		);
+
+		const logout = async (e: any) => {
+			setLogoutLoading(true);
+			axios
+				.post("/api/auth/logout")
+				.then((res) => {
+					toast.success("You have successfully logged out!");
+					location.reload();
+				})
+				.catch((error) => {
+					toast.error("Something went wrong!");
+				});
+		};
 
 		return (
 			<motion.div
@@ -107,7 +140,13 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 							sensitive={sensitive}
 							auth={auth}
 						/>
-						<Link href="/" aria-label="Home">
+						<Link
+							href="/"
+							aria-label="Home"
+							onClick={(e) =>
+								useMobileNavigationStore.getState().close()
+							}
+						>
 							<Logo className="h-6" />
 						</Link>
 					</div>
@@ -120,41 +159,145 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 					)}
 
 					<div className="flex items-center gap-5">
-						<nav className="hidden md:block">
-							<ul role="list" className="flex items-center gap-8">
-								<TopLevelNavItem href="#">
-									Getting Started
-								</TopLevelNavItem>
-								<TopLevelNavItem href="#">
-									Pricing
-								</TopLevelNavItem>
-								<TopLevelNavItem href="#">
-									Support
-								</TopLevelNavItem>
-							</ul>
-						</nav>
-						<div className="hidden md:block md:h-5 md:w-px md:bg-zinc-900/10 md:dark:bg-white/15" />
+						{!sensitive && (
+							<Fragment>
+								<nav className="hidden md:block">
+									<ul
+										role="list"
+										className="flex items-center gap-8"
+									>
+										<TopLevelNavItem href="#">
+											Getting Started
+										</TopLevelNavItem>
+										<TopLevelNavItem href="/pricing">
+											Pricing
+										</TopLevelNavItem>
+										<TopLevelNavItem href="#">
+											Support
+										</TopLevelNavItem>
+									</ul>
+								</nav>
+								<div className="hidden md:block md:h-5 md:w-px md:bg-zinc-900/10 md:dark:bg-white/15" />
+							</Fragment>
+						)}
 						<div className="flex gap-4">
 							<ModeToggle />
 						</div>
-						<div className="hidden min-[416px]:contents">
+						<div
+							className={classNames(
+								!auth &&
+									!sensitive &&
+									"hidden min-[416px]:contents" // old
+							)}
+						>
 							{auth ? (
-								!sensitive ? (
-									<Fragment>
-										<Button
-											variant="filled"
-											href="/dashboard"
+								<Fragment>
+									<Button
+										variant="filled"
+										href="/dashboard"
+										className={classNames(
+											!sensitive
+												? "lg:block hidden"
+												: "hidden"
+										)}
+									>
+										Dashboard
+									</Button>
+									<Menu
+										as="div"
+										className={classNames(
+											"relative flex-shrink-0 ",
+											!sensitive && "lg:hidden"
+										)}
+									>
+										<div>
+											<Menu.Button className="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2">
+												<span className="sr-only">
+													Open user menu
+												</span>
+												<img
+													className="h-8 w-8 rounded-full"
+													src={auth.avatar}
+													alt="Profile"
+												/>
+											</Menu.Button>
+										</div>
+										<Transition
+											as={Fragment}
+											enter="transition ease-out duration-100"
+											enterFrom="transform opacity-0 scale-95"
+											enterTo="transform opacity-100 scale-100"
+											leave="transition ease-in duration-75"
+											leaveFrom="transform opacity-100 scale-100"
+											leaveTo="transform opacity-0 scale-95"
 										>
-											Dashboard
-										</Button>
-									</Fragment>
-								) : (
-									<Fragment>
-										<Button variant="filled" href="/login">
-											Profile
-										</Button>
-									</Fragment>
-								)
+											{/* <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"> */}
+											<Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right flex flex-col space-y-px rounded-md bg-white p-3 sm:w-56 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+												<Menu.Item>
+													{({ active }) => (
+														<Link
+															href="/settings/profile"
+															onClick={(e) =>
+																useMobileNavigationStore
+																	.getState()
+																	.close()
+															}
+															className={classNames(
+																"flex items-center w-full rounded-md p-2 text-sm transition-all duration-75 hover:bg-gray-100 active:bg-gray-200",
+																active &&
+																	pathname ==
+																		"/settings/profile" &&
+																	"bg-gray-100"
+															)}
+														>
+															<UserCircleIcon className="h-4 w-4 mr-2" />
+															Profile
+														</Link>
+													)}
+												</Menu.Item>
+												<Menu.Item>
+													{({ active }) => (
+														<Link
+															href="/settings"
+															onClick={(e) =>
+																useMobileNavigationStore
+																	.getState()
+																	.close()
+															}
+															className={classNames(
+																"flex items-center w-full rounded-md p-2 text-sm transition-all duration-75 hover:bg-gray-100 active:bg-gray-200",
+																active &&
+																	pathname ==
+																		"/settings" &&
+																	"bg-gray-100"
+															)}
+														>
+															<Cog6ToothIcon className="h-4 w-4 mr-2" />
+															Settings
+														</Link>
+													)}
+												</Menu.Item>
+												<button
+													className={classNames(
+														"flex items-center w-full rounded-md p-2 text-sm transition-all duration-75 hover:bg-gray-100 active:bg-gray-200",
+														logoutLoading &&
+															"justify-center bg-gray-100 min-h-[40px]"
+													)}
+													onClick={(e) => logout(e)}
+												>
+													{logoutLoading ? (
+														<LoadingDots />
+													) : (
+														<>
+															<ArrowUpOnSquareStackIcon className="h-4 w-4 mr-2 transform rotate-90" />
+															Logout
+														</>
+													)}
+												</button>
+											</Menu.Items>
+										</Transition>
+									</Menu>
+								</Fragment>
 							) : (
 								<Fragment>
 									<Button variant="filled" href="/login">

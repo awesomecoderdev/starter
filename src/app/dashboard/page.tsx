@@ -18,9 +18,9 @@ export default async function Dashboard() {
 	const cookies = getCookies();
 	const token = cookies.get("token")?.value;
 	const session = getUserFromCookie(token);
-	await new Promise(function (resolve) {
-		setTimeout(resolve, 5000);
-	});
+	// await new Promise(function (resolve) {
+	// 	setTimeout(resolve, 5000);
+	// });
 
 	if (!session?.email) {
 		// redirect("/login");

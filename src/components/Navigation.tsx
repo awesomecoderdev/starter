@@ -23,6 +23,8 @@ import {
 	CurrencyDollarIcon,
 	BanknotesIcon,
 	UserCircleIcon,
+	ArrowUpOnSquareStackIcon,
+	RectangleGroupIcon,
 } from "@heroicons/react/24/outline";
 import { GroupPathProps, NavLinkProps, TopLevelNavItemProps } from "@/types";
 
@@ -237,7 +239,11 @@ export const navigation = [
 	{
 		title: "General",
 		links: [
-			{ title: "Home", href: "/dashboard", icon: HomeIcon },
+			{
+				title: "Dashboard",
+				href: "/dashboard",
+				icon: RectangleGroupIcon,
+			},
 			{ title: "Websites", href: "/websites", icon: LinkIcon },
 		],
 	},
@@ -297,32 +303,29 @@ export function Navigation({
 		<nav className={classNames(className)}>
 			<ul role="list">
 				<TopLevelNavItem href="#">Getting Started</TopLevelNavItem>
-				<TopLevelNavItem href="#">Pricing</TopLevelNavItem>
+				<TopLevelNavItem href="/pricing">Pricing</TopLevelNavItem>
 				<TopLevelNavItem href="#">Support</TopLevelNavItem>
+
 				{navigation.map((group, groupIndex) => (
 					<NavigationGroup
 						key={group.title}
 						group={group}
-						className={groupIndex === 0 && "md:mt-0"}
+						className={classNames(
+							groupIndex === 0 && "md:mt-0"
+							// !auth && "hidden"
+						)}
 					/>
 				))}
+
 				<li className="sticky bottom-0 z-10 mt-6 min-[416px]:hidden">
 					{auth ? (
-						!sensitive ? (
+						!sensitive && (
 							<Button
 								variant="filled"
-								className="w-full"
+								className="w-full "
 								href="/dashboard"
 							>
-								Dashboard
-							</Button>
-						) : (
-							<Button
-								variant="filled"
-								className="w-full"
-								href="/login"
-							>
-								Profile
+								Dashboards
 							</Button>
 						)
 					) : (

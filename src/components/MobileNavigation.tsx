@@ -8,6 +8,7 @@ import { create } from "zustand";
 import { Header } from "@/components/Header";
 import { Navigation } from "@/components/Navigation";
 import { MobileNavigationState } from "@/types";
+import { classNames } from "@/utils/class";
 
 const IsInsideMobileNavigationContext = createContext(false);
 
@@ -43,7 +44,10 @@ export function MobileNavigation({
 		<IsInsideMobileNavigationContext.Provider value={true}>
 			<button
 				type="button"
-				className="flex h-6 w-6 items-center justify-center rounded-md transition hover:bg-zinc-900/5 dark:hover:bg-white/5"
+				className={classNames(
+					"flex h-6 w-6 items-center justify-center rounded-md transition hover:bg-zinc-900/5 dark:hover:bg-white/5",
+					!auth && "lg:flex md:hidden flex"
+				)}
 				aria-label="Toggle navigation"
 				onClick={toggle}
 			>

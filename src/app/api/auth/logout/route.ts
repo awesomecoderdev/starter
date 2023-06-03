@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 	const expired = new Date(2000);
 	return new Response(
 		JSON.stringify({
-			success: false,
+			success: true,
 			status: Status.HTTP_OK,
 			message: "Successfully logged out.",
 		}),
