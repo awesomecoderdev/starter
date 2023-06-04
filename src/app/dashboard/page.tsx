@@ -8,11 +8,12 @@ import { Button } from "@/components/Button";
 import { Heading } from "@/components/Heading";
 import Link from "next/link";
 import { Code, CodeGroup } from "@/components/Code";
+import { constructMetadata } from "@/utils/utils";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = constructMetadata({
 	title: `Dashboard - ${process.env.APP_NAME}`,
 	description: "Dashboard",
-};
+});
 
 export default async function Dashboard() {
 	const cookies = getCookies();

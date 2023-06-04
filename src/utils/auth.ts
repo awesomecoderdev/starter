@@ -28,24 +28,17 @@ export const signInWithGoogle = async () => {
 		const { user } = await signInWithPopup(firebase, Provider);
 		const { email } = user;
 		if (user && email) {
-			axios
+			return await axios
 				.post("/api/auth/login", user)
 				.then((res) => {
-					toast.success("Successfully logged in!");
-					location.reload();
+					return res.data;
 				})
 				.catch((error) => {
-					// if (error.response.status != 422) throw new Error(error);
-					toast.error(`Error: ${error.message}`);
-
-					console.log(
-						Object.values(error.response.data.errors).flat()
-					);
+					if (error.response.status != 422) throw new Error(error);
 				});
 		}
 	} catch (error: any) {
-		toast.error(`Error: ${error.message}`);
-
-		console.error("An error occured", error);
+		if (error.response.status != 422) throw new Error(error);
 	}
+	return null;
 };

@@ -2,11 +2,12 @@ import React from "react";
 import { Metadata } from "next";
 import Badge from "@/components/Badge";
 import Card from "@/components/websites/Card";
+import { constructMetadata } from "@/utils/utils";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = constructMetadata({
 	title: `Websites - ${process.env.APP_NAME}`,
 	description: "Websites",
-};
+});
 
 const getProducts = async () => {
 	try {

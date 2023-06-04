@@ -5,6 +5,7 @@ import { Layout } from "@/components/Layout";
 import { cookies as getCookies } from "next/headers";
 import { getCartFromCookie, getUserFromCookie } from "@/utils/buffer";
 import { Metadata } from "next";
+import { constructMetadata } from "@/utils/utils";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -68,8 +69,7 @@ export default function RootLayout({
 		</html>
 	);
 }
-
-export const metadata: Metadata = {
+export const metadata: Metadata = constructMetadata({
 	title: `Getting Started - ${process.env.APP_NAME}`,
 	description: "Getting Started",
-};
+});

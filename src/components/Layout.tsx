@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Footer } from "@/components/Footer";
@@ -13,7 +13,7 @@ import { usePathname } from "next/navigation";
 import { useMobileNavigationStore } from "@/components/MobileNavigation";
 import TagManager from "react-gtm-module";
 import { LayoutComponentsProps } from "@/types";
-import { sensitiveRoutes } from "@/utils/route";
+import { authRoutes, sensitiveRoutes } from "@/utils/route";
 import { Toaster } from "sonner";
 import { classNames } from "@/utils/class";
 
@@ -27,6 +27,11 @@ export function Layout({
 
 	const isSensitiveRoute = sensitiveRoutes.some((route) =>
 		pathname.startsWith(route)
+	);
+
+	const isAuthSensitiveRoute = useMemo(
+		() => authRoutes.some((route) => pathname.startsWith(route)),
+		[pathname]
 	);
 
 	// useEffect(() => {
@@ -87,7 +92,10 @@ export function Layout({
 				<Fragment>
 					<motion.header
 						layoutScroll
-						className="relative z-40 contents px-6 pt-4 pb-8"
+						className={classNames(
+							"relative z-40 contents px-6 pt-4 pb-8",
+							isAuthSensitiveRoute && "hidden"
+						)}
 					>
 						<Header
 							cart={cart}
@@ -95,9 +103,21 @@ export function Layout({
 							auth={session}
 						/>
 					</motion.header>
-					<div className="relative px-6 pt-14 sm:px-7 lg:px-8">
-						<main className="py-10">
+					<div
+						className={classNames(
+							"relative",
+							!isAuthSensitiveRoute &&
+								"pt-14 px-6 sm:px-7 lg:px-8"
+						)}
+					>
+						<main
+							className={classNames(
+								"relative",
+								!isAuthSensitiveRoute && "py-10"
+							)}
+						>
 							<Prose
+								enable={!isAuthSensitiveRoute}
 								className={classNames(
 									isSensitiveRoute && "sensitive"
 								)}
@@ -107,7 +127,9 @@ export function Layout({
 							</Prose>
 						</main>
 					</div>
-					<Footer />
+					<Footer
+						className={classNames(isAuthSensitiveRoute && "hidden")}
+					/>
 				</Fragment>
 			)}
 		</SectionProvider>

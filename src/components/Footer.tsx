@@ -6,6 +6,7 @@ import { Transition } from "@headlessui/react";
 import { Button } from "@/components/Button";
 import { navigation } from "@/components/Navigation";
 import { usePathname } from "next/navigation";
+import { classNames } from "@/utils/class";
 
 function CheckIcon(props: any) {
 	return (
@@ -242,10 +243,15 @@ function SmallPrint() {
 	);
 }
 
-export function Footer() {
+export function Footer({ className }: { className?: string }) {
 	let pathname = usePathname();
 	return (
-		<footer className="border-t border-zinc-900/5 pt-7 pb-8 dark:border-white/5">
+		<footer
+			className={classNames(
+				"border-t border-zinc-900/5 pt-7 pb-8 dark:border-white/5",
+				className
+			)}
+		>
 			<div className="mx-auto max-w-2xl lg:max-w-7xl">
 				<SmallPrint />
 			</div>

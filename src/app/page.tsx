@@ -11,11 +11,12 @@ import { ChatBubbleIcon } from "@/components/icons/ChatBubbleIcon";
 import { EnvelopeIcon } from "@/components/icons/EnvelopeIcon";
 import { UserIcon } from "@/components/icons/UserIcon";
 import { UsersIcon } from "@/components/icons/UsersIcon";
+import { constructMetadata } from "@/utils/utils";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = constructMetadata({
 	title: `Getting Started - ${process.env.APP_NAME}`,
 	description: "Getting Started",
-};
+});
 
 export default async function Home() {
 	// await new Promise(function (resolve) {

@@ -1,11 +1,12 @@
 import { Heading } from "@/components/Heading";
 import { Col, Note, Properties, Property, Row } from "@/components/Note";
+import { constructMetadata } from "@/utils/utils";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = constructMetadata({
 	title: `Settings - ${process.env.APP_NAME}`,
 	description: "Settings",
-};
+});
 
 export default function Settings() {
 	return (

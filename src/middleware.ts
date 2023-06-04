@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { sensitiveRoutes } from "@/utils/route";
+import { authRoutes, sensitiveRoutes } from "@/utils/route";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
@@ -15,7 +15,6 @@ export function middleware(request: NextRequest) {
 		pathname.startsWith(route)
 	);
 
-	const authRoutes = ["/login", "/signup"];
 	const isAuthSensitiveRoute = authRoutes.some((route) =>
 		pathname.startsWith(route)
 	);
