@@ -57,16 +57,16 @@ const SignInCard = () => {
 					</div>
 				</div>
 
-				<Prose className="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
+				<Prose className="relative flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
 					<Button
 						variant="outline"
 						arrow="left"
 						href="/"
-						className="absolute top-10 rounded-lg"
+						className="absolute lg:left-10 left-6 top-10 rounded-lg"
 					>
 						Back
 					</Button>
-					<div className="absolute top-10 right-10 rounded-lg bg-zinc-50 dark:bg-zinc-600/30">
+					<div className="absolute lg:right-10 right-6 top-10 rounded-lg bg-zinc-50 dark:bg-zinc-600/30">
 						<ModeToggle />
 					</div>
 
