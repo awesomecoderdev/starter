@@ -256,12 +256,22 @@ export const navigation = [
 			{
 				title: "Subscriptions",
 				href: "/subscriptions",
-				icon: CurrencyDollarIcon,
-			},
-			{
-				title: "Payments",
-				href: "/payments",
 				icon: BanknotesIcon,
+			},
+			// {
+			// 	title: "Payments",
+			// 	href: "/payments",
+			// 	icon: BanknotesIcon,
+			// },
+			// {
+			// 	title: "Billing",
+			// 	href: "/settings/billing",
+			// 	icon: CreditCardIcon,
+			// },
+			{
+				title: "Billing",
+				href: "/billing",
+				icon: CreditCardIcon,
 			},
 		],
 	},
@@ -279,11 +289,11 @@ export const navigation = [
 				href: "/settings/notifications",
 				icon: BellAlertIcon,
 			},
-			{
-				title: "Billing",
-				href: "/settings/billing",
-				icon: CreditCardIcon,
-			},
+			// {
+			// 	title: "Billing",
+			// 	href: "/settings/billing",
+			// 	icon: CreditCardIcon,
+			// },
 		],
 	},
 ];

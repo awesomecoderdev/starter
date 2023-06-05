@@ -4,6 +4,7 @@ export const sensitiveRoutes = [
 	"/websites",
 	"/payments",
 	"/subscriptions",
+	"/billing",
 ];
 
 export const authRoutes = ["/login", "/signup"];
