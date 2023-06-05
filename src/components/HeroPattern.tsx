@@ -17,6 +17,7 @@ export function HeroPattern() {
 							[2, 1],
 							[7, 3],
 							[10, 6],
+							[13, 8],
 						]}
 						className="absolute inset-x-0 inset-y-[-50%] h-[200%] w-full skew-y-[-18deg] fill-black/40 stroke-black/50 mix-blend-overlay dark:fill-white/2.5 dark:stroke-white/5"
 					/>

@@ -112,7 +112,7 @@ export function Layout({
 					>
 						<main
 							className={classNames(
-								"relative",
+								// "relative",
 								!isAuthSensitiveRoute && "py-10"
 							)}
 						>
