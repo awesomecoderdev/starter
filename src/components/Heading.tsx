@@ -72,7 +72,7 @@ export function Heading({
 	id,
 	tag,
 	label,
-	anchor = true,
+	anchor = false,
 	...props
 }: HeadingProps) {
 	let Component: any = `h${parseInt(level)}`;

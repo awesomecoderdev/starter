@@ -1,113 +1,24 @@
-"use client";
-// import { Heading } from "@/components/Heading";
-// import { Col, Note, Properties, Property, Row } from "@/components/Note";
-// import { constructMetadata } from "@/utils/utils";
-// import { Metadata } from "next";
+import { Heading } from "@/components/Heading";
+import { Col, Note, Properties, Property, Row } from "@/components/Note";
+import Dropzone from "@/components/settings/Dropzone";
+import { getUserFromCookie } from "@/utils/buffer";
+import { constructMetadata } from "@/utils/utils";
+import { cookies as getCookies } from "next/headers";
+import { Metadata } from "next";
 
-// export const metadata: Metadata = constructMetadata({
-// 	title: `Settings - ${process.env.APP_NAME}`,
-// 	description: "Settings",
-// });
+export const metadata: Metadata = constructMetadata({
+	title: `Settings - ${process.env.APP_NAME}`,
+	description: "Settings",
+});
 
-// export default function Settings() {
-// 	return (
-// 		<>
-// 			<h1>Errors :( </h1>
-// 			<p className="lead">
-// 				In this guide, we will talk about what happens when something
-// 				goes wrong while you work with the API. Mistakes happen, and
-// 				mostly they will be yours, not ours. Lets look at some status
-// 				codes and error types you might encounter.
-// 			</p>
-// 			<p>
-// 				You can tell if your request was successful by checking the
-// 				status code when receiving an API response. If a response comes
-// 				back unsuccessful, you can use the error type and error message
-// 				to figure out what has gone wrong and do some rudimentary
-// 				debugging (before contacting support).
-// 			</p>
-// 			<Note>
-// 				Before reaching out to support with an error, please be aware
-// 				that 99% of all reported errors are, in fact, user errors.
-// 				Therefore, please carefully check your code before contacting
-// 				Protocol support.
-// 			</Note>
-// 			<hr />
-// 			<Heading level={2}>Status codes</Heading>
-// 			<p>
-// 				Here is a list of the different categories of status codes
-// 				returned by the Protocol API. Use these to understand if a
-// 				request was successful.
-// 			</p>
-// 			<Properties>
-// 				<Property name="2xx">
-// 					A 2xx status code indicates a successful response.
-// 				</Property>
-// 				<Property name="4xx">
-// 					A 4xx status code indicates a client error — this means its
-// 					a _you_ problem.
-// 				</Property>
-// 				<Property name="5xx">
-// 					A 5xx status code indicates a server error — you wont be
-// 					seeing these.
-// 				</Property>
-// 			</Properties>
-// 			<hr />
-// 			<Heading level={2}>Error types</Heading>
-// 			<Row>
-// 				<Col>
-// 					Whenever a request is unsuccessful, the Protocol API will
-// 					return an error response with an error type and message. You
-// 					can use this information to understand better what has gone
-// 					wrong and how to fix it. Most of the error messages are
-// 					pretty helpful and actionable. Here is a list of the two
-// 					error types supported by the Protocol API — use these to
-// 					understand what you have done wrong.
-// 					<Properties>
-// 						<Property name="api_error">
-// 							This means that we made an error, which is highly
-// 							speculative and unlikely.
-// 						</Property>
-// 						<Property name="invalid_request">
-// 							This means that you made an error, which is much
-// 							more likely.
-// 						</Property>
-// 					</Properties>
-// 				</Col>
-// 				<Col>
-// 					{/* ```bash {{ title: "Error response" }}
-//     {
-//       "type": "api_error",
-//       "message": "No way this is happening!?",
-//       "documentation_url": "https://protocol.chat/docs/errors/api_error"
-//     }
-//     ``` */}
-// 				</Col>
-// 			</Row>
-// 		</>
-// 	);
-// }
+export default function Settings() {
+	const cookies = getCookies();
+	const token = cookies.get("token")?.value;
+	const auth = getUserFromCookie(token);
 
-/*
-  This example requires Tailwind CSS v2.0+
-
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-export default function Example() {
 	return (
-		<form className="space-y-6" action="#" method="POST">
-			<div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
+		<form className="py-3 space-y-6" action="#" method="POST">
+			<div className="px-4 py-5 shadow border border-zinc-900/7.5 dark:border-white/7.5 sm:rounded-lg sm:p-6">
 				<div className="md:grid md:grid-cols-3 md:gap-6">
 					<div className="md:col-span-1">
 						<h3 className="text-lg font-medium leading-6 text-gray-900">
@@ -135,7 +46,7 @@ export default function Example() {
 										type="text"
 										name="company-website"
 										id="company-website"
-										className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+										className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
 										placeholder="www.example.com"
 									/>
 								</div>
@@ -154,7 +65,7 @@ export default function Example() {
 									id="about"
 									name="about"
 									rows={3}
-									className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+									className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
 									placeholder="you@example.com"
 									defaultValue={""}
 								/>
@@ -181,7 +92,7 @@ export default function Example() {
 								</span>
 								<button
 									type="button"
-									className="rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+									className="rounded-md border border-gray-300 py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
 								>
 									Change
 								</button>
@@ -192,7 +103,7 @@ export default function Example() {
 							<label className="block text-sm font-medium text-gray-700">
 								Cover photo
 							</label>
-							<div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+							{/* <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
 								<div className="space-y-1 text-center">
 									<svg
 										className="mx-auto h-12 w-12 text-gray-400"
@@ -211,7 +122,7 @@ export default function Example() {
 									<div className="flex text-sm text-gray-600">
 										<label
 											htmlFor="file-upload"
-											className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+											className="relative cursor-pointer rounded-md font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500"
 										>
 											<span>Upload a file</span>
 											<input
@@ -227,23 +138,10 @@ export default function Example() {
 										PNG, JPG, GIF up to 10MB
 									</p>
 								</div>
-							</div>
+							</div> */}
+							<Dropzone auth={auth} />
 						</div>
-					</div>
-				</div>
-			</div>
 
-			<div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
-				<div className="md:grid md:grid-cols-3 md:gap-6">
-					<div className="md:col-span-1">
-						<h3 className="text-lg font-medium leading-6 text-gray-900">
-							Personal Information
-						</h3>
-						<p className="mt-1 text-sm text-gray-500">
-							Use a permanent address where you can receive mail.
-						</p>
-					</div>
-					<div className="mt-5 md:col-span-2 md:mt-0">
 						<div className="grid grid-cols-6 gap-6">
 							<div className="col-span-6 sm:col-span-3">
 								<label
@@ -257,7 +155,7 @@ export default function Example() {
 									name="first-name"
 									id="first-name"
 									autoComplete="given-name"
-									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
 								/>
 							</div>
 
@@ -273,7 +171,7 @@ export default function Example() {
 									name="last-name"
 									id="last-name"
 									autoComplete="family-name"
-									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
 								/>
 							</div>
 
@@ -289,7 +187,7 @@ export default function Example() {
 									name="email-address"
 									id="email-address"
 									autoComplete="email"
-									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
 								/>
 							</div>
 
@@ -304,7 +202,7 @@ export default function Example() {
 									id="country"
 									name="country"
 									autoComplete="country-name"
-									className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+									className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
 								>
 									<option>United States</option>
 									<option>Canada</option>
@@ -324,7 +222,7 @@ export default function Example() {
 									name="street-address"
 									id="street-address"
 									autoComplete="street-address"
-									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
 								/>
 							</div>
 
@@ -340,7 +238,7 @@ export default function Example() {
 									name="city"
 									id="city"
 									autoComplete="address-level2"
-									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
 								/>
 							</div>
 
@@ -356,7 +254,7 @@ export default function Example() {
 									name="region"
 									id="region"
 									autoComplete="address-level1"
-									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
 								/>
 							</div>
 
@@ -372,7 +270,7 @@ export default function Example() {
 									name="postal-code"
 									id="postal-code"
 									autoComplete="postal-code"
-									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+									className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
 								/>
 							</div>
 						</div>
@@ -380,7 +278,7 @@ export default function Example() {
 				</div>
 			</div>
 
-			<div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
+			<div className="px-4 py-5 shadow sm:rounded-lg sm:p-6">
 				<div className="md:grid md:grid-cols-3 md:gap-6">
 					<div className="md:col-span-1">
 						<h3 className="text-lg font-medium leading-6 text-gray-900">
@@ -407,7 +305,7 @@ export default function Example() {
 											id="comments"
 											name="comments"
 											type="checkbox"
-											className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+											className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
 										/>
 									</div>
 									<div className="ml-3 text-sm">
@@ -429,7 +327,7 @@ export default function Example() {
 											id="candidates"
 											name="candidates"
 											type="checkbox"
-											className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+											className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
 										/>
 									</div>
 									<div className="ml-3 text-sm">
@@ -451,7 +349,7 @@ export default function Example() {
 											id="offers"
 											name="offers"
 											type="checkbox"
-											className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+											className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
 										/>
 									</div>
 									<div className="ml-3 text-sm">
@@ -483,7 +381,7 @@ export default function Example() {
 										id="push-everything"
 										name="push-notifications"
 										type="radio"
-										className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+										className="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-500"
 									/>
 									<label
 										htmlFor="push-everything"
@@ -497,7 +395,7 @@ export default function Example() {
 										id="push-email"
 										name="push-notifications"
 										type="radio"
-										className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+										className="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-500"
 									/>
 									<label
 										htmlFor="push-email"
@@ -511,7 +409,7 @@ export default function Example() {
 										id="push-nothing"
 										name="push-notifications"
 										type="radio"
-										className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+										className="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-500"
 									/>
 									<label
 										htmlFor="push-nothing"
@@ -529,13 +427,13 @@ export default function Example() {
 			<div className="flex justify-end">
 				<button
 					type="button"
-					className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+					className="rounded-md border border-gray-300 py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
 				>
 					Cancel
 				</button>
 				<button
 					type="submit"
-					className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+					className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
 				>
 					Save
 				</button>

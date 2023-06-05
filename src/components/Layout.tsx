@@ -43,7 +43,7 @@ export function Layout({
 
 	return (
 		<SectionProvider sections={sections}>
-			<Toaster duration={2000} expand={true} />
+			<Toaster duration={4000} expand={true} />
 			{session?.email && isSensitiveRoute ? (
 				<Fragment>
 					<div className="lg:ml-60 xl:ml-64">

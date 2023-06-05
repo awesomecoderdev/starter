@@ -44,7 +44,7 @@ const Settings = ({ steps, className }: SettingsProps, props: any) => {
 												<span className="flex items-start">
 													<span className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
 														<CheckCircleIcon
-															className="h-full w-full text-indigo-600 group-hover:text-indigo-800"
+															className="h-full w-full text-primary-600 group-hover:text-primary-800"
 															aria-hidden="true"
 														/>
 													</span>
@@ -63,11 +63,11 @@ const Settings = ({ steps, className }: SettingsProps, props: any) => {
 													className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center"
 													aria-hidden="true"
 												>
-													<span className="absolute h-4 w-4 rounded-full bg-indigo-200 animate-ping" />
-													<span className="absolute h-4 w-4 rounded-full bg-indigo-200 " />
-													<span className="relative block h-2 w-2 rounded-full bg-indigo-600" />
+													<span className="absolute h-4 w-4 rounded-full bg-primary-200 animate-ping" />
+													<span className="absolute h-4 w-4 rounded-full bg-primary-200 " />
+													<span className="relative block h-2 w-2 rounded-full bg-primary-600" />
 												</span>
-												<span className="ml-3 text-sm font-medium text-indigo-600">
+												<span className="ml-3 text-sm font-medium text-primary-600">
 													{step.name}
 												</span>
 											</a>
