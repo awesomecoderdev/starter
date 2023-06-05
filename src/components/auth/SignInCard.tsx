@@ -123,11 +123,11 @@ const SignInCard = () => {
 							<div className="flex items-center justify-between mt-4">
 								<span className="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
 
-								<span className="text-xs text-center text-gray-500 uppercase dark:text-gray-400 hover:underline">
+								<span className="text-xs font-semibold text-center text-gray-500 capitalize dark:text-gray-400 hover:underline">
 									or login with email
 								</span>
 
-								<span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
+								<span className="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
 							</div>
 
 							<div className="mt-6">
@@ -148,12 +148,11 @@ const SignInCard = () => {
 									className={classNames(
 										"text-sm font-medium flex items-center justify-center w-full rounded-lg p-2 transition-all duration-75 ",
 										emailLoading &&
-											"justify-center bg-gray-100 dark:bg-zinc-700/[0.30] min-h-[40px]",
-										googleLoading && "pointer-events-none"
+											"justify-center min-h-[40px] pointer-events-none"
 									)}
 								>
 									{emailLoading ? (
-										<LoadingDots />
+										<LoadingDots className="bg-white" />
 									) : (
 										"Continue with Email"
 									)}
