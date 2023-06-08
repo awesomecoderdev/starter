@@ -7,6 +7,7 @@ import {
 import { firebase } from "./firebase";
 import axios from "./axios";
 import { toast } from "sonner";
+import useSWR from "swr";
 
 interface AuthUserContextType {
 	Provider: any;
@@ -42,3 +43,32 @@ export const signInWithGoogle = async () => {
 	}
 	return null;
 };
+
+export default function useNextAuth() {
+	// const {
+	// 	data: user,
+	// 	error,
+	// 	mutate,
+	// }: {
+	// 	data: any;
+	// 	error: any;
+	// 	mutate: any;
+	// } = useSWR(
+	// 	"/api/auth/session",
+	// 	() =>
+	// 		axios
+	// 			.post("/api/auth/session")
+	// 			.then((response) => response.data.data.user),
+	// 	{
+	// 		dedupingInterval: 30000,
+	// 	}
+	// );
+
+	let error,
+		user = null;
+
+	return {
+		error,
+		user,
+	};
+}

@@ -5,6 +5,8 @@ import { getUserFromCookie } from "@/utils/buffer";
 import { constructMetadata } from "@/utils/utils";
 import { cookies as getCookies } from "next/headers";
 import { Metadata } from "next";
+import Country from "@/components/Country";
+import BlurImage from "@/components/BlurImage";
 
 export const metadata: Metadata = constructMetadata({
 	title: `Settings - ${process.env.APP_NAME}`,
@@ -21,16 +23,16 @@ export default function Settings() {
 			<div className="px-4 py-5 shadow border border-zinc-900/7.5 dark:border-white/7.5 sm:rounded-lg sm:p-6">
 				<div className="md:grid md:grid-cols-3 md:gap-6">
 					<div className="md:col-span-1">
-						<h3 className="text-lg font-medium leading-6 text-gray-900">
+						<h2 className="text-lg font-medium leading-6 p-0 m-0">
 							Profile
-						</h3>
-						<p className="mt-1 text-sm text-gray-500">
+						</h2>
+						<p className="mt-1 text-sm ">
 							This information will be displayed publicly so be
 							careful what you share.
 						</p>
 					</div>
 					<div className="mt-5 space-y-6 md:col-span-2 md:mt-0">
-						<div className="grid grid-cols-3 gap-6">
+						{/* <div className="grid grid-cols-3 gap-6">
 							<div className="col-span-3 sm:col-span-2">
 								<label
 									htmlFor="company-website"
@@ -51,36 +53,13 @@ export default function Settings() {
 									/>
 								</div>
 							</div>
-						</div>
+						</div> */}
 
 						<div>
-							<label
-								htmlFor="about"
-								className="block text-sm font-medium text-gray-700"
-							>
-								About
+							<label className="block text-sm font-medium p-0 m-0">
+								Avatar
 							</label>
-							<div className="mt-1">
-								<textarea
-									id="about"
-									name="about"
-									rows={3}
-									className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
-									placeholder="you@example.com"
-									defaultValue={""}
-								/>
-							</div>
-							<p className="mt-2 text-sm text-gray-500">
-								Brief description for your profile. URLs are
-								hyperlinked.
-							</p>
-						</div>
-
-						<div>
-							<label className="block text-sm font-medium text-gray-700">
-								Photo
-							</label>
-							<div className="mt-1 flex items-center space-x-5">
+							{/* <div className="mt-1 flex items-center space-x-5">
 								<span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
 									<svg
 										className="h-full w-full text-gray-300"
@@ -96,48 +75,6 @@ export default function Settings() {
 								>
 									Change
 								</button>
-							</div>
-						</div>
-
-						<div>
-							<label className="block text-sm font-medium text-gray-700">
-								Cover photo
-							</label>
-							{/* <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
-								<div className="space-y-1 text-center">
-									<svg
-										className="mx-auto h-12 w-12 text-gray-400"
-										stroke="currentColor"
-										fill="none"
-										viewBox="0 0 48 48"
-										aria-hidden="true"
-									>
-										<path
-											d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-											strokeWidth={2}
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										/>
-									</svg>
-									<div className="flex text-sm text-gray-600">
-										<label
-											htmlFor="file-upload"
-											className="relative cursor-pointer rounded-md font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500"
-										>
-											<span>Upload a file</span>
-											<input
-												id="file-upload"
-												name="file-upload"
-												type="file"
-												className="sr-only"
-											/>
-										</label>
-										<p className="pl-1">or drag and drop</p>
-									</div>
-									<p className="text-xs text-gray-500">
-										PNG, JPG, GIF up to 10MB
-									</p>
-								</div>
 							</div> */}
 							<Dropzone auth={auth} />
 						</div>
@@ -194,20 +131,17 @@ export default function Settings() {
 							<div className="col-span-6 sm:col-span-3">
 								<label
 									htmlFor="country"
-									className="block text-sm font-medium text-gray-700"
+									className="block text-sm font-medium"
 								>
 									Country
 								</label>
-								<select
+								<Country
 									id="country"
 									name="country"
 									autoComplete="country-name"
-									className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
-								>
-									<option>United States</option>
-									<option>Canada</option>
-									<option>Mexico</option>
-								</select>
+									defaultValue="Palestine"
+									className="cursor-pointer mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
+								/>
 							</div>
 
 							<div className="col-span-6">
@@ -274,152 +208,6 @@ export default function Settings() {
 								/>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-
-			<div className="px-4 py-5 shadow sm:rounded-lg sm:p-6">
-				<div className="md:grid md:grid-cols-3 md:gap-6">
-					<div className="md:col-span-1">
-						<h3 className="text-lg font-medium leading-6 text-gray-900">
-							Notifications
-						</h3>
-						<p className="mt-1 text-sm text-gray-500">
-							Decide which communications you'd like to receive
-							and how.
-						</p>
-					</div>
-					<div className="mt-5 space-y-6 md:col-span-2 md:mt-0">
-						<fieldset>
-							<legend className="sr-only">By Email</legend>
-							<div
-								className="text-base font-medium text-gray-900"
-								aria-hidden="true"
-							>
-								By Email
-							</div>
-							<div className="mt-4 space-y-4">
-								<div className="flex items-start">
-									<div className="flex h-5 items-center">
-										<input
-											id="comments"
-											name="comments"
-											type="checkbox"
-											className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-										/>
-									</div>
-									<div className="ml-3 text-sm">
-										<label
-											htmlFor="comments"
-											className="font-medium text-gray-700"
-										>
-											Comments
-										</label>
-										<p className="text-gray-500">
-											Get notified when someones posts a
-											comment on a posting.
-										</p>
-									</div>
-								</div>
-								<div className="flex items-start">
-									<div className="flex h-5 items-center">
-										<input
-											id="candidates"
-											name="candidates"
-											type="checkbox"
-											className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-										/>
-									</div>
-									<div className="ml-3 text-sm">
-										<label
-											htmlFor="candidates"
-											className="font-medium text-gray-700"
-										>
-											Candidates
-										</label>
-										<p className="text-gray-500">
-											Get notified when a candidate
-											applies for a job.
-										</p>
-									</div>
-								</div>
-								<div className="flex items-start">
-									<div className="flex h-5 items-center">
-										<input
-											id="offers"
-											name="offers"
-											type="checkbox"
-											className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-										/>
-									</div>
-									<div className="ml-3 text-sm">
-										<label
-											htmlFor="offers"
-											className="font-medium text-gray-700"
-										>
-											Offers
-										</label>
-										<p className="text-gray-500">
-											Get notified when a candidate
-											accepts or rejects an offer.
-										</p>
-									</div>
-								</div>
-							</div>
-						</fieldset>
-						<fieldset>
-							<legend className="contents text-base font-medium text-gray-900">
-								Push Notifications
-							</legend>
-							<p className="text-sm text-gray-500">
-								These are delivered via SMS to your mobile
-								phone.
-							</p>
-							<div className="mt-4 space-y-4">
-								<div className="flex items-center">
-									<input
-										id="push-everything"
-										name="push-notifications"
-										type="radio"
-										className="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-500"
-									/>
-									<label
-										htmlFor="push-everything"
-										className="ml-3 block text-sm font-medium text-gray-700"
-									>
-										Everything
-									</label>
-								</div>
-								<div className="flex items-center">
-									<input
-										id="push-email"
-										name="push-notifications"
-										type="radio"
-										className="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-500"
-									/>
-									<label
-										htmlFor="push-email"
-										className="ml-3 block text-sm font-medium text-gray-700"
-									>
-										Same as email
-									</label>
-								</div>
-								<div className="flex items-center">
-									<input
-										id="push-nothing"
-										name="push-notifications"
-										type="radio"
-										className="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-500"
-									/>
-									<label
-										htmlFor="push-nothing"
-										className="ml-3 block text-sm font-medium text-gray-700"
-									>
-										No push notifications
-									</label>
-								</div>
-							</div>
-						</fieldset>
 					</div>
 				</div>
 			</div>

@@ -107,7 +107,6 @@ export function SectionProvider({ sections, children }: SectionProviderProps) {
 	const [sectionStore, setSectionStore] = useState<any>(() =>
 		createSectionStore(sections)
 	);
-
 	useVisibleSections(sectionStore);
 
 	useIsomorphicLayoutEffect(() => {

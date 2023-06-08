@@ -11,20 +11,22 @@ export async function POST(request: Request) {
 	if (uid && email && displayName && photoURL && apiKey) {
 		// const user = await prisma.user.create({
 		// 	data: {
+		// 		id: uid,
 		// 		name: displayName,
 		// 		email: email,
-		// 		password: uid,
 		// 		avatar: photoURL,
 		// 	},
 		// });
 
+		const user: any = await prisma.user.findFirst();
+
 		const token = jwt.sign(
 			{
 				user: {
-					uid,
-					name: displayName,
-					email,
-					avatar: photoURL,
+					uid: user.id,
+					name: user?.name,
+					email: user?.email,
+					avatar: user?.avatar,
 				},
 			},
 			secret,

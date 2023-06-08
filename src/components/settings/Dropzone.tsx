@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Fragment, useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { ArrowUpTrayIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { getSignature, saveToDatabase } from "./_action";
@@ -10,6 +10,7 @@ import { toast } from "sonner";
 
 const Dropzone = ({ className, auth }: { className?: any; auth?: any }) => {
 	const [files, setFiles] = useState<any>([]);
+	const avatarInput = useRef<any>(null);
 
 	const onDrop = useCallback((acceptedFiles: any[], rejectedFiles: any) => {
 		if (acceptedFiles?.length) {
@@ -90,71 +91,76 @@ const Dropzone = ({ className, auth }: { className?: any; auth?: any }) => {
 
 	return (
 		<Fragment>
-			<form action={action}>
-				<div
-					{...getRootProps({
-						className: classNames(
-							"mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6",
-							className
-						),
-					})}
+			{/* <form action={action}> */}
+			<div className="flex items-center mt-1 space-x-5 ">
+				<div className="relative h-12 w-12 overflow-hidden rounded-full">
+					<Image
+						src={files.length > 0 ? files[0].preview : auth.avatar}
+						alt={auth.name}
+						width={100}
+						height={100}
+						onLoad={() => {
+							URL.revokeObjectURL(
+								files.length > 0
+									? files[0].preview
+									: auth.avatar
+							);
+						}}
+						className="h-full w-full rounded-md object-cover p-0 m-0"
+					/>
+				</div>
+				<button
+					onClick={(e) => avatarInput.current.click()}
+					type="button"
+					className="rounded-md border border-gray-300 py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
 				>
-					<div className="space-y-1 text-center">
-						<svg
-							className="mx-auto h-12 w-12 text-gray-400"
-							stroke="currentColor"
-							fill="none"
-							viewBox="0 0 48 48"
-							aria-hidden="true"
-						>
-							<path
-								d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-								strokeWidth={2}
-								strokeLinecap="round"
-								strokeLinejoin="round"
+					Change
+				</button>
+			</div>
+			<div
+				{...getRootProps({
+					className: classNames(
+						"mt-4 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6 ",
+						className
+					),
+				})}
+			>
+				<div className="space-y-1 text-center">
+					<svg
+						className="mx-auto h-12 w-12 text-gray-400"
+						stroke="currentColor"
+						fill="none"
+						viewBox="0 0 48 48"
+						aria-hidden="true"
+					>
+						<path
+							d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+							strokeWidth={2}
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						/>
+					</svg>
+					<div className="flex text-sm text-gray-600">
+						<span className="relative cursor-pointer rounded-md font-medium text-primary-600 focus-within:outline-none p-0 m-0">
+							<span className="p-0 m-0">Upload a file</span>
+							<input
+								{...getInputProps({ name: "file" })}
+								ref={avatarInput}
 							/>
-						</svg>
-						<div className="flex text-sm text-gray-600">
-							<span className="relative cursor-pointer rounded-md font-medium text-primary-600 focus-within:outline-none ">
-								<span>Upload a file</span>
-								<input {...getInputProps({ name: "file" })} />
-							</span>
-							<p className="pl-1">
-								{isDragActive
-									? "drop the files here"
-									: "or drag and drop"}
-							</p>
-						</div>
-						<p className="text-xs text-gray-500">
-							PNG, JPG, GIF up to 1MB
+						</span>
+						<p className=" p-0 m-0 pl-1">
+							{isDragActive
+								? "drop the files here"
+								: "or drag and drop"}
 						</p>
 					</div>
+					<p className="text-xs text-gray-500  p-0 m-0 ">
+						PNG, JPG, GIF up to 1MB
+					</p>
 				</div>
-				{files?.length != 0 ? (
-					<div className="w-32">
-						<Image
-							src={files[0].preview}
-							alt={files[0].name}
-							width={100}
-							height={100}
-							onLoad={() => {
-								URL.revokeObjectURL(files[0].preview);
-							}}
-							className="h-full w-full rounded-md object-contain"
-						/>
-					</div>
-				) : (
-					<div className="w-32">
-						<img
-							src={auth.avatar}
-							alt={auth.name}
-							width={100}
-							height={100}
-							className="h-full w-full rounded-md object-contain"
-						/>
-					</div>
-				)}
-			</form>
+			</div>
+
+			{/* </form> */}
 		</Fragment>
 	);
 };

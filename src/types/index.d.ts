@@ -18,9 +18,21 @@ interface MobileNavigationState {
 	toggle: () => void;
 }
 
+type UserSession = {
+	name?: string;
+	email?: string;
+};
+
 type SectionProviderProps = {
 	children: React.ReactNode;
 	sections?: React.ReactNode | any;
+};
+
+type AuthProviderProps = {
+	children: React.ReactNode;
+	isSensitiveRoute?: boolean;
+	isAuthSensitiveRoute?: boolean;
+	session?: UserSession | any;
 };
 
 type Section = {

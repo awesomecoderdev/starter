@@ -19,11 +19,13 @@ const SignInCard = () => {
 		try {
 			const req = await signInWithGoogle();
 			if (req?.success) {
-				toast.success("You have successfully logged in.");
+				toast.success(
+					req.message ?? "You have successfully logged in."
+				);
 				location.reload();
 			} else {
 				setGoogleLoading(false);
-				toast.error("Something went wrong!");
+				toast.error(req.message ?? "Something went wrong!");
 			}
 		} catch (error) {
 			setGoogleLoading(false);

@@ -13,7 +13,7 @@ const SettingsLayout = ({ children }: { children: any }) => {
 	return (
 		<Fragment>
 			<Prose
-				enable={false}
+				// enable={false}
 				className={
 					classNames()
 					// "grid grid-cols-fluid xl:grid-cols-3 gap-5"

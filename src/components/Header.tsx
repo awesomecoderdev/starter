@@ -37,6 +37,7 @@ import { LoadingDots } from "./animation/Loading";
 import axios from "@/utils/axios";
 import { error } from "console";
 import { toast } from "sonner";
+import Image from "next/image";
 
 function TopLevelNavItem({
 	href,
@@ -215,11 +216,22 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 												<span className="sr-only">
 													Open user menu
 												</span>
-												<img
-													className="h-8 w-8 rounded-full"
-													src={auth.avatar}
-													alt="Profile"
-												/>
+												<div className="h-8 w-8 rounded-full overflow-hidden">
+													<BlurImage
+														src={`${auth.avatar}`}
+														alt={auth.name}
+														width={100}
+														height={100}
+														noblur
+														priority
+														onLoad={() => {
+															URL.revokeObjectURL(
+																auth.avatar
+															);
+														}}
+														className="h-full w-full object-cover"
+													/>
+												</div>
 											</Menu.Button>
 										</div>
 										<Transition
