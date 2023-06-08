@@ -35,10 +35,13 @@ export const signInWithGoogle = async () => {
 					return res.data;
 				})
 				.catch((error) => {
+					console.log("error", error);
 					if (error.response.status != 422) throw new Error(error);
 				});
 		}
 	} catch (error: any) {
+		console.log("error", error);
+
 		if (error.response.status != 422) throw new Error(error);
 	}
 	return null;

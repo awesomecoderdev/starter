@@ -4,7 +4,7 @@ import { classNames } from "@/utils/class";
 import Image, { ImageProps } from "next/image";
 import { useEffect, useState } from "react";
 interface BlurImageProps extends ImageProps {
-	noblur?: Boolean;
+	noblur?: "true" | "false";
 }
 export default function BlurImage(props: BlurImageProps) {
 	const [loading, setLoading] = useState(true);
@@ -17,7 +17,11 @@ export default function BlurImage(props: BlurImageProps) {
 			src={src}
 			alt={props.alt}
 			className={classNames(
-				!props?.noblur && (loading ? "blur-[2px]" : "blur-0"),
+				props?.noblur == "true"
+					? ""
+					: loading
+					? "blur-[2px]"
+					: "blur-0",
 				props?.className
 			)}
 			onLoadingComplete={async () => {

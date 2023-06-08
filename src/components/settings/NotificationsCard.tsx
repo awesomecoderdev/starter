@@ -1,8 +1,8 @@
 "use client";
 import { classNames } from "@/utils/class";
 import React, { Fragment, useState } from "react";
-import { LoadingDots } from "../animation/Loading";
-import { Button } from "../Button";
+import { LoadingDots } from "@/components/animation/Loading";
+import { Button } from "@/components/Button";
 
 const NotificationsCard = () => {
 	const [submitLoading, setSubmitLoading] = useState(false);

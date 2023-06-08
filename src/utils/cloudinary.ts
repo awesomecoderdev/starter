@@ -40,3 +40,11 @@ export async function saveToDatabase({
 		console.log({ public_id });
 	}
 }
+
+export async function getAvatarUrl(publicId: string) {
+	return {
+		// url: cloudinary.url(publicId),
+		url: `https://res.cloudinary.com/${cloudinaryConfig.cloud_name}/image/upload/f_auto,q_auto:eco/${publicId}.png`,
+		publicId: publicId,
+	};
+}

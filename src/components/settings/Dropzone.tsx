@@ -4,27 +4,39 @@ import Image from "next/image";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { ArrowUpTrayIcon, XMarkIcon } from "@heroicons/react/24/solid";
-import { getSignature, saveToDatabase } from "./_action";
+import { getSignature, saveToDatabase } from "../../utils/cloudinary";
 import { classNames } from "@/utils/class";
 import { toast } from "sonner";
 
-const Dropzone = ({ className, auth }: { className?: any; auth?: any }) => {
+const Dropzone = ({
+	className,
+	auth,
+	setAvatar,
+}: {
+	className?: any;
+	auth?: any;
+	setAvatar: any;
+}) => {
 	const [files, setFiles] = useState<any>([]);
 	const avatarInput = useRef<any>(null);
 
 	const onDrop = useCallback((acceptedFiles: any[], rejectedFiles: any) => {
 		if (acceptedFiles?.length) {
 			setFiles([]);
+			setAvatar([]);
+
 			let newUpload = [
 				...acceptedFiles.map((file) =>
 					Object.assign(file, { preview: URL.createObjectURL(file) })
 				),
 			];
 			setFiles(newUpload);
+			setAvatar(newUpload[0]);
 		}
 
 		if (rejectedFiles?.length) {
 			// setFiles([]);
+			// setAvatar([])
 			toast.error("Unacceptable file type or file size!");
 		}
 	}, []);
@@ -43,18 +55,6 @@ const Dropzone = ({ className, auth }: { className?: any; auth?: any }) => {
 		return () =>
 			files.forEach((file: any) => URL.revokeObjectURL(file.preview));
 	}, [files]);
-
-	const removeFile = (name: any) => {
-		setFiles((files: any) =>
-			files.filter((file: any) => file.name !== name)
-		);
-	};
-
-	const removeAll = () => {
-		setFiles([]);
-	};
-
-	const removeRejected = (name: any) => {};
 
 	async function action() {
 		const file = files[0];
@@ -91,7 +91,6 @@ const Dropzone = ({ className, auth }: { className?: any; auth?: any }) => {
 
 	return (
 		<Fragment>
-			{/* <form action={action}> */}
 			<div className="flex items-center mt-1 space-x-5 ">
 				<div className="relative h-12 w-12 overflow-hidden rounded-full">
 					<Image
@@ -120,7 +119,7 @@ const Dropzone = ({ className, auth }: { className?: any; auth?: any }) => {
 			<div
 				{...getRootProps({
 					className: classNames(
-						"mt-4 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6 ",
+						"mt-4 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6",
 						className
 					),
 				})}
@@ -159,8 +158,6 @@ const Dropzone = ({ className, auth }: { className?: any; auth?: any }) => {
 					</p>
 				</div>
 			</div>
-
-			{/* </form> */}
 		</Fragment>
 	);
 };

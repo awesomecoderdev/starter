@@ -222,7 +222,7 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 														alt={auth.name}
 														width={100}
 														height={100}
-														noblur
+														noblur="true"
 														priority
 														onLoad={() => {
 															URL.revokeObjectURL(
