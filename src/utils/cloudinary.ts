@@ -37,7 +37,7 @@ export async function saveToDatabase({
 
 	if (expectedSignature === signature) {
 		// safe to write to database
-		console.log({ public_id });
+		// console.log({ public_id });
 	}
 }
 

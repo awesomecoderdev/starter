@@ -24,7 +24,7 @@ const NotificationsCard = () => {
 								Notifications
 							</h2>
 							<p className="mt-1 text-sm text-gray-500 dark:text-zinc-400">
-								Decide which communications you'd like to
+								Decide which communications you&apos;d like to
 								receive and how.
 							</p>
 						</div>

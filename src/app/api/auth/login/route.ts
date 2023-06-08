@@ -9,16 +9,21 @@ export async function POST(request: Request) {
 	const { uid, email, displayName, photoURL, apiKey } = req;
 
 	if (uid && email && displayName && photoURL && apiKey) {
-		const user = await prisma.user.create({
-			data: {
-				// id: uid,
-				name: displayName,
-				email: email,
-				avatar: photoURL,
-			},
-		});
+		// const user = await prisma.user.create({
+		// 	data: {
+		// 		// id: uid,
+		// 		name: displayName,
+		// 		email: email,
+		// 		avatar: photoURL,
+		// 	},
+		// });
 
 		// const user: any = await prisma.user.findFirst();
+		const user: any = await prisma.user.findUnique({
+			where: {
+				email: email,
+			},
+		});
 
 		const token = jwt.sign(
 			{
@@ -27,6 +32,11 @@ export async function POST(request: Request) {
 					name: user?.name,
 					email: user?.email,
 					avatar: user?.avatar,
+					street: user?.street,
+					city: user?.city,
+					region: user?.region,
+					zip: user?.zip,
+					country: user?.country,
 				},
 			},
 			secret,

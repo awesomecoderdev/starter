@@ -20,26 +20,31 @@ const Dropzone = ({
 	const [files, setFiles] = useState<any>([]);
 	const avatarInput = useRef<any>(null);
 
-	const onDrop = useCallback((acceptedFiles: any[], rejectedFiles: any) => {
-		if (acceptedFiles?.length) {
-			setFiles([]);
-			setAvatar([]);
+	const onDrop = useCallback(
+		(acceptedFiles: any[], rejectedFiles: any) => {
+			if (acceptedFiles?.length) {
+				setFiles([]);
+				setAvatar([]);
 
-			let newUpload = [
-				...acceptedFiles.map((file) =>
-					Object.assign(file, { preview: URL.createObjectURL(file) })
-				),
-			];
-			setFiles(newUpload);
-			setAvatar(newUpload[0]);
-		}
+				let newUpload = [
+					...acceptedFiles.map((file) =>
+						Object.assign(file, {
+							preview: URL.createObjectURL(file),
+						})
+					),
+				];
+				setFiles(newUpload);
+				setAvatar(newUpload[0]);
+			}
 
-		if (rejectedFiles?.length) {
-			// setFiles([]);
-			// setAvatar([])
-			toast.error("Unacceptable file type or file size!");
-		}
-	}, []);
+			if (rejectedFiles?.length) {
+				// setFiles([]);
+				// setAvatar([])
+				toast.error("Unacceptable file type or file size!");
+			}
+		},
+		[setAvatar]
+	);
 
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({
 		accept: {
