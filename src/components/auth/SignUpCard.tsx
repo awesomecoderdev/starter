@@ -4,13 +4,13 @@ import { Prose } from "@/components/Prose";
 import { signInWithGoogle } from "@/utils/auth";
 import { classNames } from "@/utils/class";
 import { useState } from "react";
-import { LoadingDots } from "../animation/Loading";
+import { LoadingDots } from "@/components/animation/Loading";
 import { ArrowUpOnSquareStackIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/components/Button";
-import { ModeToggle } from "../ModeToggle";
+import { ModeToggle } from "@/components/ModeToggle";
 import { toast } from "sonner";
 import Link from "next/link";
-import { Heading } from "../Heading";
+import { Heading } from "@/components/Heading";
 
 const SignUpCard = () => {
 	const [googleLoading, setGoogleLoading] = useState(false);
