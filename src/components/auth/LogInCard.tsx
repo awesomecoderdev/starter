@@ -9,10 +9,13 @@ import { ArrowUpOnSquareStackIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/components/Button";
 import { ModeToggle } from "../ModeToggle";
 import { toast } from "sonner";
+import Link from "next/link";
+import axios from "@/utils/axios";
 
-const SignInCard = () => {
+const LogInCard = () => {
 	const [googleLoading, setGoogleLoading] = useState(false);
 	const [emailLoading, setEmailLoading] = useState(false);
+	const [email, setEmail] = useState("");
 
 	const SignIn = async () => {
 		setGoogleLoading(true);
@@ -29,6 +32,26 @@ const SignInCard = () => {
 			}
 		} catch (error) {
 			setGoogleLoading(false);
+			toast.error("Something went wrong!");
+		}
+	};
+
+	const SignInWithEmail = async () => {
+		setEmailLoading(true);
+		try {
+			const req: any = await axios
+				.post("/api/auth/login", { email: email })
+				.then((res) => res.data)
+				.catch((err) => ({ success: false, message: err?.message }));
+
+			if (req?.success) {
+				toast.success(req.message);
+			} else {
+				toast.error(req.message ?? "Something went wrong!");
+			}
+			setEmailLoading(false);
+		} catch (error) {
+			setEmailLoading(false);
 			toast.error("Something went wrong!");
 		}
 	};
@@ -138,6 +161,8 @@ const SignInCard = () => {
 									name="email"
 									id="email"
 									placeholder="example@example.com"
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
 									className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-primary-400 dark:focus:border-primary-400 focus:ring-primary-400 focus:outline-none focus:ring focus:ring-opacity-40"
 								/>
 							</div>
@@ -145,7 +170,7 @@ const SignInCard = () => {
 							<div className="mt-6">
 								<Button
 									variant="primary"
-									onClick={() => setEmailLoading(true)}
+									onClick={SignInWithEmail}
 									disabled={googleLoading}
 									className={classNames(
 										"text-sm font-medium flex items-center justify-center w-full rounded-lg p-2 transition-all duration-75 ",
@@ -163,12 +188,12 @@ const SignInCard = () => {
 
 							<p className="mt-6 text-sm text-center text-gray-400">
 								Don&#x27;t have an account yet?{" "}
-								<a
-									href="#"
+								<Link
+									href="/signup"
 									className="text-primary-500 focus:outline-none focus:underline hover:underline"
 								>
 									Sign up
-								</a>
+								</Link>
 								.
 							</p>
 						</div>
@@ -179,4 +204,4 @@ const SignInCard = () => {
 	);
 };
 
-export default SignInCard;
+export default LogInCard;

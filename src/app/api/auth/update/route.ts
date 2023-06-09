@@ -2,6 +2,7 @@ import Status, { MethodNotALlowed } from "@/utils/http";
 import prisma from "@/prisma/client";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
+import { deleteAvatarByID } from "@/utils/cloudinary";
 
 export async function POST(request: Request) {
 	const secret = `${process.env.JWT_SECRET}`;
@@ -41,22 +42,36 @@ export async function POST(request: Request) {
 		publicId: any;
 	};
 
-	if (avatar && publicId) {
-		formData = { ...formData, avatar: avatar, publicId: publicId };
-	}
-
-	const getUserEmail = () => {
+	const getUser = () => {
 		let { user, exp } = (<jwt.JwtPayload>(
 			jwt.verify(`${token}`, `${secret}`)
 		)) as { user?: any; exp?: any };
 
 		if (user) {
-			return user?.email;
+			return user;
 		}
 		return null;
 	};
 
-	if (email == getUserEmail()) {
+	const user = getUser();
+
+	if (avatar && publicId) {
+		formData = { ...formData, avatar: avatar, publicId: publicId };
+		try {
+			if (user?.publicId) {
+				const { error, result } = await deleteAvatarByID(user.publicId);
+				if (error) {
+					console.log("Error: delete avatar => ", error);
+				} else {
+					console.log("Result: delete avatar => ", result);
+				}
+			}
+		} catch (error: any) {
+			// skip
+		}
+	}
+
+	if (email == user?.email) {
 		try {
 			const authorization = await prisma.user.update({
 				where: { email: email },

@@ -44,7 +44,7 @@ export async function POST(request: Request) {
 		// 	}
 		// );
 
-		const getUser = () => {
+		const getUserEmail = () => {
 			let { user, exp } = (<jwt.JwtPayload>(
 				jwt.verify(`${token}`, `${secret}`)
 			)) as { user?: any; exp?: any };
@@ -57,7 +57,7 @@ export async function POST(request: Request) {
 
 		const authorization = await prisma.user.findUnique({
 			where: {
-				email: getUser(),
+				email: getUserEmail(),
 			},
 		});
 
@@ -68,16 +68,16 @@ export async function POST(request: Request) {
 					status: Status.HTTP_ACCEPTED,
 					message: "Successfully Authorized.",
 					token,
-					user: getUser(),
+					user: getUserEmail(),
 					auth: authorization,
 				}),
 				{
 					status: Status.HTTP_ACCEPTED,
-					headers: {
-						// "Set-Cookie": `token=${token}; Path=/;`,
-						// "Set-Cookie": `token=${token}; Expires=${expired}  Secure; Path=/; Domain=localhost`,
-						// "Set-Cookie": `token=${token}; Expires=${expired}; Path=/;`,
-					},
+					// headers: {
+					// 	// "Set-Cookie": `token=${token}; Path=/;`,
+					// 	// "Set-Cookie": `token=${token}; Expires=${expired}  Secure; Path=/; Domain=localhost`,
+					// 	// "Set-Cookie": `token=${token}; Expires=${expired}; Path=/;`,
+					// },
 				}
 			);
 		} else {

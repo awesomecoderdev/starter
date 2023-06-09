@@ -19,7 +19,7 @@ module.exports = ({ theme }: { theme: any }) => ({
 			"--tw-prose-th-borders": theme("colors.zinc.300"),
 			"--tw-prose-td-borders": theme("colors.zinc.200"),
 
-			"--tw-prose-invert-body": theme("colors.zinc.400"),
+			"--tw-prose-invert-body": theme("colors.zinc.300"),
 			"--tw-prose-invert-headings": theme("colors.white"),
 			"--tw-prose-invert-links": theme("colors.primary.400"),
 			"--tw-prose-invert-links-hover": theme("colors.primary.500"),

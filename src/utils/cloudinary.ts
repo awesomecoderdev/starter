@@ -35,10 +35,7 @@ export async function saveToDatabase({
 		cloudinaryConfig.api_secret
 	);
 
-	if (expectedSignature === signature) {
-		// safe to write to database
-		// console.log({ public_id });
-	}
+	return expectedSignature === signature;
 }
 
 export async function getAvatarUrl(publicId: string) {
@@ -47,4 +44,25 @@ export async function getAvatarUrl(publicId: string) {
 		url: `https://res.cloudinary.com/${cloudinaryConfig.cloud_name}/image/upload/f_auto,q_auto:eco/${publicId}.png`,
 		publicId: publicId,
 	};
+}
+
+export async function deleteAvatarByID(publicId: string) {
+	try {
+		return (await cloudinaryConfig.uploader.destroy(
+			publicId,
+			(error: any, result: any) => {
+				return {
+					error,
+					result,
+				};
+			}
+		)) as {
+			error?: any;
+			result?: any;
+		};
+	} catch (error) {
+		return {
+			error,
+		};
+	}
 }

@@ -116,7 +116,7 @@ const Dropzone = ({
 				<button
 					onClick={(e) => avatarInput.current.click()}
 					type="button"
-					className="rounded-md border border-gray-300 py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+					className="rounded-md border border-gray-300 py-2 px-3 text-sm font-medium leading-4 shadow-sm hover:bg-gray-50 dark:bg-transparent focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
 				>
 					Change
 				</button>
@@ -124,14 +124,14 @@ const Dropzone = ({
 			<div
 				{...getRootProps({
 					className: classNames(
-						"mt-4 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6",
+						"mt-4 flex justify-center rounded-md border-2 border-dashed px-6 pt-5 pb-6",
 						className
 					),
 				})}
 			>
 				<div className="space-y-1 text-center">
 					<svg
-						className="mx-auto h-12 w-12 text-gray-400"
+						className="mx-auto h-12 w-12 "
 						stroke="currentColor"
 						fill="none"
 						viewBox="0 0 48 48"
@@ -144,7 +144,7 @@ const Dropzone = ({
 							strokeLinejoin="round"
 						/>
 					</svg>
-					<div className="flex text-sm text-gray-600">
+					<div className="flex text-sm ">
 						<span className="relative cursor-pointer rounded-md font-medium text-primary-600 focus-within:outline-none p-0 m-0">
 							<span className="p-0 m-0">Upload a file</span>
 							<input
@@ -158,9 +158,7 @@ const Dropzone = ({
 								: "or drag and drop"}
 						</p>
 					</div>
-					<p className="text-xs text-gray-500  p-0 m-0 ">
-						PNG, JPG, GIF up to 1MB
-					</p>
+					<p className="text-xs p-0 m-0 ">PNG, JPG, GIF up to 1MB</p>
 				</div>
 			</div>
 		</Fragment>

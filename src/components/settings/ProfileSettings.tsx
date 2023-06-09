@@ -6,7 +6,12 @@ import BlurImage from "@/components/BlurImage";
 import { LoadingDots } from "@/components/animation/Loading";
 import { Button } from "@/components/Button";
 import { classNames } from "@/utils/class";
-import { getAvatarUrl, getSignature, saveToDatabase } from "@/utils/cloudinary";
+import {
+	deleteAvatarByID,
+	getAvatarUrl,
+	getSignature,
+	saveToDatabase,
+} from "@/utils/cloudinary";
 import axios from "@/utils/axios";
 import { toast } from "sonner";
 
@@ -22,7 +27,7 @@ interface FormDataProps {
 	country?: any;
 }
 
-const GeneralSettings = ({ auth }: { auth?: any }) => {
+const ProfileSettings = ({ auth }: { auth?: any }) => {
 	const [submitLoading, setSubmitLoading] = useState(false);
 	const [avatar, setAvatar] = useState<any>(null);
 	let [formData, setFormData] = useState<FormDataProps>({
@@ -36,8 +41,9 @@ const GeneralSettings = ({ auth }: { auth?: any }) => {
 		});
 	};
 
-	const handelGeneralSetting = async (e: any) => {
+	const handelProfileSetting = async (e: any) => {
 		e.preventDefault();
+
 		const { url, publicId } = (await uploadToCloudinary()) as {
 			url: string;
 			publicId: string;
@@ -79,7 +85,7 @@ const GeneralSettings = ({ auth }: { auth?: any }) => {
 		}
 	};
 
-	async function uploadToCloudinary() {
+	const uploadToCloudinary = async () => {
 		if (!avatar) {
 			return {
 				url: null,
@@ -90,10 +96,8 @@ const GeneralSettings = ({ auth }: { auth?: any }) => {
 		try {
 			// get a signature using server action
 			const { timestamp, signature } = await getSignature();
-
 			// upload to cloudinary using the signature
 			const formData = new FormData();
-
 			formData.append("file", avatar);
 			formData.append(
 				"api_key",
@@ -102,20 +106,18 @@ const GeneralSettings = ({ auth }: { auth?: any }) => {
 			formData.append("signature", signature);
 			formData.append("timestamp", timestamp);
 			formData.append("folder", "next");
-
 			const endpoint =
 				process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL ?? "";
 			const data = await fetch(endpoint, {
 				method: "POST",
 				body: formData,
 			}).then((res) => res.json());
-
 			// write to database using server actions
-			await saveToDatabase({
-				version: data?.version,
-				signature: data?.signature,
-				public_id: data?.public_id,
-			});
+			// await saveToDatabase({
+			// 	version: data?.version,
+			// 	signature: data?.signature,
+			// 	public_id: data?.public_id,
+			// });
 
 			if (!data?.public_id) {
 				return {
@@ -131,12 +133,12 @@ const GeneralSettings = ({ auth }: { auth?: any }) => {
 				publicId: null,
 			};
 		}
-	}
+	};
 
 	return (
 		<form
 			className="py-3 space-y-6"
-			onSubmit={(e) => handelGeneralSetting(e)}
+			onSubmit={(e) => handelProfileSetting(e)}
 			encType="multipart/form-data"
 		>
 			<div className="relative">
@@ -315,4 +317,4 @@ const GeneralSettings = ({ auth }: { auth?: any }) => {
 	);
 };
 
-export default GeneralSettings;
+export default ProfileSettings;

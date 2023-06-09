@@ -1,19 +1,19 @@
 import { Metadata } from "next";
 import { constructMetadata } from "@/utils/utils";
 import { Fragment } from "react";
-import SignInCard from "@/components/auth/SignInCard";
+import LogInCard from "@/components/auth/LogInCard";
 
 type Props = {};
 
 export const metadata: Metadata = constructMetadata({
-	title: `Login - ${process.env.APP_NAME}`,
-	description: "Login",
+	title: `Sign In - ${process.env.APP_NAME}`,
+	description: "Sign In",
 });
 
 const Login = (props: Props) => {
 	return (
 		<Fragment>
-			<SignInCard />
+			<LogInCard />
 		</Fragment>
 	);
 };
