@@ -34,7 +34,7 @@ const MagicLogin = ({ token = null, expired = false }: MagicLoginProps) => {
 				}
 			}
 		}, 2000);
-	}, []);
+	}, [token, expired, loading]);
 
 	return (
 		<Prose>
