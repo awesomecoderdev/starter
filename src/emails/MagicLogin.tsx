@@ -1,14 +1,18 @@
 import {
 	Body,
+	Button,
 	Container,
 	Column,
 	Head,
+	Heading,
+	Hr,
 	Html,
 	Img,
 	Link,
 	Preview,
 	Row,
 	Section,
+	Tailwind,
 	Text,
 } from "@react-email/components";
 import * as React from "react";
@@ -27,149 +31,112 @@ export const MagicLogin = ({ user, magicLink }: MagicLoginProps) => {
 		timeStyle: "medium",
 	}).format(updatedDate);
 
+	const previewText = `Join ${user.name} on Vercel`;
+
 	return (
 		<Html>
 			<Head />
-			<Preview>You updated the password for your Twitch account</Preview>
-			<Body style={main}>
-				<Container style={container}>
-					<Section style={logo}>
-						<Img
-							width={114}
-							src={`${baseUrl}/static/twitch-logo.png`}
-						/>
-					</Section>
-					<Section style={sectionsBorders}>
-						<Row>
-							<Column style={sectionBorder} />
-							<Column style={sectionCenter} />
-							<Column style={sectionBorder} />
-						</Row>
-					</Section>
-					<Section style={content}>
-						<Text style={paragraph}>Hi {user.name},</Text>
-						<Text style={paragraph}>
-							{JSON.stringify(user, null, 3)},
+			<Preview>{previewText}</Preview>
+			<Tailwind>
+				<Body className="bg-white my-auto mx-auto font-sans">
+					<Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
+						<Section className="mt-[32px]">
+							<Img
+								src={`${baseUrl}/static/vercel-logo.png`}
+								width="40"
+								height="37"
+								alt="Vercel"
+								className="my-0 mx-auto"
+							/>
+						</Section>
+						<Heading className="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">
+							Join <strong>{user.name}</strong> on{" "}
+							<strong>Vercel</strong>
+						</Heading>
+						<Text className="text-black text-[14px] leading-[24px]">
+							Hello {user.name},
 						</Text>
-						<Text style={paragraph}>
-							You updated the password for your Twitch account on{" "}
-							{formattedDate}. If this was you, then no further
-							action is required.
+						<Text className="text-black text-[14px] leading-[24px]">
+							<strong>bukinoshita</strong> (
+							<Link
+								href={`mailto:${user.email}`}
+								className="text-blue-600 no-underline"
+							>
+								{user.email}
+							</Link>
+							) has invited you to the{" "}
+							<strong>{user.name}</strong> team on{" "}
+							<strong>Vercel</strong>.
 						</Text>
-						<Text style={paragraph}>
-							However if you did NOT perform this password change,
-							please
-							<Link href="#" style={link}>
-								{" "}
-								reset your account password
-							</Link>{" "}
-							immediately.
-						</Text>
-						<Text style={paragraph}>
-							Remember to use a password that is both strong and
-							unique to your Twitch account. To learn more about
-							how to create a strong and unique password,
-							<Link href="#" style={link}>
-								{" "}
-								click here.
+						<Section>
+							<Row>
+								<Column align="right">
+									<Img
+										className="rounded-full"
+										src={user.avatar}
+										width="64"
+										height="64"
+									/>
+								</Column>
+								<Column align="center">
+									<Img
+										src={`${baseUrl}/static/vercel-arrow.png`}
+										width="12"
+										height="9"
+										alt="invited you to"
+									/>
+								</Column>
+								<Column align="left">
+									<Img
+										className="rounded-full"
+										src={user.avatar}
+										width="64"
+										height="64"
+									/>
+								</Column>
+							</Row>
+						</Section>
+						<Section className="text-center mt-[32px] mb-[32px]">
+							<Button
+								pX={20}
+								pY={12}
+								className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center"
+								href={magicLink}
+							>
+								Join the team
+							</Button>
+						</Section>
+						<Text className="text-black text-[14px] leading-[24px]">
+							or copy and paste this URL into your browser:{" "}
+							<Link
+								href={magicLink}
+								className="text-blue-600 no-underline"
+							>
+								{magicLink}
 							</Link>
 						</Text>
-						<Text style={paragraph}>
-							Still have questions? Please contact
-							<Link href="#" style={link}>
-								{" "}
-								Twitch Support
-							</Link>
-						</Text>
-						<Text style={paragraph}>
-							Thanks,
+						<Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
+						<Text className="text-[#666666] text-[12px] leading-[24px]">
+							This invitation was intended for{" "}
+							<span className="text-black">{user.name} </span>
+							.This invite was sent from{" "}
+							<span className="text-black">
+								{user.email}
+							</span>{" "}
+							located in{" "}
+							<span className="text-black">{user.country}</span>.
+							If you were not expecting this invitation, you can
+							ignore this email. If you are concerned about your
+							account's safety, please reply to this email to get
+							in touch with us.
 							<br />
-							Twitch Support Team
+							<p>{JSON.stringify(user, null, 3)}</p>
 						</Text>
-					</Section>
-				</Container>
-
-				<Section style={footer}>
-					<Row>
-						<Column
-							align="right"
-							style={{ width: "50%", paddingRight: "8px" }}
-						>
-							<Img
-								src={`${baseUrl}/static/twitch-icon-twitter.png`}
-							/>
-						</Column>
-						<Column
-							align="left"
-							style={{ width: "50%", paddingLeft: "8px" }}
-						>
-							<Img
-								src={`${baseUrl}/static/twitch-icon-facebook.png`}
-							/>
-						</Column>
-					</Row>
-					<Text style={{ textAlign: "center", color: "#706a7b" }}>
-						© 2022 Twitch, All Rights Reserved <br />
-						350 Bush Street, 2nd Floor, San Francisco, CA, 94104 -
-						USA
-					</Text>
-				</Section>
-			</Body>
+					</Container>
+				</Body>
+			</Tailwind>
 		</Html>
 	);
 };
 
 export default MagicLogin;
-
-const fontFamily = "HelveticaNeue,Helvetica,Arial,sans-serif";
-
-const main = {
-	backgroundColor: "#efeef1",
-	fontFamily,
-};
-
-const paragraph = {
-	lineHeight: 1.5,
-	fontSize: 14,
-};
-
-const container = {
-	width: "580px",
-	margin: "30px auto",
-	backgroundColor: "#ffffff",
-};
-
-const footer = {
-	width: "580px",
-	margin: "0 auto",
-};
-
-const content = {
-	padding: "5px 50px 10px 60px",
-};
-
-const logo = {
-	display: "flex",
-	justifyContent: "center",
-	alingItems: "center",
-	padding: 30,
-};
-
-const sectionsBorders = {
-	width: "100%",
-	display: "flex",
-};
-
-const sectionBorder = {
-	borderBottom: "1px solid rgb(238,238,238)",
-	width: "249px",
-};
-
-const sectionCenter = {
-	borderBottom: "1px solid rgb(145,71,255)",
-	width: "102px",
-};
-
-const link = {
-	textDecoration: "underline",
-};

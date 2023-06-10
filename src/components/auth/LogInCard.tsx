@@ -11,11 +11,26 @@ import { ModeToggle } from "@/components/ModeToggle";
 import { toast } from "sonner";
 import Link from "next/link";
 import axios from "@/utils/axios";
-
-const LogInCard = () => {
+import DefaultLoading from "@/app/loading";
+import Cookies from "js-cookie";
+import MagicLogin from "@/components/auth/MagicLogin";
+interface LoginCardProps {
+	login?: any;
+	expired?: boolean;
+	token?: any;
+}
+const LogInCard = ({
+	token = null,
+	login = false,
+	expired = false,
+}: LoginCardProps) => {
 	const [googleLoading, setGoogleLoading] = useState(false);
 	const [emailLoading, setEmailLoading] = useState(false);
 	const [email, setEmail] = useState("");
+
+	if (login) {
+		return <MagicLogin token={token} expired={expired} />;
+	}
 
 	const SignIn = async () => {
 		setGoogleLoading(true);
@@ -69,7 +84,7 @@ const LogInCard = () => {
 					<div className="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
 						<div>
 							<h2 className="text-2xl font-bold text-white sm:text-3xl">
-								Plagiarism AI
+								Plagiarism AI {token}
 							</h2>
 
 							<p className="max-w-xl mt-3 text-gray-300">

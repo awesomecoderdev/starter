@@ -37,7 +37,7 @@ export function constructMetadata({
 
 export const nanoid = customAlphabet(
 	"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
-	7
+	25
 ); // 7-character random string
 
 interface SWRError extends Error {
@@ -356,3 +356,14 @@ export const log = async (
 		console.log(`Failed to log to Dub Slack. Error: ${e}`);
 	}
 };
+
+export const getAppUrl = (path?: string) => {
+	const base = process.env.APP_URL ?? "";
+	if (!path) {
+		return base;
+	}
+
+	return `${base}${path}`;
+};
+
+export const jwtSecret = process.env.JWT_SECRET ?? "";

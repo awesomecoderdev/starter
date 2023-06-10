@@ -4,6 +4,8 @@ import prisma from "@/prisma/client";
 import jwt from "jsonwebtoken";
 import sendMail from "@/emails";
 import MagicLogin from "@/emails/MagicLogin";
+import { getAppUrl, nanoid } from "@/utils/utils";
+import { encode } from "@/utils/buffer";
 
 export async function POST(request: Request) {
 	const secret = `${process.env.JWT_SECRET}`;
@@ -43,6 +45,78 @@ export async function POST(request: Request) {
 				);
 			}
 
+			if (email && !uid && !displayName) {
+				try {
+					const loginSecret = nanoid();
+					const token = jwt.sign(
+						{
+							user: {
+								uid: user.id,
+								name: user.name,
+								email: user.email,
+								avatar: user.avatar,
+								publicId: user.publicId,
+								street: user.street,
+								city: user.city,
+								region: user.region,
+								zip: user.zip,
+								country: user.country,
+							},
+						},
+						secret,
+						{
+							expiresIn: 60 * timeout,
+						}
+					);
+
+					const loginToken = jwt.sign({ token: token }, secret, {
+						expiresIn: 60 * 15,
+					});
+
+					const verificationToken = encode(loginToken);
+					const magicLink = getAppUrl(
+						`login/?token=${loginSecret}${verificationToken}&secret=${loginSecret}`
+					);
+					// console.log("magicLink", magicLink);
+
+					await sendMail({
+						subject: "Your Plagiarism AI Login Link",
+						to: email,
+						component: (
+							<MagicLogin user={user} magicLink={magicLink} />
+						),
+					});
+
+					return new Response(
+						JSON.stringify({
+							success: true,
+							status: Status.HTTP_OK,
+							message:
+								"We've send an login link to your email address.",
+						}),
+						{
+							status: Status.HTTP_OK,
+							headers: {
+								"Set-Cookie": `login_secret=${encode(
+									loginSecret
+								)}; Path=/;`,
+							},
+						}
+					);
+				} catch (error: any) {
+					return new Response(
+						JSON.stringify({
+							success: false,
+							status: error?.code,
+							message: error?.message,
+						}),
+						{
+							status: Status.HTTP_OK,
+						}
+					);
+				}
+			}
+
 			if (uid && email && displayName && photoURL && apiKey) {
 				const token = jwt.sign(
 					{
@@ -78,42 +152,6 @@ export async function POST(request: Request) {
 						},
 					}
 				);
-			}
-
-			if (email && !uid && !displayName) {
-				try {
-					const magicLink = "/sdfdf";
-					await sendMail({
-						subject: "Your Plagiarism AI Login Link",
-						to: email,
-						component: (
-							<MagicLogin user={user} magicLink={magicLink} />
-						),
-					});
-
-					return new Response(
-						JSON.stringify({
-							success: true,
-							status: Status.HTTP_OK,
-							message:
-								"We've send an login link to your email address.",
-						}),
-						{
-							status: Status.HTTP_OK,
-						}
-					);
-				} catch (error: any) {
-					return new Response(
-						JSON.stringify({
-							success: false,
-							status: error?.code,
-							message: error?.message,
-						}),
-						{
-							status: Status.HTTP_OK,
-						}
-					);
-				}
 			}
 		}
 	} catch (error) {
