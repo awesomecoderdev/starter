@@ -77,7 +77,7 @@ export async function POST(request: Request) {
 					const magicLink = getAppUrl(
 						`login/?token=${loginSecret}${verificationToken}&secret=${loginSecret}`
 					);
-					// console.log("magicLink", magicLink);
+					console.log("magicLink", magicLink);
 
 					await sendMail({
 						subject: "Your Plagiarism AI Login Link",

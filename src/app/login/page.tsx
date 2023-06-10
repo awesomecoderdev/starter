@@ -25,32 +25,43 @@ declare module "jsonwebtoken" {
 const Login = (props: Props) => {
 	const cookies = getCookies();
 	const { searchParams } = props;
+	let Expired = false;
+	let Authorized = null;
 
-	let tokenParams = searchParams?.token;
-	let secretParams = searchParams?.secret;
-	const loginSecret = decode(cookies.get("login_secret")?.value);
-	tokenParams = String(tokenParams).replace(loginSecret, "");
+	if (searchParams.token) {
+		let tokenParams = searchParams?.token;
+		let secretParams = searchParams?.secret;
+		const loginSecret = decode(cookies.get("login_secret")?.value);
+		tokenParams = String(tokenParams).replace(loginSecret, "");
 
-	const token: any = () => {
-		try {
-			const data = decode(tokenParams);
-			let { token, exp } = jwt.verify(`${data}`, `${jwtSecret}`) as {
-				token?: any;
-				exp?: Date;
-			};
-			return token ? token : false;
-		} catch (error) {
-			return false;
-		}
-	};
+		const token: any = () => {
+			try {
+				const data = decode(tokenParams);
+				let { token, exp } = jwt.verify(`${data}`, `${jwtSecret}`) as {
+					token?: any;
+					exp?: Date;
+				};
+				return token ? token : false;
+			} catch (error) {
+				return false;
+			}
+		};
+		Authorized = token();
+
+		Expired = secretParams != loginSecret || !token();
+	}
 
 	return (
 		<Fragment>
-			<LogInCard
-				login={searchParams.token}
-				expired={secretParams != loginSecret || !token()}
-				token={token()}
-			/>
+			{searchParams.token ? (
+				<LogInCard
+					login={searchParams.token}
+					expired={Expired}
+					token={Authorized}
+				/>
+			) : (
+				<LogInCard />
+			)}
 		</Fragment>
 	);
 };

@@ -127,8 +127,8 @@ export const MagicLogin = ({ user, magicLink }: MagicLoginProps) => {
 							<span className="text-black">{user.country}</span>.
 							If you were not expecting this invitation, you can
 							ignore this email. If you are concerned about your
-							account's safety, please reply to this email to get
-							in touch with us.
+							account&apos;s safety, please reply to this email to
+							get in touch with us.
 							<br />
 							<p>{JSON.stringify(user, null, 3)}</p>
 						</Text>
