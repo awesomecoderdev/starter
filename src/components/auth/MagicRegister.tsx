@@ -13,6 +13,7 @@ import { Button } from "@/components/Button";
 import { classNames } from "@/utils/class";
 import Link from "next/link";
 import { ModeToggle } from "@/components/ModeToggle";
+import axios from "@/utils/axios";
 interface MagicRegisterProps {
 	expired?: boolean;
 	token?: any;
@@ -27,6 +28,7 @@ interface FormDataProps {
 	region?: any;
 	zip?: any;
 	country?: any;
+	secret?: any;
 }
 
 const MagicRegister = ({
@@ -40,11 +42,8 @@ const MagicRegister = ({
 		{ name: "Profile information", status: "current" },
 		{ name: "Complete", status: "upcoming" },
 	]);
-	let [formData, setFormData] = useState<FormDataProps>(
-		user ?? {
-			email: user?.email,
-		}
-	);
+	let userData = user ?? {};
+	let [formData, setFormData] = useState<FormDataProps>(userData);
 
 	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setFormData({
@@ -53,7 +52,12 @@ const MagicRegister = ({
 		});
 	};
 
-	console.log("formData", formData);
+	useEffect(() => {
+		setFormData({
+			...formData,
+			secret: token,
+		});
+	}, []);
 
 	// useEffect(() => {
 	// 	setTimeout(() => {
@@ -77,6 +81,41 @@ const MagicRegister = ({
 	// 		}
 	// 	}, 2000);
 	// }, [token, expired, loading]);
+	const handelCreateAccount = async (e: any) => {
+		e.preventDefault();
+
+		if (Object.keys(formData).length == 1) {
+			toast.error("Everything is up-to-date.");
+			setLoading(false);
+			return false;
+		}
+
+		try {
+			axios
+				.post("/api/auth/register", formData)
+				.then((res) => {
+					let req = res.data;
+					if (req?.success) {
+						setLoading(false);
+						toast.success(
+							req.message ?? "You have successfully logged in."
+						);
+						location.reload();
+					} else {
+						setLoading(false);
+						toast.error(req.message ?? "Something went wrong!");
+					}
+				})
+				.catch((error) => {
+					setLoading(false);
+					toast.error(error.message ?? "Something went wrong!");
+					if (error.response.status != 422) throw new Error(error);
+				});
+		} catch (error) {
+			setLoading(false);
+			toast.error("Something went wrong!");
+		}
+	};
 
 	return (
 		<Prose>
@@ -291,7 +330,7 @@ const MagicRegister = ({
 										variant="outline"
 										id="submit"
 										type="submit"
-										onClick={() => setLoading(true)}
+										onClick={handelCreateAccount}
 										className={classNames(
 											"text-sm font-medium flex items-center justify-center w-32 rounded-md p-2 transition-all duration-75 dark:text-white border-gray-300 min-h-[42px]",
 											loading &&

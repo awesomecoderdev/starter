@@ -3,15 +3,28 @@ import prisma from "@/prisma/client";
 import jwt from "jsonwebtoken";
 import sendMail from "@/emails";
 import WelComeEmail from "@/emails/Welcome";
-import { getAppUrl, nanoid } from "@/utils/utils";
+import { getAppUrl, jwtSecret, nanoid } from "@/utils/utils";
 import { encode } from "@/utils/buffer";
 import MagicRegister from "@/emails/MagicRegister";
 
 export async function POST(request: Request) {
-	const secret = `${process.env.JWT_SECRET}`;
 	const timeout: number = parseInt(`${process.env.JWT_TIMEOUT}`) || 60;
 	const req = await request.json();
-	const { uid, email, displayName, photoURL, apiKey } = req;
+	const {
+		uid,
+		email,
+		displayName,
+		photoURL,
+		apiKey,
+		name,
+		street,
+		city,
+		region,
+		zip,
+		country,
+		secret,
+	} = req;
+
 	let user: any = null;
 	try {
 		if (!email) {
@@ -51,25 +64,111 @@ export async function POST(request: Request) {
 				throw new Error(error);
 			}
 
+			if (street && email) {
+				try {
+					const getUserEmail = () => {
+						let { user, exp } = jwt.verify(
+							`${secret}`,
+							`${jwtSecret}`
+						) as { user?: any; exp?: any };
+						return user ? user.email : null;
+					};
+
+					if (email != getUserEmail()) {
+						console.log("Invalid Token");
+						return new Response(
+							JSON.stringify({
+								success: false,
+								status: Status.HTTP_OK,
+								message: "Something went wrong.",
+							}),
+							{
+								status: Status.HTTP_OK,
+							}
+						);
+					}
+
+					const user: any = await prisma.user.create({
+						data: {
+							email: email,
+							name: name,
+							zip: zip,
+							street: street,
+							city: city,
+							country: country,
+							region: region,
+						},
+					});
+
+					const token = jwt.sign(
+						{
+							user: {
+								uid: user.id,
+								name: user.name,
+								email: user.email,
+								avatar: user.avatar,
+								publicId: user.publicId,
+								street: user.street,
+								city: user.city,
+								region: user.region,
+								zip: user.zip,
+								country: user.country,
+							},
+						},
+						jwtSecret,
+						{
+							expiresIn: 60 * timeout,
+						}
+					);
+
+					return new Response(
+						JSON.stringify({
+							success: true,
+							status: Status.HTTP_CREATED,
+							message:
+								"You account has been successfully updated.",
+						}),
+						{
+							status: Status.HTTP_CREATED,
+							headers: {
+								"Set-Cookie": `token=${token}; Path=/;`,
+							},
+						}
+					);
+				} catch (error) {
+					console.log("Creating Error:", error);
+					return new Response(
+						JSON.stringify({
+							success: false,
+							status: Status.HTTP_OK,
+							message: "Something went wrong.",
+						}),
+						{
+							status: Status.HTTP_OK,
+						}
+					);
+				}
+			}
+
 			if (email && !uid && !displayName) {
 				try {
 					const loginSecret = nanoid();
 					const token = jwt.sign(
 						{
 							user: {
-								uid: null,
+								uid: loginSecret,
 								email: email,
-								displayName: null,
-								photoURL: null,
-								apiKey: null,
+								name: null,
+								avatar: null,
+								secret: null,
 							},
 						},
-						secret,
+						jwtSecret,
 						{
 							expiresIn: 60 * timeout,
 						}
 					);
-					const loginToken = jwt.sign({ token: token }, secret, {
+					const loginToken = jwt.sign({ token: token }, jwtSecret, {
 						expiresIn: 60 * 15,
 					});
 					const verificationToken = encode(loginToken);
@@ -144,7 +243,7 @@ export async function POST(request: Request) {
 								country: user.country,
 							},
 						},
-						secret,
+						jwtSecret,
 						{
 							expiresIn: 60 * timeout,
 						}

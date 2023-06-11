@@ -66,6 +66,8 @@ export default function SignUp(props: Props) {
 
 	return (
 		<Fragment>
+			{/* <h1>Token : {Authorized}</h1>
+			<h1>User : {JSON.stringify(User)}</h1> */}
 			{searchParams.token ? (
 				<SignUpCard
 					signup={searchParams.token}
