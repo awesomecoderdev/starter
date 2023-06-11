@@ -81,6 +81,7 @@ const MagicRegister = ({
 	// 		}
 	// 	}, 2000);
 	// }, [token, expired, loading]);
+
 	const handelCreateAccount = async (e: any) => {
 		e.preventDefault();
 
@@ -100,6 +101,7 @@ const MagicRegister = ({
 						toast.success(
 							req.message ?? "You have successfully logged in."
 						);
+						Cookies.remove("signup_secret");
 						location.reload();
 					} else {
 						setLoading(false);
