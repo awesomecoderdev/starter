@@ -1,7 +1,7 @@
 "use client";
 import { Logo } from "@/components/Logo";
 import { Prose } from "@/components/Prose";
-import { signInWithGoogle } from "@/utils/auth";
+import { signUpWithGoogle } from "@/utils/auth";
 import { classNames } from "@/utils/class";
 import { useState } from "react";
 import { LoadingDots } from "@/components/animation/Loading";
@@ -11,15 +11,33 @@ import { ModeToggle } from "@/components/ModeToggle";
 import { toast } from "sonner";
 import Link from "next/link";
 import { Heading } from "@/components/Heading";
+import axios from "@/utils/axios";
+import MagicRegister from "@/components/auth/MagicRegister";
 
-const SignUpCard = () => {
+interface SignUpCardProps {
+	signup?: any;
+	expired?: boolean;
+	token?: any;
+	user?: any;
+}
+const SignUpCard = ({
+	token = null,
+	signup = false,
+	expired = false,
+	user = null,
+}: SignUpCardProps) => {
 	const [googleLoading, setGoogleLoading] = useState(false);
 	const [emailLoading, setEmailLoading] = useState(false);
+	const [email, setEmail] = useState("");
 
-	const SignIn = async () => {
+	if (signup) {
+		return <MagicRegister token={token} user={user} expired={expired} />;
+	}
+
+	const SignUp = async () => {
 		setGoogleLoading(true);
 		try {
-			const req = await signInWithGoogle();
+			const req = await signUpWithGoogle();
 			if (req?.success) {
 				toast.success(
 					req.message ?? "You have successfully logged in."
@@ -31,6 +49,30 @@ const SignUpCard = () => {
 			}
 		} catch (error) {
 			setGoogleLoading(false);
+			toast.error("Something went wrong!");
+		}
+	};
+
+	const SignUpWithEmail = async () => {
+		if (email == "") {
+			toast.error("Email can't be empty!");
+			return false;
+		}
+		setEmailLoading(true);
+		try {
+			const req: any = await axios
+				.post("/api/auth/register", { email: email })
+				.then((res) => res.data)
+				.catch((err) => ({ success: false, message: err?.message }));
+
+			if (req?.success) {
+				toast.success(req.message);
+			} else {
+				toast.error(req.message ?? "Something went wrong!");
+			}
+			setEmailLoading(false);
+		} catch (error) {
+			setEmailLoading(false);
 			toast.error("Something went wrong!");
 		}
 	};
@@ -86,7 +128,7 @@ const SignUpCard = () => {
 								<Button
 									variant="secondary"
 									disabled={emailLoading}
-									onClick={SignIn}
+									onClick={SignUp}
 									className={classNames(
 										"text-sm font-medium flex items-center justify-center w-full rounded-lg p-2 transition-all duration-75 ",
 										googleLoading &&
@@ -140,6 +182,8 @@ const SignUpCard = () => {
 									name="email"
 									id="email"
 									placeholder="example@example.com"
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
 									className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-primary-400 dark:focus:border-primary-400 focus:ring-primary-400 focus:outline-none focus:ring focus:ring-opacity-40"
 								/>
 							</div>
@@ -147,7 +191,7 @@ const SignUpCard = () => {
 							<div className="mt-6">
 								<Button
 									variant="primary"
-									onClick={() => setEmailLoading(true)}
+									onClick={SignUpWithEmail}
 									disabled={googleLoading}
 									className={classNames(
 										"text-sm font-medium flex items-center justify-center w-full rounded-lg p-2 transition-all duration-75 ",

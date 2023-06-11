@@ -47,6 +47,29 @@ export const signInWithGoogle = async () => {
 	return null;
 };
 
+export const signUpWithGoogle = async () => {
+	try {
+		const { user } = await signInWithPopup(firebase, Provider);
+		const { email } = user;
+		if (user && email) {
+			return await axios
+				.post("/api/auth/register", user)
+				.then((res) => {
+					return res.data;
+				})
+				.catch((error) => {
+					console.log("error", error);
+					if (error.response.status != 422) throw new Error(error);
+				});
+		}
+	} catch (error: any) {
+		console.log("error", error);
+
+		if (error.response.status != 422) throw new Error(error);
+	}
+	return null;
+};
+
 export default function useNextAuth() {
 	// const {
 	// 	data: user,

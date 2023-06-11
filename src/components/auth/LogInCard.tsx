@@ -52,6 +52,10 @@ const LogInCard = ({
 	};
 
 	const SignInWithEmail = async () => {
+		if (email == "") {
+			toast.error("Email can't be empty!");
+			return false;
+		}
 		setEmailLoading(true);
 		try {
 			const req: any = await axios

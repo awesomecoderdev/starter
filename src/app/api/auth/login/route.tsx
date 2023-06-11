@@ -1,4 +1,3 @@
-import { RecentLoginEmail } from "@/emails/RecentLogIn";
 import Status, { MethodNotALlowed } from "@/utils/http";
 import prisma from "@/prisma/client";
 import jwt from "jsonwebtoken";

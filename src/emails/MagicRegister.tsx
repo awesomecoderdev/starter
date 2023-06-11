@@ -15,23 +15,23 @@ import {
 	Text,
 } from "@react-email/components";
 import { Tailwind } from "@react-email/tailwind";
+
 import * as React from "react";
 
-interface MagicLoginProps {
-	user: any;
+interface MagicRegisterProps {
 	magicLink: string;
 }
 
 const baseUrl = "https://react-email-demo-ijnnx5hul-resend.vercel.app/";
 
-export const MagicLogin = ({ user, magicLink }: MagicLoginProps) => {
+export const MagicRegister = ({ magicLink }: MagicRegisterProps) => {
 	let updatedDate = new Date("June 23, 2022 4:06:00 pm UTC");
 	const formattedDate = new Intl.DateTimeFormat("en", {
 		dateStyle: "medium",
 		timeStyle: "medium",
 	}).format(updatedDate);
 
-	const previewText = `Join ${user.name} on Vercel`;
+	const previewText = `Join There on Vercel`;
 
 	return (
 		<Html>
@@ -50,52 +50,15 @@ export const MagicLogin = ({ user, magicLink }: MagicLoginProps) => {
 							/>
 						</Section>
 						<Heading className="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">
-							Join <strong>{user.name}</strong> on{" "}
+							Join <strong>afaf </strong> on{" "}
 							<strong>Vercel</strong>
 						</Heading>
 						<Text className="text-black text-[14px] leading-[24px]">
-							Hello {user.name},
+							Hello there,
 						</Text>
 						<Text className="text-black text-[14px] leading-[24px]">
-							<strong>bukinoshita</strong> (
-							<Link
-								href={`mailto:${user.email}`}
-								className="text-blue-600 no-underline"
-							>
-								{user.email}
-							</Link>
-							) has invited you to the{" "}
-							<strong>{user.name}</strong> team on{" "}
-							<strong>Vercel</strong>.
+							<strong>bukinoshita</strong> has invited you to the{" "}
 						</Text>
-						<Section>
-							<Row>
-								<Column align="right">
-									<Img
-										className="rounded-full"
-										src={user.avatar}
-										width="64"
-										height="64"
-									/>
-								</Column>
-								<Column align="center">
-									<Img
-										src={`${baseUrl}/static/vercel-arrow.png`}
-										width="12"
-										height="9"
-										alt="invited you to"
-									/>
-								</Column>
-								<Column align="left">
-									<Img
-										className="rounded-full"
-										src={user.avatar}
-										width="64"
-										height="64"
-									/>
-								</Column>
-							</Row>
-						</Section>
 						<Section className="text-center mt-[32px] mb-[32px]">
 							<Button
 								pX={20}
@@ -117,20 +80,12 @@ export const MagicLogin = ({ user, magicLink }: MagicLoginProps) => {
 						</Text>
 						<Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
 						<Text className="text-[#666666] text-[12px] leading-[24px]">
-							This invitation was intended for{" "}
-							<span className="text-black">{user.name} </span>
-							.This invite was sent from{" "}
-							<span className="text-black">
-								{user.email}
-							</span>{" "}
-							located in{" "}
-							<span className="text-black">{user.country}</span>.
-							If you were not expecting this invitation, you can
-							ignore this email. If you are concerned about your
-							account&apos;s safety, please reply to this email to
-							get in touch with us.
+							This invitation was intended for .This invite was
+							sent from located in If you were not expecting this
+							invitation, you can ignore this email. If you are
+							concerned about your account&apos;s safety, please
+							reply to this email to get in touch with us.
 							<br />
-							<p>{JSON.stringify(user, null, 3)}</p>
 						</Text>
 					</Container>
 				</Body>
@@ -139,4 +94,4 @@ export const MagicLogin = ({ user, magicLink }: MagicLoginProps) => {
 	);
 };
 
-export default MagicLogin;
+export default MagicRegister;

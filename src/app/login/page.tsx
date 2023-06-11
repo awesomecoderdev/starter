@@ -16,12 +16,6 @@ export const metadata: Metadata = constructMetadata({
 	description: "Sign In",
 });
 
-declare module "jsonwebtoken" {
-	export interface JwtPayload {
-		user: object;
-	}
-}
-
 const Login = (props: Props) => {
 	const cookies = getCookies();
 	const { searchParams } = props;

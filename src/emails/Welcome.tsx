@@ -17,7 +17,7 @@ const baseUrl = process.env.VERCEL_URL
 	? `https://${process.env.VERCEL_URL}`
 	: "https://react-email-demo-ijnnx5hul-resend.vercel.app/";
 
-export const RecentLoginEmail = () => (
+export const WelComeEmail = () => (
 	<Html>
 		<Head />
 		<Preview>
@@ -112,7 +112,7 @@ export const RecentLoginEmail = () => (
 	</Html>
 );
 
-export default RecentLoginEmail;
+export default WelComeEmail;
 
 const main = {
 	backgroundColor: "#f6f9fc",
