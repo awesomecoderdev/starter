@@ -15,10 +15,12 @@ CREATE TABLE `User` (
     `plan` VARCHAR(191) NOT NULL DEFAULT 'free',
     `stripeId` VARCHAR(191) NULL,
     `billingCycleStart` INTEGER NULL,
+    `settings` LONGTEXT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     UNIQUE INDEX `User_email_key`(`email`),
     UNIQUE INDEX `User_stripeId_key`(`stripeId`),
+    FULLTEXT INDEX `User_settings_idx`(`settings`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

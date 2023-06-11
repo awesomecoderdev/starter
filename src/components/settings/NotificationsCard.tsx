@@ -17,114 +17,88 @@ const NotificationsCard = () => {
 				className="py-3 space-y-6"
 				action={UpdateNotificationsSetting}
 			>
-				<div className="px-4 py-5 shadow border border-zinc-900/7.5 dark:border-white/7.5 sm:rounded-lg sm:p-6">
-					<div className="md:grid md:grid-cols-3 md:gap-6">
+				<div className="relative">
+					<div className="lg:grid md:grid-cols-3 md:gap-6">
 						<div className="md:col-span-1">
-							<h2 className="text-lg font-medium leading-6 text-gray-900 dark:text-white">
+							<h2 className="text-lg font-medium leading-6 p-0 m-0">
 								Notifications
 							</h2>
-							<p className="mt-1 text-sm text-gray-500 dark:text-zinc-400">
+							<p className="mt-1 text-sm p-0 m-0">
 								Decide which communications you&apos;d like to
 								receive and how.
 							</p>
 						</div>
-						<div className="mt-5 space-y-6 md:col-span-2 md:mt-0">
+						<div className="mt-5 space-y-6 md:col-span-2 ">
 							<fieldset>
-								<legend className="sr-only">By Email</legend>
+								<legend className="sr-only">Notices</legend>
 								<div
-									className="text-base font-medium text-gray-900"
+									className="text-base font-medium p-0 m-0"
 									aria-hidden="true"
 								>
-									By Email
+									Notices
 								</div>
 								<div className="mt-4 space-y-4">
 									<div className="flex items-start">
 										<div className="flex h-5 items-center">
 											<input
-												id="comments"
-												name="comments"
+												id="login"
+												name="login"
 												type="checkbox"
 												className="h-4 w-4 mt-1.5 cursor-pointer rounded border-gray-300 text-primary-600 focus:ring-primary-500"
 											/>
 										</div>
 										<div className="ml-3 text-sm">
 											<label
-												htmlFor="comments"
-												className="font-medium text-gray-700 dark:text-zinc-50 cursor-pointer"
+												htmlFor="login"
+												className="font-medium p-0 m-0 cursor-pointer"
 											>
-												Comments
+												Login Alert
 											</label>
-											<p className="text-gray-500 dark:text-zinc-400">
-												Get notified when someones posts
-												a comment on a posting.
+											<p className="text-gray-500 dark:text-zinc-400 p-0 m-0">
+												Get notified when someones login
+												into your account.
 											</p>
 										</div>
 									</div>
 									<div className="flex items-start">
 										<div className="flex h-5 items-center">
 											<input
-												id="candidates"
-												name="candidates"
+												id="billing"
+												name="billing"
 												type="checkbox"
 												className="h-4 w-4 mt-1.5 cursor-pointer rounded border-gray-300 text-primary-600 focus:ring-primary-500"
 											/>
 										</div>
 										<div className="ml-3 text-sm">
 											<label
-												htmlFor="candidates"
-												className="font-medium text-gray-700 dark:text-zinc-50 cursor-pointer"
+												htmlFor="billing"
+												className="font-medium p-0 m-0 cursor-pointer"
 											>
-												Candidates
+												Billing
 											</label>
-											<p className="text-gray-500 dark:text-zinc-400">
-												Get notified when a candidate
-												applies for a job.
-											</p>
-										</div>
-									</div>
-									<div className="flex items-start">
-										<div className="flex h-5 items-center">
-											<input
-												id="offers"
-												name="offers"
-												type="checkbox"
-												className="h-4 w-4 mt-1.5 cursor-pointer rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-											/>
-										</div>
-										<div className="ml-3 text-sm">
-											<label
-												htmlFor="offers"
-												className="font-medium text-gray-700 dark:text-zinc-50 cursor-pointer"
-											>
-												Offers
-											</label>
-											<p className="text-gray-500 dark:text-zinc-400">
-												Get notified when a candidate
-												accepts or rejects an offer.
+											<p className="text-gray-500 dark:text-zinc-400 p-0 m-0">
+												Get notified when subscription
+												updated.
 											</p>
 										</div>
 									</div>
 								</div>
 							</fieldset>
 							<fieldset>
-								<legend className="contents text-base font-medium text-gray-900">
-									Push Notifications
+								<legend className="contents text-base font-medium ">
+									Newsletter
 								</legend>
-								<p className="text-sm text-gray-500">
-									These are delivered via SMS to your mobile
-									phone.
-								</p>
 								<div className="mt-4 space-y-4">
 									<div className="flex items-center">
 										<input
 											id="push-everything"
-											name="push-notifications"
+											name="newsletter"
 											type="radio"
 											className="h-4 w-4 cursor-pointer border-gray-300 text-primary-600 focus:ring-primary-500"
 										/>
 										<label
 											htmlFor="push-everything"
-											className="ml-3 block text-sm font-medium text-gray-700 dark:text-zinc-50 cursor-pointer"
+											className="ml-3 block text-sm font-medium p-0 m-0 cursor-pointer"
 										>
 											Everything
 										</label>
@@ -132,29 +106,29 @@ const NotificationsCard = () => {
 									<div className="flex items-center">
 										<input
 											id="push-email"
-											name="push-notifications"
+											name="newsletter"
 											type="radio"
 											className="h-4 w-4 cursor-pointer border-gray-300 text-primary-600 focus:ring-primary-500"
 										/>
 										<label
 											htmlFor="push-email"
-											className="ml-3 block text-sm font-medium text-gray-700 dark:text-zinc-50 cursor-pointer"
+											className="ml-3 block text-sm font-medium p-0 m-0 cursor-pointer"
 										>
-											Same as email
+											Weekly Updates
 										</label>
 									</div>
 									<div className="flex items-center">
 										<input
 											id="push-nothing"
-											name="push-notifications"
+											name="newsletter"
 											type="radio"
 											className="h-4 w-4 cursor-pointer border-gray-300 text-primary-600 focus:ring-primary-500"
 										/>
 										<label
 											htmlFor="push-nothing"
-											className="ml-3 block text-sm font-medium text-gray-700 dark:text-zinc-50 cursor-pointer"
+											className="ml-3 block text-sm font-medium p-0 m-0 cursor-pointer"
 										>
-											No push notifications
+											No Notifications
 										</label>
 									</div>
 								</div>
