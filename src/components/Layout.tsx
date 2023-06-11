@@ -42,6 +42,16 @@ export function Layout({
 	// 	});
 	// }, []);
 
+	useEffect(() => {
+		if (!session && isSensitiveRoute) {
+			location.reload();
+		}
+
+		if (session && isAuthSensitiveRoute) {
+			location.reload();
+		}
+	}, [session, isSensitiveRoute, isAuthSensitiveRoute]);
+
 	return (
 		<AuthProvider
 			isAuthSensitiveRoute={isAuthSensitiveRoute}

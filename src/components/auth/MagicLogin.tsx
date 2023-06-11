@@ -30,7 +30,7 @@ const MagicLogin = ({ token = null, expired = false }: MagicLoginProps) => {
 			if (!token && expired) {
 				if (!loading) {
 					Cookies.remove("login_secret");
-					toast.success("Invalid token or token has been expired.");
+					toast.error("Invalid token or token has been expired.");
 				}
 			}
 		}, 2000);
