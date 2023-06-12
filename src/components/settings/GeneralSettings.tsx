@@ -32,6 +32,7 @@ import {
 	XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Example from "./Example";
+import Link from "next/link";
 
 interface FormDataProps {
 	name?: any;
@@ -84,6 +85,9 @@ const GeneralSettings = ({ auth }: { auth?: any }) => {
 					} else {
 						setSubmitLoading(false);
 						toast.error(req.message ?? "Something went wrong!");
+						if (req.reload) {
+							location.reload();
+						}
 					}
 				})
 				.catch((error) => {
@@ -107,10 +111,11 @@ const GeneralSettings = ({ auth }: { auth?: any }) => {
 				<div className="md:grid lg:grid-cols-3 md:gap-6">
 					<div className="md:col-span-1">
 						<h2 className="text-lg font-medium leading-6 p-0 m-0">
-							Account
+							Profile
 						</h2>
 						<p className="mt-1 text-sm ">
-							This information of plans.
+							This information will be shared with stripe so be
+							careful what you share.
 						</p>
 					</div>
 					<div className="md:col-span-2 md:mt-0 space-y-2">
@@ -131,12 +136,12 @@ const GeneralSettings = ({ auth }: { auth?: any }) => {
 										className="h-full w-full rounded-md object-cover p-0 m-0"
 									/>
 								</div>
-								<button
-									type="button"
+								<Link
+									href="/settings/profile"
 									className="rounded-md border border-gray-300 dark:border-zinc-600 py-2 px-3 text-sm font-medium leading-4 shadow-sm hover:bg-gray-50 dark:bg-transparent focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
 								>
 									Change
-								</button>
+								</Link>
 							</div>
 						</div>
 
@@ -277,24 +282,26 @@ const GeneralSettings = ({ auth }: { auth?: any }) => {
 								/>
 							</div>
 
-							<div className="col-span-6 sm:col-span-3">
+							<div className="col-span-6 sm:col-span-3 flex justify-end">
 								<label
 									htmlFor="submit"
 									className="block text-sm font-medium pointer-events-none opacity-0"
 								>
 									Submit
 								</label>
-								<Button
-									variant="outline"
-									type="submit"
-									id="submit"
-									href="/settings/profile"
-									className={classNames(
-										"text-sm font-medium min-h-[42px]  flex items-center justify-center w-32 rounded-md p-2 transition-all duration-75 dark:text-white"
-									)}
-								>
-									Save Changes
-								</Button>
+								<div className="flex justify-end items-end">
+									<Button
+										variant="outline"
+										type="submit"
+										id="submit"
+										href="/settings/profile"
+										className={classNames(
+											"mt-1 text-sm font-medium min-h-[42px] shadow-sm flex items-center justify-center w-32 rounded-md p-2 transition-all duration-75 dark:text-white border-gray-300 dark:border-zinc-600"
+										)}
+									>
+										Update
+									</Button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -413,14 +420,12 @@ const GeneralSettings = ({ auth }: { auth?: any }) => {
 				<Button
 					variant="outline"
 					type="submit"
-					onClick={() => setSubmitLoading(true)}
+					href="/subscriptions"
 					className={classNames(
-						"text-sm font-medium flex items-center justify-center w-32 rounded-md p-2 transition-all duration-75 dark:text-white",
-						submitLoading &&
-							"justify-center min-h-[40px] pointer-events-none"
+						"text-sm font-medium min-h-[42px] flex items-center justify-center w-32 rounded-md p-2 transition-all duration-75 dark:text-white shadow-sm"
 					)}
 				>
-					{submitLoading ? <LoadingDots /> : "Save Changes"}
+					Update
 				</Button>
 			</div>
 		</form>

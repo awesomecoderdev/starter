@@ -144,7 +144,7 @@ const NotificationsCard = () => {
 						onClick={() => setSubmitLoading(true)}
 						disabled={submitLoading}
 						className={classNames(
-							"text-sm font-medium flex items-center justify-center w-32 rounded-md p-2 transition-all duration-75 ",
+							"text-sm font-medium flex items-center justify-center w-32 rounded-md p-2 transition-all duration-75 shadow-sm",
 							submitLoading &&
 								"justify-center min-h-[40px] pointer-events-none"
 						)}

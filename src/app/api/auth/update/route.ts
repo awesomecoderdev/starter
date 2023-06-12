@@ -43,17 +43,39 @@ export async function POST(request: Request) {
 	};
 
 	const getUser = () => {
-		let { user, exp } = (<jwt.JwtPayload>(
-			jwt.verify(`${token}`, `${secret}`)
-		)) as { user?: any; exp?: any };
+		try {
+			let { user, exp } = (<jwt.JwtPayload>(
+				jwt.verify(`${token}`, `${secret}`)
+			)) as { user?: any; exp?: any };
 
-		if (user) {
-			return user;
+			if (user) {
+				return user;
+			}
+		} catch (error) {
+			//  skip
 		}
 		return null;
 	};
 
 	const user = getUser();
+
+	if (!user) {
+		const expired = new Date(2000);
+		return new Response(
+			JSON.stringify({
+				success: false,
+				status: Status.HTTP_OK,
+				message: "Session has expired.",
+				reload: true,
+			}),
+			{
+				status: Status.HTTP_OK,
+				headers: {
+					"Set-Cookie": `token=deleted; Path=/; Expires=${expired};`,
+				},
+			}
+		);
+	}
 
 	if (avatar && publicId) {
 		formData = { ...formData, avatar: avatar, publicId: publicId };

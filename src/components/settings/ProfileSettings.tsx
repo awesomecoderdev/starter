@@ -72,6 +72,9 @@ const ProfileSettings = ({ auth }: { auth?: any }) => {
 					} else {
 						setSubmitLoading(false);
 						toast.error(req.message ?? "Something went wrong!");
+						if (req.reload) {
+							location.reload();
+						}
 					}
 				})
 				.catch((error) => {
@@ -305,7 +308,7 @@ const ProfileSettings = ({ auth }: { auth?: any }) => {
 					type="submit"
 					onClick={() => setSubmitLoading(true)}
 					className={classNames(
-						"text-sm font-medium flex items-center justify-center w-32 rounded-md p-2 transition-all duration-75 dark:text-white",
+						"text-sm font-medium flex items-center justify-center w-32 rounded-md p-2 transition-all duration-75 dark:text-white shadow-sm",
 						submitLoading &&
 							"justify-center min-h-[40px] pointer-events-none"
 					)}
