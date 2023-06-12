@@ -7,6 +7,7 @@ import { useSectionStore } from "@/components/SectionProvider";
 import { Tag } from "@/components/Tag";
 import { remToPx } from "@/lib/remToPx";
 import { HeadingProps } from "@/types";
+import { classNames } from "@/utils/class";
 
 function AnchorIcon(props: any) {
 	return (
@@ -69,6 +70,7 @@ function Anchor({
 export function Heading({
 	level = 2,
 	children,
+	className,
 	id,
 	tag,
 	label,
@@ -96,7 +98,10 @@ export function Heading({
 			<Component
 				ref={ref}
 				id={anchor ? id : undefined}
-				className={tag || label ? "mt-2 scroll-mt-32" : "scroll-mt-24"}
+				className={classNames(
+					tag || label ? "mt-2 scroll-mt-32" : "scroll-mt-24",
+					className
+				)}
 				{...props}
 			>
 				{anchor ? (

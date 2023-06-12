@@ -46,8 +46,8 @@ export function LoadingCircle({ className }: { className?: string }) {
 			<svg
 				aria-hidden="true"
 				className={classNames(
-					className,
-					"h-6 w-6 p-1 animate-spin fill-gray-600 text-gray-200"
+					"h-6 w-6 p-1 animate-spin fill-gray-600 text-gray-200",
+					className
 				)}
 				viewBox="0 0 100 101"
 				fill="none"

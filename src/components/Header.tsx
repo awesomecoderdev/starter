@@ -218,9 +218,7 @@ export const Header = forwardRef<HTMLHeadingElement, HeaderProps>(
 												</span>
 												<div className="h-8 w-8 rounded-full overflow-hidden">
 													<BlurImage
-														src={`${
-															auth.avatar ?? ""
-														}`}
+														src={auth.avatar}
 														alt={auth.name}
 														width={100}
 														height={100}

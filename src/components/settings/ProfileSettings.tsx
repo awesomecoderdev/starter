@@ -178,7 +178,7 @@ const ProfileSettings = ({ auth }: { auth?: any }) => {
 									name="name"
 									id="name"
 									autoComplete="name"
-									defaultValue={auth?.name}
+									defaultValue={auth?.name ?? ""}
 									className="mt-1 block w-full rounded-md border-gray-300 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
 								/>
 							</div>
@@ -195,7 +195,7 @@ const ProfileSettings = ({ auth }: { auth?: any }) => {
 									type="text"
 									name="email"
 									id="email"
-									defaultValue={auth?.email}
+									defaultValue={auth?.email ?? ""}
 									readOnly
 									autoComplete="email"
 									className="mt-1 block w-full rounded-md border-gray-300 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm pointer-events-none"
@@ -214,7 +214,7 @@ const ProfileSettings = ({ auth }: { auth?: any }) => {
 									type="text"
 									name="street"
 									id="street"
-									defaultValue={auth?.street}
+									defaultValue={auth?.street ?? ""}
 									autoComplete="street-address"
 									className="mt-1 block w-full rounded-md border-gray-300 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
 								/>
@@ -231,7 +231,7 @@ const ProfileSettings = ({ auth }: { auth?: any }) => {
 									onChange={handleInputChange}
 									type="text"
 									name="city"
-									defaultValue={auth?.city}
+									defaultValue={auth?.city ?? ""}
 									id="city"
 									autoComplete="address-level2"
 									className="mt-1 block w-full rounded-md border-gray-300 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
@@ -249,7 +249,7 @@ const ProfileSettings = ({ auth }: { auth?: any }) => {
 									onChange={handleInputChange}
 									type="text"
 									name="region"
-									defaultValue={auth?.region}
+									defaultValue={auth?.region ?? ""}
 									id="region"
 									autoComplete="address-level1"
 									className="mt-1 block w-full rounded-md border-gray-300 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
@@ -266,7 +266,7 @@ const ProfileSettings = ({ auth }: { auth?: any }) => {
 								<input
 									onChange={handleInputChange}
 									type="text"
-									defaultValue={auth?.zip}
+									defaultValue={auth?.zip ?? ""}
 									name="zip"
 									id="postal-code"
 									autoComplete="postal-code"

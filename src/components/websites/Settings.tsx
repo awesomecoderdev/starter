@@ -37,26 +37,22 @@ const Settings = ({ steps, className }: SettingsProps, props: any) => {
 								{steps.map((step) => (
 									<li key={step.name}>
 										{step.status === "complete" ? (
-											<a
-												href={step.href}
-												className="group"
-											>
-												<span className="flex items-start">
+											<button className="group">
+												<span className="flex items-center">
 													<span className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
 														<CheckCircleIcon
-															className="h-full w-full text-primary-600 group-hover:text-primary-800"
+															className="h-full w-full text-primary-600 group-hover:scale-110 transition-all"
 															aria-hidden="true"
 														/>
 													</span>
-													<span className="ml-3 text-sm font-medium text-gray-500 group-hover:text-gray-900">
+													<span className="transition-all ml-3 text-sm font-semibold group-hover:text-zinc-700 dark:group-hover:text-white">
 														{step.name}
 													</span>
 												</span>
-											</a>
+											</button>
 										) : step.status === "current" ? (
-											<a
-												href={step.href}
-												className="flex items-start"
+											<button
+												className="flex items-center"
 												aria-current="step"
 											>
 												<span
@@ -64,30 +60,27 @@ const Settings = ({ steps, className }: SettingsProps, props: any) => {
 													aria-hidden="true"
 												>
 													<span className="absolute h-4 w-4 rounded-full bg-primary-200 animate-ping" />
-													<span className="absolute h-4 w-4 rounded-full bg-primary-200 " />
+													<span className="absolute h-4 w-4 rounded-full bg-primary-200 dark:bg-primary-400" />
 													<span className="relative block h-2 w-2 rounded-full bg-primary-600" />
 												</span>
-												<span className="ml-3 text-sm font-medium text-primary-600">
+												<span className=" transition-all ml-3 text-sm font-semibold text-primary-600 dark:text-white">
 													{step.name}
 												</span>
-											</a>
+											</button>
 										) : (
-											<a
-												href={step.href}
-												className="group"
-											>
-												<div className="flex items-start">
+											<button className="group">
+												<div className="flex items-center">
 													<div
 														className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center"
 														aria-hidden="true"
 													>
-														<div className="h-2 w-2 rounded-full bg-gray-300 group-hover:bg-gray-400" />
+														<div className="h-2 w-2 rounded-full bg-gray-300 group-hover:scale-110 transition-all" />
 													</div>
-													<p className="ml-3 text-sm font-medium text-gray-500 group-hover:text-gray-900">
+													<p className="transition-all ml-3 text-sm font-semibold group-hover:text-zinc-700 dark:group-hover:text-white">
 														{step.name}
 													</p>
 												</div>
-											</a>
+											</button>
 										)}
 									</li>
 								))}

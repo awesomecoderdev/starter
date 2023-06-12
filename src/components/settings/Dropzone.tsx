@@ -4,9 +4,10 @@ import Image from "next/image";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { ArrowUpTrayIcon, XMarkIcon } from "@heroicons/react/24/solid";
-import { getSignature, saveToDatabase } from "../../utils/cloudinary";
+import { getSignature, saveToDatabase } from "@/utils/cloudinary";
 import { classNames } from "@/utils/class";
 import { toast } from "sonner";
+import BlurImage from "@/components/BlurImage";
 
 const Dropzone = ({
 	className,
@@ -98,7 +99,7 @@ const Dropzone = ({
 		<Fragment>
 			<div className="flex items-center mt-1 space-x-5 ">
 				<div className="relative h-12 w-12 overflow-hidden rounded-full">
-					<Image
+					<BlurImage
 						src={files.length > 0 ? files[0].preview : auth.avatar}
 						alt={auth.name}
 						width={100}

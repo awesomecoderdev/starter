@@ -1,3 +1,4 @@
+import { classNames } from "./../utils/class";
 type LayoutComponentsProps = {
 	children: React.ReactNode | any;
 	sections?: Section[];
@@ -97,6 +98,7 @@ type HeadingProps = {
 	tag?: any;
 	label?: any;
 	anchor?: boolean;
+	className?: string;
 };
 
 interface LanguageMappings {

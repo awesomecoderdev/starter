@@ -14,7 +14,7 @@ export default function BlurImage(props: BlurImageProps) {
 	return (
 		<Image
 			{...props}
-			src={src}
+			src={src ?? `https://avatar.vercel.sh/${props.alt}`}
 			alt={props.alt}
 			className={classNames(
 				props?.noblur == "true"
