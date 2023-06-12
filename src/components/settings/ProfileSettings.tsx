@@ -179,7 +179,7 @@ const ProfileSettings = ({ auth }: { auth?: any }) => {
 									id="name"
 									autoComplete="name"
 									defaultValue={auth?.name ?? ""}
-									className="mt-1 block w-full rounded-md border-gray-300 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+									className="mt-1 block w-full rounded-md border-gray-300 dark:border-zinc-600 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
 								/>
 							</div>
 
@@ -198,7 +198,7 @@ const ProfileSettings = ({ auth }: { auth?: any }) => {
 									defaultValue={auth?.email ?? ""}
 									readOnly
 									autoComplete="email"
-									className="mt-1 block w-full rounded-md border-gray-300 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm pointer-events-none"
+									className="mt-1 block w-full rounded-md border-gray-300 dark:border-zinc-600 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm pointer-events-none"
 								/>
 							</div>
 
@@ -216,7 +216,7 @@ const ProfileSettings = ({ auth }: { auth?: any }) => {
 									id="street"
 									defaultValue={auth?.street ?? ""}
 									autoComplete="street-address"
-									className="mt-1 block w-full rounded-md border-gray-300 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+									className="mt-1 block w-full rounded-md border-gray-300 dark:border-zinc-600 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
 								/>
 							</div>
 
@@ -234,7 +234,7 @@ const ProfileSettings = ({ auth }: { auth?: any }) => {
 									defaultValue={auth?.city ?? ""}
 									id="city"
 									autoComplete="address-level2"
-									className="mt-1 block w-full rounded-md border-gray-300 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+									className="mt-1 block w-full rounded-md border-gray-300 dark:border-zinc-600 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
 								/>
 							</div>
 
@@ -252,7 +252,7 @@ const ProfileSettings = ({ auth }: { auth?: any }) => {
 									defaultValue={auth?.region ?? ""}
 									id="region"
 									autoComplete="address-level1"
-									className="mt-1 block w-full rounded-md border-gray-300 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+									className="mt-1 block w-full rounded-md border-gray-300 dark:border-zinc-600 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
 								/>
 							</div>
 
@@ -270,7 +270,7 @@ const ProfileSettings = ({ auth }: { auth?: any }) => {
 									name="zip"
 									id="postal-code"
 									autoComplete="postal-code"
-									className="mt-1 block w-full rounded-md border-gray-300 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+									className="mt-1 block w-full rounded-md border-gray-300 dark:border-zinc-600 bg-transparent shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
 								/>
 							</div>
 
@@ -291,7 +291,7 @@ const ProfileSettings = ({ auth }: { auth?: any }) => {
 											? auth.country
 											: "Palestine"
 									}
-									className="cursor-pointer mt-1 block w-full rounded-md border border-gray-300 bg-transparent py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
+									className="cursor-pointer mt-1 block w-full rounded-md border border-gray-300 dark:border-zinc-600 bg-transparent py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
 								/>
 							</div>
 						</div>

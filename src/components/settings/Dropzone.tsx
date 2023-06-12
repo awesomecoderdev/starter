@@ -117,7 +117,7 @@ const Dropzone = ({
 				<button
 					onClick={(e) => avatarInput.current.click()}
 					type="button"
-					className="rounded-md border border-gray-300 py-2 px-3 text-sm font-medium leading-4 shadow-sm hover:bg-gray-50 dark:bg-transparent focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+					className="rounded-md border border-gray-300 dark:border-zinc-600 py-2 px-3 text-sm font-medium leading-4 shadow-sm hover:bg-gray-50 dark:bg-transparent focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
 				>
 					Change
 				</button>
@@ -125,7 +125,7 @@ const Dropzone = ({
 			<div
 				{...getRootProps({
 					className: classNames(
-						"mt-4 flex justify-center rounded-md border-2 border-dashed px-6 pt-5 pb-6",
+						"mt-4 flex justify-center rounded-md border-2 border-dashed border-gray-300 dark:border-zinc-600 px-6 pt-5 pb-6",
 						className
 					),
 				})}
