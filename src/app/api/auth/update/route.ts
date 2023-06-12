@@ -64,8 +64,8 @@ export async function POST(request: Request) {
 		return new Response(
 			JSON.stringify({
 				success: false,
-				status: Status.HTTP_OK,
-				message: "Session has expired.",
+				status: Status.HTTP_UNAUTHORIZED,
+				message: "Session has been expired.",
 				reload: true,
 			}),
 			{

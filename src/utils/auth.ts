@@ -71,30 +71,28 @@ export const signUpWithGoogle = async () => {
 };
 
 export default function useNextAuth() {
-	// const {
-	// 	data: user,
-	// 	error,
-	// 	mutate,
-	// }: {
-	// 	data: any;
-	// 	error: any;
-	// 	mutate: any;
-	// } = useSWR(
-	// 	"/api/auth/session",
-	// 	() =>
-	// 		axios
-	// 			.post("/api/auth/session")
-	// 			.then((response) => response.data.data.user),
-	// 	{
-	// 		dedupingInterval: 30000,
-	// 	}
-	// );
-
-	let error,
-		user = null;
+	const {
+		data,
+		error,
+		mutate,
+	}: {
+		data: any;
+		error: any;
+		mutate: any;
+	} = useSWR(
+		"/api/auth/session",
+		() =>
+			axios
+				.post("/api/auth/session")
+				.then((response) => response.data.data.user),
+		{
+			refreshInterval: 30000,
+			dedupingInterval: 30000,
+		}
+	);
 
 	return {
 		error,
-		user,
+		user: data,
 	};
 }
