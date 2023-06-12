@@ -31,7 +31,7 @@ model User {
 
   usage             Int     @default(0)
   usageLimit        Int     @default(10)
-  plan              String  @default("free")
+  plan              String?
   stripeId          String? @unique // Stripe subscription ID
   billingCycleStart Int? // day of the month when the billing cycle starts
   settings          String?  @db.LongText

@@ -13,3 +13,5 @@ export const stripe = new Stripe(
 		// },
 	}
 );
+
+export const products = [];
