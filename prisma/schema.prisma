@@ -34,9 +34,11 @@ model User {
   plan              String?
   stripeId          String? @unique // Stripe subscription ID
   billingCycleStart Int? // day of the month when the billing cycle starts
-  settings          String?  @db.LongText
+  settings          String? @db.LongText
 
-  createdAt DateTime @default(now())
+  createdAt    DateTime       @default(now())
+  Subscription Subscription[]
+
   @@fulltext([settings])
 }
 
@@ -49,8 +51,8 @@ model Website {
   key       String @unique // key of the link (e.g. /github) – also stored on Redis
   endpoint  String @db.LongText
 
-  user  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  posts Post[]
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  posts         Post[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -74,10 +76,9 @@ model Post {
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   plagiarisms Plagiarism[]
-
   // Website metadata
-  scanned   Boolean  @default(false) // whether to show public stats or not
-  scannedAt DateTime @updatedAt
+  scanned     Boolean      @default(false) // whether to show public stats or not
+  scannedAt   DateTime     @updatedAt
 
   @@index([websiteId])
   @@index([userId])
@@ -95,4 +96,26 @@ model Plagiarism {
   scannedAt DateTime @updatedAt
 
   @@index(postId)
+}
+
+model Subscription {
+  id            String @id @default(cuid())
+  userId        String
+  name          String
+  stripe_id     String @unique
+  stripe_status String
+  stripe_price  String
+  quantity      Int
+  url           String
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Website who created the Website
+  trial_ends_at DateTime? @updatedAt
+  ends_at       DateTime? @updatedAt
+  created_at    DateTime  @updatedAt
+
+  @@index([userId, stripe_status])
 }
