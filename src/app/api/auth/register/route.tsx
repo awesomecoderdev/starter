@@ -6,6 +6,7 @@ import WelComeEmail from "@/emails/Welcome";
 import { getAppUrl, jwtSecret, nanoid } from "@/utils/utils";
 import { encode } from "@/utils/buffer";
 import MagicRegister from "@/emails/MagicRegister";
+import { stripe } from "@/utils/stripe";
 
 export async function POST(request: Request) {
 	const timeout: number = parseInt(`${process.env.JWT_TIMEOUT}`) || 60;
@@ -97,6 +98,23 @@ export async function POST(request: Request) {
 							city: city,
 							country: country,
 							region: region,
+						},
+					});
+
+					const customer = await stripe.customers.create({
+						name: name,
+						email: email,
+						metadata: {
+							user: JSON.stringify(user),
+						},
+					});
+
+					const update = await prisma.user.update({
+						where: {
+							email: user.email,
+						},
+						data: {
+							stripeId: customer.id,
 						},
 					});
 
@@ -221,6 +239,23 @@ export async function POST(request: Request) {
 								email: email,
 								name: displayName,
 								avatar: photoURL,
+							},
+						});
+
+						const customer = await stripe.customers.create({
+							name: displayName,
+							email: email,
+							metadata: {
+								user: JSON.stringify(user),
+							},
+						});
+
+						const update = await prisma.user.update({
+							where: {
+								email: user.email,
+							},
+							data: {
+								stripeId: customer.id,
 							},
 						});
 					} catch (error: any) {

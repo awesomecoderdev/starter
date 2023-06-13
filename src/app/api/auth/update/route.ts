@@ -3,6 +3,8 @@ import prisma from "@/prisma/client";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { deleteAvatarByID } from "@/utils/cloudinary";
+import { stripe } from "@/utils/stripe";
+import { jwtSecret } from "@/utils/utils";
 
 export async function POST(request: Request) {
 	const secret = `${process.env.JWT_SECRET}`;
@@ -95,26 +97,41 @@ export async function POST(request: Request) {
 
 	if (email == user?.email) {
 		try {
-			const authorization = await prisma.user.update({
+			const user = await prisma.user.update({
 				where: { email: email },
 				data: formData,
+			});
+
+			const customer = await stripe.customers.update(`${user.stripeId}`, {
+				name: name,
+				email: email,
+				address: {
+					city: city,
+					line1: street,
+					postal_code: zip,
+					state: region,
+					country: country,
+				},
+				metadata: {
+					user: JSON.stringify(user),
+				},
 			});
 
 			const token = jwt.sign(
 				{
 					user: {
-						uid: authorization.id,
-						name: authorization?.name,
-						email: authorization?.email,
-						avatar: authorization?.avatar,
-						street: authorization?.street,
-						city: authorization?.city,
-						region: authorization?.region,
-						zip: authorization?.zip,
-						country: authorization?.country,
+						uid: user.id,
+						name: user?.name,
+						email: user?.email,
+						avatar: user?.avatar,
+						street: user?.street,
+						city: user?.city,
+						region: user?.region,
+						zip: user?.zip,
+						country: user?.country,
 					},
 				},
-				secret,
+				jwtSecret,
 				{
 					expiresIn: 60 * timeout,
 					// expiresIn: 10,
