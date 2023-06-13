@@ -323,6 +323,10 @@ export async function POST(request: Request) {
 			);
 		}
 	} catch (error: any) {
+		console.log("\n==================================\n");
+		console.log("Error:", error);
+		console.log("\n==================================\n");
+
 		return new Response(
 			JSON.stringify({
 				success: false,

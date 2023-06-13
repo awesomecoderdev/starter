@@ -119,6 +119,10 @@ export async function POST(request: Request) {
 			throw new Error(`${Status.HTTP_MESSAGE_UNAUTHORIZED}`);
 		}
 	} catch (error) {
+		console.log("\n==================================\n");
+		console.log("Error:", error);
+		console.log("\n==================================\n");
+
 		const expired = new Date(2000);
 		return new Response(
 			JSON.stringify({

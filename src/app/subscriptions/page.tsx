@@ -9,7 +9,13 @@ import { toast } from "sonner";
 export default function Subscriptions() {
 	const progressCheckout = () => {
 		axios
-			.post("/api/auth/stripe/session")
+			.post("/api/auth/stripe/session", {
+				price: "hello",
+				quantity: 343,
+				metadata: {
+					ibrahim: true,
+				},
+			})
 			.then((req) => {
 				const res = req.data;
 				console.log("res", res);

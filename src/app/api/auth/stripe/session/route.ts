@@ -74,7 +74,7 @@ export async function POST(request: Request) {
 	const token = JwtToken?.value;
 
 	try {
-		const req = (await request.json()) ?? {};
+		const req = await request.json();
 		const { price = null, quantity = 1, metadata = {} } = req;
 
 		if (!price) {
@@ -137,29 +137,29 @@ export async function POST(request: Request) {
 					// 	email: user?.email || "",
 					// });
 
-					const session = await stripe.checkout.sessions.create({
-						payment_method_types: ["card"],
-						billing_address_collection: "required",
-						customer: customer.stripeId,
-						customer_email: customer.email,
-						line_items: [
-							{
-								price: price.id,
-								quantity,
-							},
-						],
-						mode: "subscription",
-						allow_promotion_codes: false, // true allow promotions code
-						subscription_data: {
-							trial_from_plan: true,
-							metadata: {
-								...metadata,
-								userId: customer.id,
-							},
-						},
-						success_url: `${getAppUrl()}/billing`,
-						cancel_url: `${getAppUrl()}/`,
-					});
+					// const session = await stripe.checkout.sessions.create({
+					// 	payment_method_types: ["card"],
+					// 	billing_address_collection: "required",
+					// 	customer: customer.stripeId,
+					// 	customer_email: customer.email,
+					// 	line_items: [
+					// 		{
+					// 			price: price.id,
+					// 			quantity,
+					// 		},
+					// 	],
+					// 	mode: "subscription",
+					// 	allow_promotion_codes: false, // true allow promotions code
+					// 	subscription_data: {
+					// 		trial_from_plan: true,
+					// 		metadata: {
+					// 			...metadata,
+					// 			userId: customer.id,
+					// 		},
+					// 	},
+					// 	success_url: `${getAppUrl()}/billing`,
+					// 	cancel_url: `${getAppUrl()}/`,
+					// });
 
 					return new Response(
 						JSON.stringify({
@@ -167,7 +167,9 @@ export async function POST(request: Request) {
 							status: Status.HTTP_OK,
 							message: "Successfully Authorized.",
 							data: {
-								sessionId: session.id,
+								req,
+								// sessionId: session.id,
+								sessionId: "session.id",
 							},
 						}),
 						{
@@ -222,6 +224,10 @@ export async function POST(request: Request) {
 			);
 		}
 	} catch (error: any) {
+		console.log("\n==================================\n");
+		console.log("Error:", error);
+		console.log("\n==================================\n");
+
 		return new Response(
 			JSON.stringify({
 				success: false,
