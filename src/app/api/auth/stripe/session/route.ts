@@ -152,8 +152,12 @@ export async function POST(request: Request) {
 								userId: customer.id,
 							},
 						},
-						success_url: `${getAppUrl()}billing`,
-						cancel_url: `${getAppUrl()}`,
+						success_url: `${getAppUrl()}subscriptions/?success=true&token=${token}&session_id={CHECKOUT_SESSION_ID}&customer_id=${
+							customer.id
+						}`,
+						cancel_url: `${getAppUrl()}subscriptions/?cancel=true&token=${token}&session_id={CHECKOUT_SESSION_ID}&customer_id=${
+							customer.id
+						}`,
 					});
 
 					// const products = await stripe.products.list({
