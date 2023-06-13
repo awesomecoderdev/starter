@@ -7,6 +7,10 @@ export const metadata: Metadata = {
 	description: "Billing",
 };
 
+// const getStripePaymentMethods = async () => {
+// 	const res = await fetch("/api/stripe/payment-methods");
+// };
+
 export default function Billing() {
 	return (
 		<>
