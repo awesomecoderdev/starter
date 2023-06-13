@@ -29,12 +29,6 @@ export async function GET(request: Request, context: ContextProps) {
 	const session_id = context.params.session ?? null;
 	const customer_id = searchParams.get("customer_id");
 
-	// const user = await prisma.user.findUnique({
-	// 	where: {
-	// 		id: user_id,
-	// 	},
-	// });
-
 	// return new Response(
 	// 	JSON.stringify({
 	// 		success: true,
@@ -60,7 +54,7 @@ export async function GET(request: Request, context: ContextProps) {
 					message: `${Status.HTTP_MESSAGE_NOT_FOUND}.`,
 				}),
 				{
-					status: Status.HTTP_NOT_FOUND,
+					status: Status.HTTP_OK,
 				}
 			);
 		}
@@ -80,7 +74,7 @@ export async function GET(request: Request, context: ContextProps) {
 					message: `${Status.HTTP_MESSAGE_NOT_FOUND}.`,
 				}),
 				{
-					status: Status.HTTP_NOT_FOUND,
+					status: Status.HTTP_OK,
 				}
 			);
 		}
@@ -113,25 +107,21 @@ export async function GET(request: Request, context: ContextProps) {
 						message: `${Status.HTTP_MESSAGE_NOT_FOUND}.`,
 					}),
 					{
-						status: Status.HTTP_NOT_FOUND,
+						status: Status.HTTP_OK,
 					}
 				);
 			}
 		}
 	} catch (error) {
 		console.log("error", error);
-		const expired = new Date(2000);
 		return new Response(
 			JSON.stringify({
 				success: false,
-				status: Status.HTTP_UNAUTHORIZED,
-				message: "Session has been expired.",
+				status: Status.HTTP_NOT_FOUND,
+				message: `${Status.HTTP_MESSAGE_NOT_FOUND}.`,
 			}),
 			{
 				status: Status.HTTP_OK,
-				// headers: {
-				// 	"Set-Cookie": `token=deleted; Path=/; Expires=${expired};`,
-				// },
 			}
 		);
 	}
