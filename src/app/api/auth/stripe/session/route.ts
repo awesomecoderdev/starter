@@ -61,6 +61,7 @@ import Status, { MethodNotALlowed } from "@/utils/http";
 import prisma from "@/prisma/client";
 import { getAppUrl, jwtSecret } from "@/utils/utils";
 import { stripe } from "@/utils/stripe";
+import { encode } from "@/utils/buffer";
 
 declare module "jsonwebtoken" {
 	export interface JwtPayload {
@@ -152,12 +153,10 @@ export async function POST(request: Request) {
 								userId: customer.id,
 							},
 						},
-						success_url: `${getAppUrl()}subscriptions/?success=true&token=${token}&session_id={CHECKOUT_SESSION_ID}&customer_id=${
-							customer.id
-						}`,
-						cancel_url: `${getAppUrl()}subscriptions/?cancel=true&token=${token}&session_id={CHECKOUT_SESSION_ID}&customer_id=${
-							customer.id
-						}`,
+						success_url: `${getAppUrl()}subscriptions/?success=true&token=${token}&session_id={CHECKOUT_SESSION_ID}&secret=${encode(
+							`${customer.stripeId}.${customer.id}`
+						)}`,
+						cancel_url: `${getAppUrl()}subscriptions/?cancel=true&token=${token}&session_id={CHECKOUT_SESSION_ID}&secret=${`${customer.stripeId}.${customer.id}`}`,
 					});
 
 					// const products = await stripe.products.list({

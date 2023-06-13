@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { Button } from "@/components/Button";
 import axios from "@/utils/axios";
@@ -47,9 +47,14 @@ export default function Subscriptions() {
 				pariatur cupiditate ipsa quidem minima architecto nobis
 				similique obcaecati ducimus libero corporis veniam voluptatum?
 			</p>
-			<Button variant="filled" onClick={progressCheckout}>
+			<Button
+				variant="filled"
+				// onClick={progressCheckout}
+			>
 				Checkout
 			</Button>
 		</Fragment>
 	);
 }
+
+// http://localhost:3000/subscriptions?success=true&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVpZCI6ImNsaXQycmptNzAwMDBoa3h2anR6aDYzdmwiLCJuYW1lIjoiVGFtZWthaCBNYWxvbmUiLCJlbWFpbCI6ImF3ZXNvbWVjb2Rlci5vcmdAZ21haWwuY29tIiwiYXZhdGFyIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Zm1GRXdFS2NUb05hWTN1NV83bG5sQUZaQWRxQ19CbHg5dDhtRGxYZz1zOTYtYyIsInN0cmVldCI6IjQ4MyBHcmVlbiBMYW5lcyIsImNpdHkiOiJMb25kb24iLCJyZWdpb24iOiJMb25kb24iLCJ6aXAiOiJOMTMgNEJTIiwiY291bnRyeSI6IkdCIn0sImlhdCI6MTY4NjY5MjExOSwiZXhwIjoxNjg2NjkzMDE5fQ.FumhZ8adlDjGpgvcW63-DXqF60h7JmyiLKJlzlee5JI&session_id=cs_test_b1ZeEyqZYnn6hoh8aII53ou1B6bvNpUwDmsaO4nWCDiMcRsvJXYmU0Cqpj&secret=Y3VzX080anpUbW9KTWFaMzdtLmNsaXQycmptNzAwMDBoa3h2anR6aDYzdmw%3D
