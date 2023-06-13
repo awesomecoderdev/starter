@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/Button";
 import axios from "@/utils/axios";
+import getStripe from "@/utils/stripe-client";
 import { Fragment } from "react";
 import { toast } from "sonner";
 
@@ -10,18 +11,23 @@ export default function Subscriptions() {
 	const progressCheckout = () => {
 		axios
 			.post("/api/auth/stripe/session", {
-				price: "hello",
-				quantity: 343,
+				price: "price_1NIdKDIX4CRni5u33vxRuoO7",
+				quantity: 1,
 				metadata: {
 					ibrahim: true,
 				},
 			})
-			.then((req) => {
+			.then(async (req) => {
 				const res = req.data;
 				console.log("res", res);
 
 				if (res.success) {
 					toast.success(res?.message);
+
+					const stripe = await getStripe();
+					stripe?.redirectToCheckout({
+						sessionId: res.data.sessionId,
+					});
 				} else {
 					toast.error(res?.message);
 				}

@@ -132,44 +132,44 @@ export async function POST(request: Request) {
 
 			if (customer) {
 				try {
-					// const customer = await createOrRetrieveCustomer({
-					// 	uuid: user?.id || "",
-					// 	email: user?.email || "",
-					// });
+					const session = await stripe.checkout.sessions.create({
+						payment_method_types: ["card"],
+						billing_address_collection: "required",
+						customer: customer.stripeId,
+						// customer_email: customer.email,
+						line_items: [
+							{
+								price: price,
+								quantity,
+							},
+						],
+						mode: "subscription",
+						allow_promotion_codes: true, // true allow promotions code
+						subscription_data: {
+							trial_from_plan: true,
+							metadata: {
+								...metadata,
+								userId: customer.id,
+							},
+						},
+						success_url: `${getAppUrl()}billing`,
+						cancel_url: `${getAppUrl()}`,
+					});
 
-					// const session = await stripe.checkout.sessions.create({
-					// 	payment_method_types: ["card"],
-					// 	billing_address_collection: "required",
-					// 	customer: customer.stripeId,
-					// 	customer_email: customer.email,
-					// 	line_items: [
-					// 		{
-					// 			price: price.id,
-					// 			quantity,
-					// 		},
-					// 	],
-					// 	mode: "subscription",
-					// 	allow_promotion_codes: false, // true allow promotions code
-					// 	subscription_data: {
-					// 		trial_from_plan: true,
-					// 		metadata: {
-					// 			...metadata,
-					// 			userId: customer.id,
-					// 		},
-					// 	},
-					// 	success_url: `${getAppUrl()}/billing`,
-					// 	cancel_url: `${getAppUrl()}/`,
+					// const products = await stripe.products.list({
+					// 	limit: 10,
 					// });
 
 					return new Response(
 						JSON.stringify({
 							success: true,
 							status: Status.HTTP_OK,
-							message: "Successfully Authorized.",
+							message: "Redirecting to checkout session.",
 							data: {
-								req,
-								// sessionId: session.id,
-								sessionId: "session.id",
+								// req,
+								// products: products.data,
+								sessionId: session.id,
+								// sessionId: "session.id",
 							},
 						}),
 						{
