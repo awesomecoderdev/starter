@@ -116,6 +116,7 @@ export async function POST(request: Request) {
 							country: country,
 						},
 						metadata: {
+							id: user.id,
 							user: JSON.stringify(user),
 						},
 					}
@@ -132,6 +133,7 @@ export async function POST(request: Request) {
 						country: country,
 					},
 					metadata: {
+						id: user.id,
 						user: JSON.stringify(user),
 					},
 				});

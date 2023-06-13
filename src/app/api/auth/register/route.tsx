@@ -105,6 +105,7 @@ export async function POST(request: Request) {
 						name: name,
 						email: email,
 						metadata: {
+							id: user.id,
 							user: JSON.stringify(user),
 						},
 					});
@@ -246,6 +247,7 @@ export async function POST(request: Request) {
 							name: displayName,
 							email: email,
 							metadata: {
+								id: user.id,
 								user: JSON.stringify(user),
 							},
 						});
