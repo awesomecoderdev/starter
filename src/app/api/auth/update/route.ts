@@ -102,20 +102,49 @@ export async function POST(request: Request) {
 				data: formData,
 			});
 
-			const customer = await stripe.customers.update(`${user.stripeId}`, {
-				name: name,
-				email: email,
-				address: {
-					city: city,
-					line1: street,
-					postal_code: zip,
-					state: region,
-					country: country,
-				},
-				metadata: {
-					user: JSON.stringify(user),
-				},
-			});
+			if (user.stripeId) {
+				const customer = await stripe.customers.update(
+					`${user.stripeId}`,
+					{
+						name: name,
+						email: email,
+						address: {
+							city: city,
+							line1: street,
+							postal_code: zip,
+							state: region,
+							country: country,
+						},
+						metadata: {
+							user: JSON.stringify(user),
+						},
+					}
+				);
+			} else {
+				const customer = await stripe.customers.create({
+					name: name,
+					email: email,
+					address: {
+						city: city,
+						line1: street,
+						postal_code: zip,
+						state: region,
+						country: country,
+					},
+					metadata: {
+						user: JSON.stringify(user),
+					},
+				});
+
+				const update = await prisma.user.update({
+					where: {
+						email: email,
+					},
+					data: {
+						stripeId: customer.id,
+					},
+				});
+			}
 
 			const token = jwt.sign(
 				{
