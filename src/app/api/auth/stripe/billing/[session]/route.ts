@@ -19,7 +19,7 @@ interface ContextProps {
 	params: SessionRequest;
 }
 
-export async function GET(request: Request, context: ContextProps) {
+export async function POST(request: Request, context: ContextProps) {
 	const cookie = cookies();
 	const JwtToken = cookie.get("token");
 	const token = JwtToken?.value;
@@ -44,6 +44,8 @@ export async function GET(request: Request, context: ContextProps) {
 	// 		status: Status.HTTP_OK,
 	// 	}
 	// );
+
+	console.log("\nrequest recived\n");
 
 	try {
 		if (!user_id || !customer_id) {
@@ -82,7 +84,7 @@ export async function GET(request: Request, context: ContextProps) {
 		if (customer) {
 			try {
 				const sessions = await stripe.checkout.sessions.retrieve(
-					`${session_id}.`
+					`${session_id}`
 				);
 
 				return new Response(
@@ -128,7 +130,7 @@ export async function GET(request: Request, context: ContextProps) {
 }
 
 export {
-	// MethodNotALlowed as GET,
+	MethodNotALlowed as GET,
 	MethodNotALlowed as PUT,
 	MethodNotALlowed as PATCH,
 	MethodNotALlowed as DELETE,
