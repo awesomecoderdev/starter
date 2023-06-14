@@ -20,6 +20,28 @@ const nextConfig = {
 		scrollRestoration: true,
 		serverActions: true,
 	},
+	async headers() {
+		return [
+			{
+				source: "/api/auth/stripe/:path*",
+				headers: [
+					{
+						key: "Cache-Control",
+						value: "no-cache no-store, max-age=0",
+					},
+				],
+			},
+			// {
+			// 	source: "/subscriptions",
+			// 	headers: [
+			// 		{
+			// 			key: "Cache-Control",
+			// 			value: "no-cache no-store, max-age=0",
+			// 		},
+			// 	],
+			// },
+		];
+	},
 };
 
 module.exports = nextConfig;

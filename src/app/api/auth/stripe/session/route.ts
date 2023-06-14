@@ -149,9 +149,11 @@ export async function POST(request: Request) {
 						subscription_data: {
 							trial_from_plan: true,
 							metadata: {
-								...metadata,
 								userId: customer.id,
 							},
+						},
+						metadata: {
+							userId: customer.id,
 						},
 						success_url: `${getAppUrl()}subscriptions/?success=true&token=${token}&session_id={CHECKOUT_SESSION_ID}&secret=${encode(
 							`${customer.stripeId}.${customer.id}`

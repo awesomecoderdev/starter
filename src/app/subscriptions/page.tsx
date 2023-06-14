@@ -4,6 +4,7 @@ import axios from "@/utils/axios";
 import { decode } from "@/utils/buffer";
 import getStripe from "@/utils/stripe-client";
 import { Fragment } from "react";
+import { Code, CodeGroup } from "@/components/Code";
 import { toast } from "sonner";
 
 const getStripeSession = async (customer: string) => {
@@ -17,17 +18,21 @@ const getStripeSession = async (customer: string) => {
 		// 	.catch((error) => []);
 		// console.log("req", req);
 		// return req;
-		const req = await fetch(`/api/auth/stripe/billing/${customer}`, {
-			method: "POST",
-		});
+		const req = await fetch(
+			`http://localhost:3000/api/auth/stripe/billing/${customer}`,
+			{
+				method: "POST",
+			}
+		);
 		// await new Promise(function (resolve) {
 		// 	setTimeout(resolve, 15000);
 		// });
 		const res = await req.json();
 		console.log("res", res);
-		return res;
+		return res.data;
 		// return `/api/auth/stripe/billing/${customer}`;
 	} catch (error) {
+		console.log("error", error);
 		return [];
 	}
 };
@@ -43,14 +48,23 @@ export default async function Subscriptions(props: Props) {
 	const secret = decode(searchParams.secret ?? "");
 	const user = secret.replace(".", "&user_id=");
 	const customer = `${session_id}?customer_id=${user}`;
-	const session = await getStripeSession(customer);
-
+	const session: any = await getStripeSession(customer);
+	console.log("session", session);
 	// searchParams.success && searchParams.secret && searchParams.session_id;
 
 	return (
 		<Fragment>
 			<p className="lead">{JSON.stringify(customer)}</p>
-			<p className="lead">{session}</p>
+			<CodeGroup>
+				{session && (
+					<Code
+						code={JSON.stringify(session, null, 4)}
+						language="json"
+					>
+						{JSON.stringify(session, null, 4)}
+					</Code>
+				)}
+			</CodeGroup>
 			<SubscriptionCard />
 		</Fragment>
 	);
