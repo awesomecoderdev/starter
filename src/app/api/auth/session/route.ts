@@ -17,29 +17,9 @@ export async function POST(request: Request) {
 	const cookie = cookies();
 	const JwtToken = cookie.get("token");
 	const timeout: number = parseInt(`${process.env.JWT_TIMEOUT}`) || 60;
-	// const user = await prisma.user.findFirst();
-	// var secret = fs.readFileSync("public.pem"); // get public key
 	const token = JwtToken?.value;
 
 	try {
-		// const user = await prisma.user.findFirst();
-
-		// const token = jwt.sign(
-		// 	{
-		// 		user: {
-		// 			uid: user?.id,
-		// 			name: user?.name,
-		// 			email: user?.email,
-		// 			avatar: user?.avatar,
-		// 		},
-		// 	},
-		// 	secret,
-		// 	{
-		// 		expiresIn: 60 * timeout,
-		// 		// expiresIn: 10,
-		// 	}
-		// );
-
 		const getUserEmail = () => {
 			try {
 				let { user, exp } = (<jwt.JwtPayload>(
@@ -55,7 +35,7 @@ export async function POST(request: Request) {
 			return null;
 		};
 
-		if (!getUserEmail) {
+		if (!getUserEmail()) {
 			const expired = new Date(2000);
 			return new Response(
 				JSON.stringify({
@@ -75,7 +55,7 @@ export async function POST(request: Request) {
 
 		const authorization = await prisma.user.findUnique({
 			where: {
-				email: getUserEmail(),
+				email: String(getUserEmail()),
 			},
 		});
 
@@ -116,7 +96,21 @@ export async function POST(request: Request) {
 				}
 			);
 		} else {
-			throw new Error(`${Status.HTTP_MESSAGE_UNAUTHORIZED}`);
+			const expired = new Date(2000);
+			return new Response(
+				JSON.stringify({
+					success: false,
+					status: Status.HTTP_UNAUTHORIZED,
+					message: "Session has been expired.",
+					reload: true,
+				}),
+				{
+					status: Status.HTTP_OK,
+					headers: {
+						"Set-Cookie": `token=deleted; Path=/; Expires=${expired};`,
+					},
+				}
+			);
 		}
 	} catch (error) {
 		console.log("\n==================================\n");
