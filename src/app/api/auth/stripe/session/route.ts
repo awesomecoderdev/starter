@@ -137,6 +137,7 @@ export async function POST(request: Request) {
 						payment_method_types: ["card"],
 						billing_address_collection: "required",
 						customer: customer.stripeId,
+						client_reference_id: customer.id,
 						// customer_email: customer.email,
 						line_items: [
 							{
@@ -150,6 +151,7 @@ export async function POST(request: Request) {
 							trial_from_plan: true,
 							metadata: {
 								userId: customer.id,
+								name: "Ibrahim Kholil",
 							},
 						},
 						metadata: {

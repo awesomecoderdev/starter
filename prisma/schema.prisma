@@ -37,7 +37,7 @@ model User {
   settings          String? @db.LongText
 
   createdAt    DateTime       @default(now())
-  Subscription Subscription[]
+  subscriptions Subscription[]
 
   @@fulltext([settings])
 }
@@ -89,7 +89,7 @@ model Plagiarism {
   id         String @id @default(cuid())
   postId     String
   url        String
-  percentage String
+  percentage String?
 
   // Website who created the Website
   post      Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
@@ -101,21 +101,41 @@ model Plagiarism {
 model Subscription {
   id            String @id @default(cuid())
   userId        String
-  name          String
+  name          String?
   stripe_id     String @unique
   stripe_status String
-  stripe_price  String
-  quantity      Int
-  url           String
+  stripe_price  String?
+  quantity      Int? @default(1)
 
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  items     Item[]
 
   // Website who created the Website
   trial_ends_at DateTime? @updatedAt
   ends_at       DateTime? @updatedAt
   created_at    DateTime  @updatedAt
+  updated_at DateTime @default(now())
+
 
   @@index([userId, stripe_status])
 }
+
+
+model Item {
+  id                String @id @default(cuid())
+  subscription_id   String
+  stripe_id         String @unique
+  stripe_product    String?
+  stripe_price      String?
+  quantity      Int? @default(1)
+
+  subscription      Subscription     @relation(fields: [subscription_id], references: [id], onDelete: Cascade)
+
+  // Website who created the Website
+  created_at        DateTime  @updatedAt
+  updated_at        DateTime @default(now())
+
+  @@index([subscription_id])
+  @@unique([subscription_id, stripe_price])
+}
+

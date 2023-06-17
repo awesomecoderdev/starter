@@ -1,9 +1,6 @@
 const Country = (props: any) => {
 	return (
 		<select {...props}>
-			{/* <option value="null" selected disabled>
-				Select Country
-			</option> */}
 			<option value="AF">Afghanistan</option>
 			<option value="AX">Åland Islands</option>
 			<option value="AL">Albania</option>
@@ -247,9 +244,7 @@ const Country = (props: any) => {
 			<option value="UA">Ukraine</option>
 			<option value="AE">United Arab Emirates</option>
 			<option value="GB">United Kingdom</option>
-			<option selected value="US">
-				United States
-			</option>
+			<option value="US">United States</option>
 			<option value="UM">United States Minor Outlying Islands</option>
 			<option value="UY">Uruguay</option>
 			<option value="UZ">Uzbekistan</option>
