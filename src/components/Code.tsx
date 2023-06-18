@@ -348,12 +348,14 @@ export function Code({
 	language = "bash",
 	nohighlight = false,
 	className,
+	title,
 	...props
 }: {
 	children: any;
 	code: any;
 	className?: any;
 	language?: string;
+	title?: string;
 	nohighlight?: boolean;
 }) {
 	let isGrouped = useContext(CodeGroupContext);

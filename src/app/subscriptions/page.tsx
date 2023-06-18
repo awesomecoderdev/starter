@@ -32,6 +32,8 @@ const getStripeSession = async (customer: string) => {
 // 	try {
 // 		const req = await fetch(`${getAppUrl()}api/auth/stripe/subscriptions`, {
 // 			method: "POST",
+// 			cache: "no-store",
+// 			next: { revalidate: 10 },
 // 		});
 // 		const res = await req.json();
 // 		return res;
@@ -88,8 +90,18 @@ export default async function Subscriptions(props: Props) {
 	return (
 		<Fragment>
 			<CodeGroup>
+				{subscriptions && (
+					<Code
+						title="Subscription"
+						code={JSON.stringify(subscriptions, null, 4)}
+						language="json"
+					>
+						{JSON.stringify(subscriptions, null, 4)}
+					</Code>
+				)}
 				{session && (
 					<Code
+						title="Session"
 						code={JSON.stringify(session, null, 4)}
 						language="json"
 					>

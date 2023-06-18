@@ -60,57 +60,69 @@ export async function POST(request: Request) {
 				},
 			});
 
-			if (customer) {
-				try {
-					// const session = await stripe.subscriptions.retrieve();
-
-					const subscriptions = await prisma.subscription.findMany({
-						where: {
-							userId: `${customer.stripeId}`,
-						},
-					});
-
-					return new Response(
-						JSON.stringify({
-							success: true,
-							status: Status.HTTP_OK,
-							message: "Successfully Authorized.",
-							data: {
-								subscriptions: subscriptions ?? [],
-							},
-						}),
-						{
-							status: Status.HTTP_OK,
-						}
-					);
-				} catch (err: any) {
-					console.log("Stripe Error: ", err);
-					return new Response(
-						JSON.stringify({
-							success: false,
-							status: Status.HTTP_INTERNAL_SERVER_ERROR,
-							message: "Something went wrong.",
-						}),
-						{
-							status: Status.HTTP_OK,
-						}
-					);
-				}
-			} else {
-				console.log("No subscriptions found");
+			if (!customer) {
+				console.log("No customer found");
 				const expired = new Date(2000);
 				return new Response(
 					JSON.stringify({
 						success: false,
 						status: Status.HTTP_UNAUTHORIZED,
-						message: "Session has been expired.",
+						message: "Session has been expired.///",
 						reload: true,
 					}),
 					{
 						status: Status.HTTP_OK,
-						headers: {
-							"Set-Cookie": `token=deleted; Path=/; Expires=${expired};`,
+						// headers: {
+						// 	"Set-Cookie": `token=deleted; Path=/; Expires=${expired};`,
+						// },
+					}
+				);
+			}
+
+			try {
+				// const session = await stripe.subscriptions.retrieve();
+
+				const subscriptions = await prisma.subscription.findMany({
+					where: {
+						userId: `${customer.id}`,
+					},
+					include: {
+						items: {
+							orderBy: {
+								created_at: "desc",
+							},
+							take: 1,
 						},
+					},
+					orderBy: {
+						created_at: "desc",
+					},
+					// take: 1,
+				});
+
+				return new Response(
+					JSON.stringify({
+						success: true,
+						status: Status.HTTP_OK,
+						message: "Successfully Authorized.",
+						data: {
+							subscriptions: subscriptions ?? [],
+						},
+					}),
+					{
+						status: Status.HTTP_OK,
+					}
+				);
+			} catch (err: any) {
+				console.log("Stripe Error: ", err);
+				return new Response(
+					JSON.stringify({
+						success: false,
+						status: Status.HTTP_INTERNAL_SERVER_ERROR,
+						message: "Something went wrong.",
+					}),
+					{
+						status: Status.HTTP_OK,
 					}
 				);
 			}
@@ -149,7 +161,8 @@ export async function POST(request: Request) {
 }
 
 export {
-	MethodNotALlowed as GET,
+	POST as GET,
+	// MethodNotALlowed as GET,
 	MethodNotALlowed as PUT,
 	MethodNotALlowed as PATCH,
 	MethodNotALlowed as DELETE,
