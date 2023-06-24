@@ -2,14 +2,9 @@ import Status, { MethodNotALlowed } from "@/utils/http";
 import { stripe } from "@/utils/stripe";
 import prisma from "@/prisma/client";
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
 	try {
-		// const sessions = await stripe.products.list({
-		// 	limit: 7,
-		// });
-
-		const sessions = await prisma.plan.findMany({
-			// where: {},
+		const subscriptions = await prisma.plan.findMany({
 			orderBy: {
 				created_at: "desc",
 			},
@@ -18,12 +13,14 @@ export async function GET(request: Request) {
 		return new Response(
 			JSON.stringify({
 				success: false,
-				status: Status.HTTP_BAD_REQUEST,
-				message: `${Status.HTTP_MESSAGE_BAD_REQUEST}.`,
-				sessions,
+				status: Status.HTTP_OK,
+				message: `${Status.HTTP_MESSAGE_OK}.`,
+				data: {
+					subscriptions: subscriptions ?? [],
+				},
 			}),
 			{
-				status: Status.HTTP_BAD_REQUEST,
+				status: Status.HTTP_OK,
 			}
 		);
 	} catch (error) {
@@ -42,7 +39,7 @@ export async function GET(request: Request) {
 }
 
 export {
-	MethodNotALlowed as POST,
+	MethodNotALlowed as GET,
 	MethodNotALlowed as PUT,
 	MethodNotALlowed as PATCH,
 	MethodNotALlowed as DELETE,

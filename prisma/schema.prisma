@@ -106,6 +106,7 @@ model Subscription {
   stripe_status String
   stripe_price  String?
   quantity      Int? @default(1)
+  metadata          String? @db.LongText
 
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   items     Item[]
@@ -118,6 +119,7 @@ model Subscription {
 
 
   @@index([userId, stripe_status])
+  @@fulltext([metadata])
 }
 
 
@@ -138,4 +140,23 @@ model Item {
   @@index([subscription_id])
   @@unique([subscription_id, stripe_price])
 }
+
+model Plan {
+  id                String @id @default(cuid())
+  name              String
+  stripe_price      String?
+  price             Int?
+  type              String? @default("monthly")
+  websites          Int? @default(0)
+  posts             Int? @default(0)
+  metadata          String? @db.LongText
+
+  // Website who created the Website
+  created_at        DateTime  @updatedAt
+  updated_at        DateTime @default(now())
+
+  @@index([id])
+  @@fulltext([metadata])
+}
+
 
