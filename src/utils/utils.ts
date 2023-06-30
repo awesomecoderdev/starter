@@ -84,6 +84,11 @@ export function nFormatter(num?: number, digits?: number) {
 		: "0";
 }
 
+export const priceFormatter = new Intl.NumberFormat("en-US", {
+	style: "currency",
+	currency: "USD",
+});
+
 export function capitalize(str: string) {
 	if (!str || typeof str !== "string") return str;
 	if (isValidDomain(str)) return str;

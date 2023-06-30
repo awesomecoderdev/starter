@@ -12,6 +12,7 @@ import { EnvelopeIcon } from "@/components/icons/EnvelopeIcon";
 import { UserIcon } from "@/components/icons/UserIcon";
 import { UsersIcon } from "@/components/icons/UsersIcon";
 import { constructMetadata } from "@/utils/utils";
+import Cart from "@/components/Cart";
 
 export const metadata: Metadata = constructMetadata({
 	title: `Getting Started - ${process.env.APP_NAME}`,
@@ -61,6 +62,8 @@ export default async function Home() {
 					Get your API key
 				</Button>
 			</div>
+
+			<Cart />
 
 			<Guides />
 			<Resources />
