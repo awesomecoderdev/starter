@@ -15,7 +15,7 @@ generator client {
 // user section
 
 model User {
-  id       String  @id @default(cuid())
+  id       String  @id @default(uuid())
   name     String?
   email    String? @unique
   avatar   String?
@@ -43,7 +43,7 @@ model User {
 }
 
 model Website {
-  id        String @id @default(cuid())
+  id        String @id @default(uuid())
   userId    String
   websiteId String
   name      String
@@ -64,7 +64,7 @@ model Website {
 }
 
 model Post {
-  id          String  @id @default(cuid())
+  id          String  @id @default(uuid())
   websiteId   String
   userId      String
   post_id     String
@@ -86,7 +86,7 @@ model Post {
 }
 
 model Plagiarism {
-  id         String @id @default(cuid())
+  id         String @id @default(uuid())
   postId     String
   url        String
   percentage String?
@@ -99,7 +99,7 @@ model Plagiarism {
 }
 
 model Subscription {
-  id            String @id @default(cuid())
+  id            String @id @default(uuid())
   userId        String
   name          String?
   stripe_id     String @unique
@@ -124,7 +124,7 @@ model Subscription {
 
 
 model Item {
-  id                String @id @default(cuid())
+  id                String @id @default(uuid())
   subscription_id   String
   stripe_id         String @unique
   stripe_product    String?
@@ -142,7 +142,7 @@ model Item {
 }
 
 model Plan {
-  id                String @id @default(cuid())
+  id                String @id @default(uuid())
   name              String
   stripe_price      String?
   price             Int?
